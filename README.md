@@ -20,8 +20,8 @@ Vídeo explicativo sobre el motor en https://www.youtube.com/watch?v=P-MAbDhIuok
 
 INSTRUCCIONES DE INSTALACIÓN Y USO PARA LA DEMO JUGABLE:
 - Opción A (ejecutable para Windows; probado en Windows 10): 
-  - Descargar la carpeta /dist
-  - Ejecutar demo.exe
+  - Descargar el archivo Skytree Demo.zip
+  - Descomprimir y ejecutar demo.exe
 - Opción B (paquete de Python; probado con Python 3.11 y Pygame 2.6)
   - Descargar e instalar Python 3.11 desde https://www.python.org/downloads/
   - Descargar e instalar Pygame 2.6. Se puede instalar desde pip siguiendo las instrucciones en https://www.pygame.org/wiki/GettingStarted
