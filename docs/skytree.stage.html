@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module skytree.stage</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="skytree.html" class="white">skytree</a>.stage</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:d%3A%5Cskytree_repo%5Csrc%5Cskytree%5Cstage.py">d:\skytree_repo\src\skytree\stage.py</a></td></tr></table>
+    <p><span class="code">Definition&nbsp;of&nbsp;a&nbsp;class&nbsp;to&nbsp;help&nbsp;keep&nbsp;track&nbsp;of&nbsp;a&nbsp;group&nbsp;of&nbsp;boards.</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="skytree.config.html">skytree.config</a><br>
+</td><td class="multicolumn"><a href="skytree.game.html">skytree.game</a><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.stage.html#Stage">Stage</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Stage">class <strong>Stage</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Stage">Stage</a>(entry_state,&nbsp;start_label=None,&nbsp;exit_state=None,&nbsp;exit_label=None)<br>
+&nbsp;<br>
+A&nbsp;class&nbsp;to&nbsp;keep&nbsp;track&nbsp;of&nbsp;a&nbsp;group&nbsp;of&nbsp;Boards.<br>
+&nbsp;<br>
+Instances&nbsp;are&nbsp;stored&nbsp;on&nbsp;the&nbsp;Game&nbsp;instance&nbsp;as&nbsp;a&nbsp;complement<br>
+to&nbsp;the&nbsp;game&nbsp;state&nbsp;system.&nbsp;They&nbsp;are&nbsp;not&nbsp;components.<br>
+The&nbsp;<a href="#Stage">Stage</a>&nbsp;class&nbsp;stores&nbsp;points&nbsp;of&nbsp;entry&nbsp;into&nbsp;a&nbsp;group&nbsp;of&nbsp;Boards<br>
+(both&nbsp;initial&nbsp;and&nbsp;for&nbsp;the&nbsp;current&nbsp;checkpoint).<br>
+Also&nbsp;keeps&nbsp;track&nbsp;of&nbsp;states&nbsp;to&nbsp;exit&nbsp;to.<br>
+Both&nbsp;entry&nbsp;and&nbsp;exit&nbsp;points&nbsp;include&nbsp;a&nbsp;state&nbsp;to&nbsp;transition&nbsp;to&nbsp;and&nbsp;a&nbsp;label<br>
+to&nbsp;signal&nbsp;the&nbsp;new&nbsp;state&nbsp;with.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#Stage-enter">enter</a>(exit_state):&nbsp;transition&nbsp;state&nbsp;with&nbsp;entry&nbsp;information;&nbsp;optionally,&nbsp;update&nbsp;exit_state.<br>
+<a href="#Stage-exit">exit</a>():&nbsp;transition&nbsp;state&nbsp;to&nbsp;exit_state&nbsp;if&nbsp;present;&nbsp;otherwise,&nbsp;quit&nbsp;the&nbsp;game.<br>
+<a href="#Stage-beat">beat</a>(entry_state,&nbsp;start_label,&nbsp;exit_label):&nbsp;exit&nbsp;the&nbsp;stage&nbsp;with&nbsp;exit&nbsp;information&nbsp;and&nbsp;reset&nbsp;checkpoint.<br>
+&nbsp;<br>
+Notes&nbsp;on&nbsp;setters:<br>
+Setting&nbsp;the&nbsp;checkpoint&nbsp;will&nbsp;deactivate&nbsp;the&nbsp;old&nbsp;one&nbsp;and&nbsp;update&nbsp;point&nbsp;of&nbsp;entry&nbsp;(entry_state&nbsp;and&nbsp;start_label).<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="Stage-__init__"><strong>__init__</strong></a>(self, entry_state, start_label=None, exit_state=None, exit_label=None)</dt><dd><span class="code">Store&nbsp;arguments&nbsp;and&nbsp;a&nbsp;reference&nbsp;to&nbsp;the&nbsp;active&nbsp;game.<br>
+&nbsp;<br>
+Labels&nbsp;are&nbsp;optional;&nbsp;a&nbsp;state&nbsp;should&nbsp;be&nbsp;able&nbsp;to&nbsp;default&nbsp;if&nbsp;it&nbsp;receives&nbsp;no&nbsp;labels&nbsp;on&nbsp;transitions.<br>
+Exit&nbsp;state&nbsp;is&nbsp;also&nbsp;optional;&nbsp;<a href="#Stage-exit">exit</a>()&nbsp;method&nbsp;will&nbsp;quit&nbsp;the&nbsp;game&nbsp;if&nbsp;there's&nbsp;no&nbsp;exit&nbsp;state.</span></dd></dl>
+
+<dl><dt><a name="Stage-beat"><strong>beat</strong></a>(self, exit_state=None, start_label=None, exit_label=None)</dt><dd><span class="code">Exit&nbsp;the&nbsp;stage,&nbsp;signal&nbsp;the&nbsp;transition&nbsp;with&nbsp;given&nbsp;exit_label&nbsp;if&nbsp;any&nbsp;and&nbsp;reset&nbsp;checkpoint.</span></dd></dl>
+
+<dl><dt><a name="Stage-enter"><strong>enter</strong></a>(self, exit_state=None)</dt><dd><span class="code">Tell&nbsp;the&nbsp;Game&nbsp;to&nbsp;enter&nbsp;entry_state&nbsp;with&nbsp;start_label.&nbsp;Optionally,&nbsp;update&nbsp;exit_state.</span></dd></dl>
+
+<dl><dt><a name="Stage-exit"><strong>exit</strong></a>(self)</dt><dd><span class="code">Activate&nbsp;a&nbsp;transition&nbsp;towards&nbsp;exit_state&nbsp;if&nbsp;present;&nbsp;otherwise,&nbsp;quit&nbsp;the&nbsp;game.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>checkpoint</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object&nbsp;holding&nbsp;the&nbsp;current&nbsp;point&nbsp;of&nbsp;entry.</span></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

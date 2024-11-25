@@ -12,7 +12,7 @@ Variables used from config: CANVAS_DIM, MIXER_FREQUENCY, MIXER_SIZE, MIXER_CHANN
 import warnings
 from abc import ABC, abstractmethod
 import pygame
-from pygame.locals import *
+from pygame.locals import QUIT, FULLSCREEN
 from skytree.helpers import repack2, bake_obj
 from skytree.singleton import Singleton
 from skytree import config

@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module skytree.layers</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="skytree.html" class="white">skytree</a>.layers</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:d%3A%5Cskytree_repo%5Csrc%5Cskytree%5Clayers.py">d:\skytree_repo\src\skytree\layers.py</a></td></tr></table>
+    <p><span class="code">Definition&nbsp;of&nbsp;classes&nbsp;that&nbsp;represent&nbsp;visible&nbsp;layers&nbsp;in&nbsp;a&nbsp;game&nbsp;space.<br>
+&nbsp;<br>
+Classes:<br>
+<a href="#Layer">Layer</a>(<a href="skytree.drawable.html#Drawable">Drawable</a>,&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>):&nbsp;a&nbsp;draw&nbsp;level&nbsp;within&nbsp;a&nbsp;board;&nbsp;supports&nbsp;parallax.<br>
+<a href="#MovingLayer">MovingLayer</a>(<a href="#Layer">Layer</a>):&nbsp;a&nbsp;<a href="#Layer">Layer</a>&nbsp;that&nbsp;can&nbsp;be&nbsp;programmed&nbsp;to&nbsp;move&nbsp;automatically.<br>
+<a href="#TiledLayer">TiledLayer</a>(<a href="#Layer">Layer</a>,&nbsp;<a href="skytree.collidable.html#Collidable">Collidable</a>):&nbsp;a&nbsp;<a href="#Layer">Layer</a>&nbsp;that&nbsp;manages&nbsp;a&nbsp;matrix&nbsp;of&nbsp;Tile&nbsp;objects.<br>
+<a href="#MovingTiledLayer">MovingTiledLayer</a>(<a href="#TiledLayer">TiledLayer</a>,&nbsp;<a href="#MovingLayer">MovingLayer</a>):&nbsp;combines&nbsp;<a href="#MovingLayer">MovingLayer</a>&nbsp;and&nbsp;<a href="#TiledLayer">TiledLayer</a>.<br>
+&nbsp;<br>
+Variables&nbsp;used&nbsp;from&nbsp;config:&nbsp;LAYER_SPEED,&nbsp;TILE_FRAME_DURATION</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="skytree.config.html">skytree.config</a><br>
+</td><td class="multicolumn"><a href="warnings.html">warnings</a><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>(<a href="skytree.positional.html#Positional">skytree.positional.Positional</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.layers.html#Layer">Layer</a>(<a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>, <a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.layers.html#MovingLayer">MovingLayer</a>
+</dt><dt class="heading-text"><a href="skytree.layers.html#TiledLayer">TiledLayer</a>(<a href="skytree.layers.html#Layer">Layer</a>, <a href="skytree.collidable.html#Collidable">skytree.collidable.Collidable</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.layers.html#MovingTiledLayer">MovingTiledLayer</a>(<a href="skytree.layers.html#TiledLayer">TiledLayer</a>, <a href="skytree.layers.html#MovingLayer">MovingLayer</a>)
+</dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="heading-text"><a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>(<a href="skytree.component.html#Component">skytree.component.Component</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.layers.html#Layer">Layer</a>(<a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>, <a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.layers.html#MovingLayer">MovingLayer</a>
+</dt><dt class="heading-text"><a href="skytree.layers.html#TiledLayer">TiledLayer</a>(<a href="skytree.layers.html#Layer">Layer</a>, <a href="skytree.collidable.html#Collidable">skytree.collidable.Collidable</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.layers.html#MovingTiledLayer">MovingTiledLayer</a>(<a href="skytree.layers.html#TiledLayer">TiledLayer</a>, <a href="skytree.layers.html#MovingLayer">MovingLayer</a>)
+</dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Layer">class <strong>Layer</strong></a>(<a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>, <a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Layer">Layer</a>(canvas,&nbsp;parallax_adjust=(0,&nbsp;0,&nbsp;0,&nbsp;0),&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>&nbsp;and&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>&nbsp;to&nbsp;represent&nbsp;layer&nbsp;within&nbsp;a&nbsp;Board.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;behaviours&nbsp;from&nbsp;Component,&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>,&nbsp;Positional&nbsp;and&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>.<br>
+Extends&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>.<a href="#Layer-update">update</a>(dt).<br>
+&nbsp;<br>
+Supports&nbsp;parallax.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#Layer-get_position_of">get_position_of</a>(label):&nbsp;return&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;component&nbsp;with&nbsp;name&nbsp;matching&nbsp;given&nbsp;label.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.layers.html#Layer">Layer</a></dd>
+<dd><a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a></dd>
+<dd><a href="skytree.positional.html#Positional">skytree.positional.Positional</a></dd>
+<dd><a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a></dd>
+<dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Layer-__init__"><strong>__init__</strong></a>(self, canvas, parallax_adjust=(0, 0, 0, 0), **kwargs)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>&nbsp;to&nbsp;store&nbsp;some&nbsp;parallax&nbsp;adjustments.<br>
+&nbsp;<br>
+Parallax&nbsp;adjustments&nbsp;are&nbsp;(trim_width,&nbsp;trim_height,&nbsp;offset_x,&nbsp;offset_y).<br>
+Keep&nbsp;in&nbsp;mind&nbsp;that&nbsp;trims&nbsp;are&nbsp;ADDED&nbsp;(so&nbsp;for&nbsp;intended&nbsp;functionality,&nbsp;express&nbsp;them&nbsp;as&nbsp;negative).</span></dd></dl>
+
+<dl><dt><a name="Layer-get_position_of"><strong>get_position_of</strong></a>(self, label)</dt><dd><span class="code">Return&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;component&nbsp;with&nbsp;name&nbsp;matching&nbsp;given&nbsp;label;&nbsp;return&nbsp;None&nbsp;if&nbsp;absent.</span></dd></dl>
+
+<dl><dt><a name="Layer-update"><strong>update</strong></a>(self, dt)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>&nbsp;to&nbsp;calculate&nbsp;layer&nbsp;parallax.<br>
+&nbsp;<br>
+Adjust&nbsp;layer&nbsp;position&nbsp;=&nbsp;-&nbsp;layer_range&nbsp;*&nbsp;main_layer_pos&nbsp;/&nbsp;main_layer_range<br>
+Will&nbsp;work&nbsp;propperly&nbsp;as&nbsp;long&nbsp;as&nbsp;layer's&nbsp;dimensions&nbsp;are&nbsp;at&nbsp;least&nbsp;as&nbsp;big&nbsp;as&nbsp;the&nbsp;frame.</span></dd></dl>
+
+<hr>
+Readonly properties defined here:<br>
+<dl><dt><strong>board</strong></dt>
+<dd><span class="code">Current&nbsp;game&nbsp;board.</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><a name="Layer-add_component"><strong>add_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;add&nbsp;component&nbsp;to&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="Layer-align_bottom"><strong>align_bottom</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Layer-align_center"><strong>align_center</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Layer-align_center_x"><strong>align_center_x</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Layer-align_center_y"><strong>align_center_y</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Layer-align_left"><strong>align_left</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Layer-align_proportion"><strong>align_proportion</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value.</span></dd></dl>
+
+<dl><dt><a name="Layer-align_proportion_x"><strong>align_proportion_x</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Layer-align_proportion_y"><strong>align_proportion_y</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Layer-align_right"><strong>align_right</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Layer-align_top"><strong>align_top</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Layer-clear_alignment"><strong>clear_alignment</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Layer-clear_alignment_x"><strong>clear_alignment_x</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;horizontal&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Layer-clear_alignment_y"><strong>clear_alignment_y</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;vertical&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Layer-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Render&nbsp;own&nbsp;canvas&nbsp;if&nbsp;present,&nbsp;then&nbsp;render&nbsp;components.&nbsp;<br>
+&nbsp;<br>
+Component&nbsp;positions&nbsp;are&nbsp;relative&nbsp;to&nbsp;root&nbsp;canvas&nbsp;(or&nbsp;closest&nbsp;subsurface).</span></dd></dl>
+
+<dl><dt><a name="Layer-get_draw_layer"><strong>get_draw_layer</strong></a>(self, component=None)</dt><dd><span class="code">Return&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Layer-move_backward"><strong>move_backward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;backwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Layer-move_forward"><strong>move_forward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;forwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Layer-move_to_back"><strong>move_to_back</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;back.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Layer-move_to_front"><strong>move_to_front</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;front.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Layer-remove_component"><strong>remove_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;remove&nbsp;component&nbsp;from&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="Layer-set_align_bottom"><strong>set_align_bottom</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Layer-set_align_center"><strong>set_align_center</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Layer-set_align_center_x"><strong>set_align_center_x</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Layer-set_align_center_y"><strong>set_align_center_y</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Layer-set_align_left"><strong>set_align_left</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Layer-set_align_proportion"><strong>set_align_proportion</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value</span></dd></dl>
+
+<dl><dt><a name="Layer-set_align_proportion_x"><strong>set_align_proportion_x</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Layer-set_align_proportion_y"><strong>set_align_proportion_y</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Layer-set_align_right"><strong>set_align_right</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Layer-set_align_top"><strong>set_align_top</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Layer-set_draw_layer"><strong>set_draw_layer</strong></a>(self, idx, component=None)</dt><dd><span class="code">Set&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<dl><dt><strong>draw_rect</strong></dt>
+<dd><span class="code">Draw&nbsp;rect&nbsp;for&nbsp;object&nbsp;canvas&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<dl><dt><strong>drawable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;drawable&nbsp;components&nbsp;list&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>frame_dim</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;2D&nbsp;dimensions.</span></dd>
+</dl>
+<dl><dt><strong>frame_height</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;height.</span></dd>
+</dl>
+<dl><dt><strong>frame_width</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;width.</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Object&nbsp;height&nbsp;(from&nbsp;its&nbsp;draw_rect)</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Object&nbsp;width&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>canvas</strong></dt>
+<dd><span class="code">This&nbsp;object's&nbsp;drawable&nbsp;surface&nbsp;(Pygame&nbsp;Surface).</span></dd>
+</dl>
+<dl><dt><strong>frame</strong></dt>
+<dd><span class="code">Object&nbsp;frame&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.positional.html#Positional">skytree.positional.Positional</a>:<br>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+<dl><dt><strong>vel</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;velocity.</span></dd>
+</dl>
+<hr>
+Readonly properties inherited from <a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>:<br>
+<dl><dt><strong>updateable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;updateable&nbsp;components&nbsp;list&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><a name="Layer-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><span class="code">Iterate&nbsp;over&nbsp;self.<strong>_components</strong>.</span></dd></dl>
+
+<dl><dt><a name="Layer-add_persistent_component"><strong>add_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Add&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;to&nbsp;the&nbsp;object&nbsp;and&nbsp;add&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;tag&nbsp;will&nbsp;prevent&nbsp;the&nbsp;component&nbsp;from&nbsp;being&nbsp;destroyed&nbsp;on&nbsp;reset<br>
+and&nbsp;also&nbsp;have&nbsp;it&nbsp;restored&nbsp;if&nbsp;it&nbsp;was&nbsp;previously&nbsp;destroyed.</span></dd></dl>
+
+<dl><dt><a name="Layer-add_tag"><strong>add_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Add&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;keep&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="Layer-destroy"><strong>destroy</strong></a>(self)</dt><dd><span class="code">Remove&nbsp;this&nbsp;component&nbsp;from&nbsp;its&nbsp;current&nbsp;owner&nbsp;and&nbsp;propagate&nbsp;the&nbsp;command&nbsp;through&nbsp;its&nbsp;own&nbsp;components.<br>
+&nbsp;<br>
+Avoid&nbsp;calling&nbsp;this&nbsp;method&nbsp;directly,&nbsp;as&nbsp;destroying&nbsp;objects&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;the&nbsp;game&nbsp;loop<br>
+will&nbsp;often&nbsp;yield&nbsp;unexpected&nbsp;(not&nbsp;the&nbsp;fun&nbsp;kind)&nbsp;behaviours.&nbsp;<br>
+Use&nbsp;Game.mark_for_destruction&nbsp;instead&nbsp;and&nbsp;let&nbsp;the&nbsp;game&nbsp;manager&nbsp;do&nbsp;the&nbsp;dirty&nbsp;work&nbsp;for&nbsp;you.</span></dd></dl>
+
+<dl><dt><a name="Layer-remove_persistent_component"><strong>remove_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Remove&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;from&nbsp;the&nbsp;object&nbsp;and&nbsp;remove&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;will&nbsp;remove&nbsp;a&nbsp;persistent&nbsp;object&nbsp;permanently.</span></dd></dl>
+
+<dl><dt><a name="Layer-remove_tag"><strong>remove_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Remove&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;not&nbsp;restore&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="Layer-reset"><strong>reset</strong></a>(self)</dt><dd><span class="code">Restore&nbsp;initial&nbsp;data&nbsp;and&nbsp;propagate&nbsp;command&nbsp;through&nbsp;components.<br>
+&nbsp;<br>
+Restore&nbsp;value&nbsp;of&nbsp;attributes&nbsp;on&nbsp;reset_data["attributes"].<br>
+Restore&nbsp;deleted&nbsp;tags&nbsp;from&nbsp;reset_data["tags"]&nbsp;and&nbsp;delete&nbsp;added&nbsp;tags&nbsp;not&nbsp;registered&nbsp;there.<br>
+Restore&nbsp;removed&nbsp;components&nbsp;from&nbsp;reset_data["components"]&nbsp;and&nbsp;remove&nbsp;added&nbsp;components<br>
+not&nbsp;registered&nbsp;there.<br>
+Extend&nbsp;on&nbsp;subclasses&nbsp;to&nbsp;recover&nbsp;initial&nbsp;state&nbsp;as&nbsp;needed.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>named</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tagged</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;tag&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Object&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>game</strong></dt>
+<dd><span class="code">The&nbsp;Game&nbsp;instance&nbsp;(the&nbsp;root&nbsp;of&nbsp;the&nbsp;tree).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;name.</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;owner.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="MovingLayer">class <strong>MovingLayer</strong></a>(<a href="skytree.layers.html#Layer">Layer</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#MovingLayer">MovingLayer</a>(canvas,&nbsp;destinations,&nbsp;speed=50,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="#Layer">Layer</a>&nbsp;to&nbsp;apply&nbsp;automatic&nbsp;movement.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;behaviours&nbsp;from&nbsp;Component,&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>,&nbsp;Positional,&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>&nbsp;and&nbsp;<a href="#Layer">Layer</a>.<br>
+Extends&nbsp;<a href="#Layer">Layer</a>.<a href="#MovingLayer-update">update</a>(dt)&nbsp;and&nbsp;Component.<a href="#MovingLayer-reset">reset</a>().<br>
+&nbsp;<br>
+Movement&nbsp;is&nbsp;done&nbsp;by&nbsp;linear&nbsp;interpolation.&nbsp;The&nbsp;only&nbsp;supported&nbsp;lerp&nbsp;function&nbsp;is&nbsp;linear&nbsp;movement.<br>
+&nbsp;<br>
+Notes&nbsp;on&nbsp;setters:<br>
+Setting&nbsp;either&nbsp;_offset_x&nbsp;or&nbsp;_offset_y&nbsp;will&nbsp;trigger&nbsp;movement;&nbsp;setting&nbsp;_offset,&nbsp;however,&nbsp;will&nbsp;not.<br>
+Setting&nbsp;_destination&nbsp;will&nbsp;update&nbsp;_origin&nbsp;and&nbsp;start&nbsp;a&nbsp;timer&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;manage&nbsp;the&nbsp;movement&nbsp;on&nbsp;update&nbsp;time.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.layers.html#MovingLayer">MovingLayer</a></dd>
+<dd><a href="skytree.layers.html#Layer">Layer</a></dd>
+<dd><a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a></dd>
+<dd><a href="skytree.positional.html#Positional">skytree.positional.Positional</a></dd>
+<dd><a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a></dd>
+<dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="MovingLayer-__init__"><strong>__init__</strong></a>(self, canvas, destinations, speed=50, **kwargs)</dt><dd><span class="code">Extend&nbsp;<a href="#Layer">Layer</a>&nbsp;to&nbsp;store&nbsp;a&nbsp;list&nbsp;of&nbsp;tuples&nbsp;in&nbsp;the&nbsp;form&nbsp;(destination&nbsp;point,&nbsp;waiting&nbsp;time&nbsp;at&nbsp;arrival).<br>
+&nbsp;<br>
+The&nbsp;sequence&nbsp;loops.&nbsp;Set&nbsp;waiting&nbsp;time&nbsp;to&nbsp;0&nbsp;to&nbsp;move&nbsp;immediately&nbsp;to&nbsp;next&nbsp;destination;&nbsp;set&nbsp;it&nbsp;to&nbsp;infinite&nbsp;on&nbsp;the&nbsp;last&nbsp;destination&nbsp;to&nbsp;stop&nbsp;the&nbsp;loop.<br>
+Set&nbsp;destination&nbsp;to&nbsp;starting&nbsp;position&nbsp;to&nbsp;establish&nbsp;an&nbsp;initial&nbsp;delay&nbsp;(keep&nbsp;in&nbsp;mind&nbsp;that&nbsp;this&nbsp;will&nbsp;spill&nbsp;into&nbsp;the&nbsp;next&nbsp;iteration&nbsp;of&nbsp;the&nbsp;loop).</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-reset"><strong>reset</strong></a>(self)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;recover&nbsp;initial&nbsp;position&nbsp;and&nbsp;movement&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-update"><strong>update</strong></a>(self, dt)</dt><dd><span class="code">Extend&nbsp;<a href="#Layer">Layer</a>&nbsp;to&nbsp;apply&nbsp;lerp&nbsp;movement.<br>
+&nbsp;<br>
+On&nbsp;arrival,&nbsp;call&nbsp;_next_destination&nbsp;if&nbsp;there's&nbsp;no&nbsp;waiting&nbsp;time&nbsp;or&nbsp;set&nbsp;a&nbsp;delay&nbsp;for&nbsp;calling&nbsp;this&nbsp;method&nbsp;if&nbsp;there&nbsp;is.</span></dd></dl>
+
+<hr>
+Methods inherited from <a href="skytree.layers.html#Layer">Layer</a>:<br>
+<dl><dt><a name="MovingLayer-get_position_of"><strong>get_position_of</strong></a>(self, label)</dt><dd><span class="code">Return&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;component&nbsp;with&nbsp;name&nbsp;matching&nbsp;given&nbsp;label;&nbsp;return&nbsp;None&nbsp;if&nbsp;absent.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.layers.html#Layer">Layer</a>:<br>
+<dl><dt><strong>board</strong></dt>
+<dd><span class="code">Current&nbsp;game&nbsp;board.</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><a name="MovingLayer-add_component"><strong>add_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;add&nbsp;component&nbsp;to&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-align_bottom"><strong>align_bottom</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-align_center"><strong>align_center</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-align_center_x"><strong>align_center_x</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-align_center_y"><strong>align_center_y</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-align_left"><strong>align_left</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-align_proportion"><strong>align_proportion</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-align_proportion_x"><strong>align_proportion_x</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-align_proportion_y"><strong>align_proportion_y</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-align_right"><strong>align_right</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-align_top"><strong>align_top</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-clear_alignment"><strong>clear_alignment</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-clear_alignment_x"><strong>clear_alignment_x</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;horizontal&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-clear_alignment_y"><strong>clear_alignment_y</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;vertical&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Render&nbsp;own&nbsp;canvas&nbsp;if&nbsp;present,&nbsp;then&nbsp;render&nbsp;components.&nbsp;<br>
+&nbsp;<br>
+Component&nbsp;positions&nbsp;are&nbsp;relative&nbsp;to&nbsp;root&nbsp;canvas&nbsp;(or&nbsp;closest&nbsp;subsurface).</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-get_draw_layer"><strong>get_draw_layer</strong></a>(self, component=None)</dt><dd><span class="code">Return&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-move_backward"><strong>move_backward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;backwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-move_forward"><strong>move_forward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;forwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-move_to_back"><strong>move_to_back</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;back.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-move_to_front"><strong>move_to_front</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;front.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-remove_component"><strong>remove_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;remove&nbsp;component&nbsp;from&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-set_align_bottom"><strong>set_align_bottom</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-set_align_center"><strong>set_align_center</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-set_align_center_x"><strong>set_align_center_x</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-set_align_center_y"><strong>set_align_center_y</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-set_align_left"><strong>set_align_left</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-set_align_proportion"><strong>set_align_proportion</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-set_align_proportion_x"><strong>set_align_proportion_x</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-set_align_proportion_y"><strong>set_align_proportion_y</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-set_align_right"><strong>set_align_right</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-set_align_top"><strong>set_align_top</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-set_draw_layer"><strong>set_draw_layer</strong></a>(self, idx, component=None)</dt><dd><span class="code">Set&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<dl><dt><strong>draw_rect</strong></dt>
+<dd><span class="code">Draw&nbsp;rect&nbsp;for&nbsp;object&nbsp;canvas&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<dl><dt><strong>drawable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;drawable&nbsp;components&nbsp;list&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>frame_dim</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;2D&nbsp;dimensions.</span></dd>
+</dl>
+<dl><dt><strong>frame_height</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;height.</span></dd>
+</dl>
+<dl><dt><strong>frame_width</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;width.</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Object&nbsp;height&nbsp;(from&nbsp;its&nbsp;draw_rect)</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Object&nbsp;width&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>canvas</strong></dt>
+<dd><span class="code">This&nbsp;object's&nbsp;drawable&nbsp;surface&nbsp;(Pygame&nbsp;Surface).</span></dd>
+</dl>
+<dl><dt><strong>frame</strong></dt>
+<dd><span class="code">Object&nbsp;frame&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.positional.html#Positional">skytree.positional.Positional</a>:<br>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+<dl><dt><strong>vel</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;velocity.</span></dd>
+</dl>
+<hr>
+Readonly properties inherited from <a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>:<br>
+<dl><dt><strong>updateable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;updateable&nbsp;components&nbsp;list&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><a name="MovingLayer-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><span class="code">Iterate&nbsp;over&nbsp;self.<strong>_components</strong>.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-add_persistent_component"><strong>add_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Add&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;to&nbsp;the&nbsp;object&nbsp;and&nbsp;add&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;tag&nbsp;will&nbsp;prevent&nbsp;the&nbsp;component&nbsp;from&nbsp;being&nbsp;destroyed&nbsp;on&nbsp;reset<br>
+and&nbsp;also&nbsp;have&nbsp;it&nbsp;restored&nbsp;if&nbsp;it&nbsp;was&nbsp;previously&nbsp;destroyed.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-add_tag"><strong>add_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Add&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;keep&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-destroy"><strong>destroy</strong></a>(self)</dt><dd><span class="code">Remove&nbsp;this&nbsp;component&nbsp;from&nbsp;its&nbsp;current&nbsp;owner&nbsp;and&nbsp;propagate&nbsp;the&nbsp;command&nbsp;through&nbsp;its&nbsp;own&nbsp;components.<br>
+&nbsp;<br>
+Avoid&nbsp;calling&nbsp;this&nbsp;method&nbsp;directly,&nbsp;as&nbsp;destroying&nbsp;objects&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;the&nbsp;game&nbsp;loop<br>
+will&nbsp;often&nbsp;yield&nbsp;unexpected&nbsp;(not&nbsp;the&nbsp;fun&nbsp;kind)&nbsp;behaviours.&nbsp;<br>
+Use&nbsp;Game.mark_for_destruction&nbsp;instead&nbsp;and&nbsp;let&nbsp;the&nbsp;game&nbsp;manager&nbsp;do&nbsp;the&nbsp;dirty&nbsp;work&nbsp;for&nbsp;you.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-remove_persistent_component"><strong>remove_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Remove&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;from&nbsp;the&nbsp;object&nbsp;and&nbsp;remove&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;will&nbsp;remove&nbsp;a&nbsp;persistent&nbsp;object&nbsp;permanently.</span></dd></dl>
+
+<dl><dt><a name="MovingLayer-remove_tag"><strong>remove_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Remove&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;not&nbsp;restore&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>named</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tagged</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;tag&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Object&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>game</strong></dt>
+<dd><span class="code">The&nbsp;Game&nbsp;instance&nbsp;(the&nbsp;root&nbsp;of&nbsp;the&nbsp;tree).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;name.</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;owner.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="MovingTiledLayer">class <strong>MovingTiledLayer</strong></a>(<a href="skytree.layers.html#TiledLayer">TiledLayer</a>, <a href="skytree.layers.html#MovingLayer">MovingLayer</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#MovingTiledLayer">MovingTiledLayer</a>(tileset,&nbsp;tilemap,&nbsp;key2object,&nbsp;active_margins=(0,&nbsp;0,&nbsp;0,&nbsp;0),&nbsp;frame_duration=300,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Combine&nbsp;<a href="#MovingLayer">MovingLayer</a>&nbsp;with&nbsp;<a href="#TiledLayer">TiledLayer</a><br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.layers.html#MovingTiledLayer">MovingTiledLayer</a></dd>
+<dd><a href="skytree.layers.html#TiledLayer">TiledLayer</a></dd>
+<dd><a href="skytree.layers.html#MovingLayer">MovingLayer</a></dd>
+<dd><a href="skytree.layers.html#Layer">Layer</a></dd>
+<dd><a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a></dd>
+<dd><a href="skytree.collidable.html#Collidable">skytree.collidable.Collidable</a></dd>
+<dd><a href="skytree.positional.html#Positional">skytree.positional.Positional</a></dd>
+<dd><a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a></dd>
+<dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.layers.html#TiledLayer">TiledLayer</a>:<br>
+<dl><dt><a name="MovingTiledLayer-__init__"><strong>__init__</strong></a>(self, tileset, tilemap, key2object, active_margins=(0, 0, 0, 0), frame_duration=300, **kwargs)</dt><dd><span class="code">Extend&nbsp;Subsurface,&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>&nbsp;and&nbsp;WithResources&nbsp;to&nbsp;construct&nbsp;an&nbsp;object&nbsp;matrix.<br>
+&nbsp;<br>
+The&nbsp;tileset&nbsp;is&nbsp;going&nbsp;to&nbsp;be&nbsp;used&nbsp;by&nbsp;the&nbsp;tile&nbsp;objects.&nbsp;It's&nbsp;fetched&nbsp;by&nbsp;reference&nbsp;every&nbsp;time&nbsp;(so&nbsp;it&nbsp;can&nbsp;be&nbsp;changed&nbsp;on&nbsp;the&nbsp;fly<br>
+&nbsp;&nbsp;with&nbsp;a&nbsp;noticeable&nbsp;effect&nbsp;and&nbsp;no&nbsp;extra&nbsp;computational&nbsp;cost).<br>
+tilemap&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;file&nbsp;that&nbsp;defines&nbsp;the&nbsp;matrix;&nbsp;every&nbsp;row&nbsp;and&nbsp;every&nbsp;column&nbsp;must&nbsp;have&nbsp;the&nbsp;same&nbsp;length.<br>
+key2object&nbsp;is&nbsp;the&nbsp;dictionary&nbsp;that&nbsp;defines&nbsp;how&nbsp;to&nbsp;convert&nbsp;symbols&nbsp;into&nbsp;objects,&nbsp;in&nbsp;the&nbsp;form&nbsp;{symbol:&nbsp;(Class,&nbsp;kwargs)}.<br>
+&nbsp;&nbsp;Tile&nbsp;objects&nbsp;are&nbsp;baked&nbsp;on&nbsp;this&nbsp;init&nbsp;and&nbsp;they're&nbsp;also&nbsp;given&nbsp;a&nbsp;position,&nbsp;and&nbsp;a&nbsp;reference&nbsp;to&nbsp;this&nbsp;layer.<br>
+active_margins&nbsp;will&nbsp;define&nbsp;how&nbsp;far&nbsp;an&nbsp;updateable&nbsp;tile&nbsp;can&nbsp;be&nbsp;from&nbsp;the&nbsp;screen&nbsp;border&nbsp;and&nbsp;still&nbsp;be&nbsp;updated.<br>
+&nbsp;&nbsp;The&nbsp;value&nbsp;can&nbsp;be&nbsp;a&nbsp;single&nbsp;value,&nbsp;(horizontal,&nbsp;vertical)&nbsp;or&nbsp;(left,&nbsp;top,&nbsp;right,&nbsp;bottom).&nbsp;Value&nbsp;expresses&nbsp;tiles,&nbsp;not&nbsp;pixels.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-delete_tile_at"><strong>delete_tile_at</strong></a>(self, coord)</dt><dd><span class="code">Delete&nbsp;the&nbsp;tile&nbsp;object&nbsp;at&nbsp;the&nbsp;specified&nbsp;tile&nbsp;coordinates.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-get_collisions"><strong>get_collisions</strong></a>(self, obj, obj_tags=None)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.collidable.html#Collidable">Collidable</a>&nbsp;to&nbsp;include&nbsp;tile&nbsp;collisions.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-get_collisions_hitbox"><strong>get_collisions_hitbox</strong></a>(self, hitbox, obj_tags)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.collidable.html#Collidable">Collidable</a>&nbsp;to&nbsp;include&nbsp;tile&nbsp;collisions.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-get_position_of"><strong>get_position_of</strong></a>(self, label)</dt><dd><span class="code">Return&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;component&nbsp;or&nbsp;tile&nbsp;with&nbsp;name&nbsp;matching&nbsp;given&nbsp;label;&nbsp;return&nbsp;None&nbsp;if&nbsp;absent.<br>
+&nbsp;<br>
+Prioritizes&nbsp;components.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-get_tile_at"><strong>get_tile_at</strong></a>(self, coord)</dt><dd><span class="code">Return&nbsp;the&nbsp;tile&nbsp;object&nbsp;at&nbsp;the&nbsp;specified&nbsp;tile&nbsp;coordinates&nbsp;or&nbsp;None&nbsp;if&nbsp;there's&nbsp;no&nbsp;object&nbsp;there&nbsp;or&nbsp;the&nbsp;coordinates&nbsp;are&nbsp;outside&nbsp;the&nbsp;matrix.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-put_tile_at"><strong>put_tile_at</strong></a>(self, coord, obj)</dt><dd><span class="code">Put&nbsp;the&nbsp;tile&nbsp;object&nbsp;in&nbsp;the&nbsp;specified&nbsp;tile&nbsp;coordinates,&nbsp;replacing&nbsp;existing&nbsp;object&nbsp;if&nbsp;any.<br>
+&nbsp;<br>
+Raise&nbsp;AttributeError&nbsp;if&nbsp;the&nbsp;object's&nbsp;name&nbsp;is&nbsp;already&nbsp;in&nbsp;use.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-reset"><strong>reset</strong></a>(self)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;re-bake&nbsp;all&nbsp;tile&nbsp;objects&nbsp;unless&nbsp;prevented&nbsp;by&nbsp;the&nbsp;use&nbsp;of&nbsp;tag&nbsp;'persistent_tiles'.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-update"><strong>update</strong></a>(self, dt)</dt><dd><span class="code">Override&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>&nbsp;to&nbsp;include&nbsp;active&nbsp;tiles,&nbsp;both&nbsp;currently&nbsp;and&nbsp;always&nbsp;active.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.layers.html#TiledLayer">TiledLayer</a>:<br>
+<dl><dt><strong>tile_dim</strong></dt>
+<dd><span class="code">Tile&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;TileSet;&nbsp;read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_height</strong></dt>
+<dd><span class="code">Tile&nbsp;height&nbsp;(from&nbsp;TileSet;&nbsp;read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_width</strong></dt>
+<dd><span class="code">Tile&nbsp;width&nbsp;(from&nbsp;TileSet;&nbsp;read-only).</span></dd>
+</dl>
+<hr>
+Readonly properties inherited from <a href="skytree.layers.html#Layer">Layer</a>:<br>
+<dl><dt><strong>board</strong></dt>
+<dd><span class="code">Current&nbsp;game&nbsp;board.</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><a name="MovingTiledLayer-add_component"><strong>add_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;add&nbsp;component&nbsp;to&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-align_bottom"><strong>align_bottom</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-align_center"><strong>align_center</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-align_center_x"><strong>align_center_x</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-align_center_y"><strong>align_center_y</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-align_left"><strong>align_left</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-align_proportion"><strong>align_proportion</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-align_proportion_x"><strong>align_proportion_x</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-align_proportion_y"><strong>align_proportion_y</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-align_right"><strong>align_right</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-align_top"><strong>align_top</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-clear_alignment"><strong>clear_alignment</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-clear_alignment_x"><strong>clear_alignment_x</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;horizontal&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-clear_alignment_y"><strong>clear_alignment_y</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;vertical&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Render&nbsp;own&nbsp;canvas&nbsp;if&nbsp;present,&nbsp;then&nbsp;render&nbsp;components.&nbsp;<br>
+&nbsp;<br>
+Component&nbsp;positions&nbsp;are&nbsp;relative&nbsp;to&nbsp;root&nbsp;canvas&nbsp;(or&nbsp;closest&nbsp;subsurface).</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-get_draw_layer"><strong>get_draw_layer</strong></a>(self, component=None)</dt><dd><span class="code">Return&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-move_backward"><strong>move_backward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;backwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-move_forward"><strong>move_forward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;forwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-move_to_back"><strong>move_to_back</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;back.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-move_to_front"><strong>move_to_front</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;front.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-remove_component"><strong>remove_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;remove&nbsp;component&nbsp;from&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-set_align_bottom"><strong>set_align_bottom</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-set_align_center"><strong>set_align_center</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-set_align_center_x"><strong>set_align_center_x</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-set_align_center_y"><strong>set_align_center_y</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-set_align_left"><strong>set_align_left</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-set_align_proportion"><strong>set_align_proportion</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-set_align_proportion_x"><strong>set_align_proportion_x</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-set_align_proportion_y"><strong>set_align_proportion_y</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-set_align_right"><strong>set_align_right</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-set_align_top"><strong>set_align_top</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-set_draw_layer"><strong>set_draw_layer</strong></a>(self, idx, component=None)</dt><dd><span class="code">Set&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<dl><dt><strong>draw_rect</strong></dt>
+<dd><span class="code">Draw&nbsp;rect&nbsp;for&nbsp;object&nbsp;canvas&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<dl><dt><strong>drawable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;drawable&nbsp;components&nbsp;list&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>frame_dim</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;2D&nbsp;dimensions.</span></dd>
+</dl>
+<dl><dt><strong>frame_height</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;height.</span></dd>
+</dl>
+<dl><dt><strong>frame_width</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;width.</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Object&nbsp;height&nbsp;(from&nbsp;its&nbsp;draw_rect)</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Object&nbsp;width&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>canvas</strong></dt>
+<dd><span class="code">This&nbsp;object's&nbsp;drawable&nbsp;surface&nbsp;(Pygame&nbsp;Surface).</span></dd>
+</dl>
+<dl><dt><strong>frame</strong></dt>
+<dd><span class="code">Object&nbsp;frame&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.collidable.html#Collidable">skytree.collidable.Collidable</a>:<br>
+<dl><dt><a name="MovingTiledLayer-__setattr__"><strong>__setattr__</strong></a>(self, name, value)</dt><dd><span class="code">Extend&nbsp;object&nbsp;setter&nbsp;to&nbsp;update&nbsp;hitbox&nbsp;position&nbsp;when&nbsp;position&nbsp;is&nbsp;changed.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;avoids&nbsp;overriding&nbsp;Positional;&nbsp;it's&nbsp;slower&nbsp;than&nbsp;using&nbsp;property&nbsp;decorators,&nbsp;though.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-collides"><strong>collides</strong></a>(self, obj)</dt><dd><span class="code">Return&nbsp;True&nbsp;in&nbsp;case&nbsp;of&nbsp;collision,&nbsp;False&nbsp;otherwise.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-lock_hitbox"><strong>lock_hitbox</strong></a>(self)</dt><dd><span class="code">Disable&nbsp;the&nbsp;hitbox.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-unlock_hitbox"><strong>unlock_hitbox</strong></a>(self)</dt><dd><span class="code">Enable&nbsp;the&nbsp;hitbox.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.collidable.html#Collidable">skytree.collidable.Collidable</a>:<br>
+<dl><dt><strong>collidable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;collidable&nbsp;components&nbsp;set&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.collidable.html#Collidable">skytree.collidable.Collidable</a>:<br>
+<dl><dt><strong>hitbox</strong></dt>
+<dd><span class="code">Object's&nbsp;hitbox.</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.positional.html#Positional">skytree.positional.Positional</a>:<br>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+<dl><dt><strong>vel</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;velocity.</span></dd>
+</dl>
+<hr>
+Readonly properties inherited from <a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>:<br>
+<dl><dt><strong>updateable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;updateable&nbsp;components&nbsp;list&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><a name="MovingTiledLayer-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><span class="code">Iterate&nbsp;over&nbsp;self.<strong>_components</strong>.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-add_persistent_component"><strong>add_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Add&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;to&nbsp;the&nbsp;object&nbsp;and&nbsp;add&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;tag&nbsp;will&nbsp;prevent&nbsp;the&nbsp;component&nbsp;from&nbsp;being&nbsp;destroyed&nbsp;on&nbsp;reset<br>
+and&nbsp;also&nbsp;have&nbsp;it&nbsp;restored&nbsp;if&nbsp;it&nbsp;was&nbsp;previously&nbsp;destroyed.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-add_tag"><strong>add_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Add&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;keep&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-destroy"><strong>destroy</strong></a>(self)</dt><dd><span class="code">Remove&nbsp;this&nbsp;component&nbsp;from&nbsp;its&nbsp;current&nbsp;owner&nbsp;and&nbsp;propagate&nbsp;the&nbsp;command&nbsp;through&nbsp;its&nbsp;own&nbsp;components.<br>
+&nbsp;<br>
+Avoid&nbsp;calling&nbsp;this&nbsp;method&nbsp;directly,&nbsp;as&nbsp;destroying&nbsp;objects&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;the&nbsp;game&nbsp;loop<br>
+will&nbsp;often&nbsp;yield&nbsp;unexpected&nbsp;(not&nbsp;the&nbsp;fun&nbsp;kind)&nbsp;behaviours.&nbsp;<br>
+Use&nbsp;Game.mark_for_destruction&nbsp;instead&nbsp;and&nbsp;let&nbsp;the&nbsp;game&nbsp;manager&nbsp;do&nbsp;the&nbsp;dirty&nbsp;work&nbsp;for&nbsp;you.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-remove_persistent_component"><strong>remove_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Remove&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;from&nbsp;the&nbsp;object&nbsp;and&nbsp;remove&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;will&nbsp;remove&nbsp;a&nbsp;persistent&nbsp;object&nbsp;permanently.</span></dd></dl>
+
+<dl><dt><a name="MovingTiledLayer-remove_tag"><strong>remove_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Remove&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;not&nbsp;restore&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>named</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tagged</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;tag&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Object&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>game</strong></dt>
+<dd><span class="code">The&nbsp;Game&nbsp;instance&nbsp;(the&nbsp;root&nbsp;of&nbsp;the&nbsp;tree).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;name.</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;owner.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="TiledLayer">class <strong>TiledLayer</strong></a>(<a href="skytree.layers.html#Layer">Layer</a>, <a href="skytree.collidable.html#Collidable">skytree.collidable.Collidable</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#TiledLayer">TiledLayer</a>(tileset,&nbsp;tilemap,&nbsp;key2object,&nbsp;active_margins=(0,&nbsp;0,&nbsp;0,&nbsp;0),&nbsp;frame_duration=300,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="#Layer">Layer</a>&nbsp;and&nbsp;<a href="skytree.collidable.html#Collidable">Collidable</a>&nbsp;to&nbsp;represent&nbsp;a&nbsp;tiled&nbsp;space.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;behaviours&nbsp;from&nbsp;Component,&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>,&nbsp;Positional,&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>,&nbsp;<a href="skytree.collidable.html#Collidable">Collidable</a>&nbsp;and&nbsp;<a href="#Layer">Layer</a>.<br>
+Extends&nbsp;<a href="#Layer">Layer</a>.<a href="#TiledLayer-update">update</a>(dt)&nbsp;and&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>._render_components(canvas).<br>
+Overrides&nbsp;<a href="#TiledLayer-get_position_of">get_position_of</a>(label)&nbsp;to&nbsp;include&nbsp;tiles<br>
+&nbsp;<br>
+Has&nbsp;an&nbsp;object&nbsp;matrix;&nbsp;each&nbsp;entry&nbsp;may&nbsp;hold&nbsp;a&nbsp;drawable,&nbsp;updateable&nbsp;and/or&nbsp;collidable&nbsp;tile&nbsp;object.<br>
+Matrix&nbsp;coordinates&nbsp;map&nbsp;(tile_dim:1)&nbsp;to&nbsp;2d&nbsp;positions&nbsp;in&nbsp;space.<br>
+Only&nbsp;visible&nbsp;tiles&nbsp;get&nbsp;rendered&nbsp;each&nbsp;frame.<br>
+Only&nbsp;tiles&nbsp;within&nbsp;a&nbsp;margin&nbsp;of&nbsp;the&nbsp;screen&nbsp;borders&nbsp;and&nbsp;marked&nbsp;as&nbsp;always&nbsp;active&nbsp;get&nbsp;updated&nbsp;each&nbsp;frame.<br>
+Only&nbsp;tiles&nbsp;matching&nbsp;a&nbsp;hitbox&nbsp;position&nbsp;are&nbsp;checked&nbsp;for&nbsp;collisions.<br>
+The&nbsp;draw,&nbsp;update&nbsp;and&nbsp;collision&nbsp;systems&nbsp;are&nbsp;overriden&nbsp;to&nbsp;include&nbsp;the&nbsp;appropriate&nbsp;tile&nbsp;objects<br>
+&nbsp;&nbsp;(see&nbsp;_render_components(canvas),&nbsp;<a href="#TiledLayer-update">update</a>(dt),&nbsp;<a href="#TiledLayer-get_collisions">get_collisions</a>(self,&nbsp;obj,&nbsp;obj_tags)&nbsp;and&nbsp;<a href="#TiledLayer-get_collisions_hitbox">get_collisions_hitbox</a>(self,&nbsp;obj,&nbsp;obj_tags))<br>
+The&nbsp;point&nbsp;of&nbsp;doing&nbsp;this&nbsp;instead&nbsp;of&nbsp;just&nbsp;having&nbsp;the&nbsp;tile&nbsp;objects&nbsp;be&nbsp;Components&nbsp;is&nbsp;filtering&nbsp;the&nbsp;objects&nbsp;that&nbsp;actually&nbsp;do&nbsp;need&nbsp;to&nbsp;be<br>
+taken&nbsp;in&nbsp;account&nbsp;each&nbsp;frame&nbsp;so&nbsp;we&nbsp;can&nbsp;save&nbsp;computational&nbsp;cost,&nbsp;especially&nbsp;on&nbsp;large&nbsp;layers.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#TiledLayer-get_tile_at">get_tile_at</a>(coord):&nbsp;return&nbsp;the&nbsp;tile&nbsp;object&nbsp;at&nbsp;the&nbsp;specified&nbsp;tile&nbsp;coordinates.<br>
+<a href="#TiledLayer-delete_tile_at">delete_tile_at</a>(coord):&nbsp;delete&nbsp;the&nbsp;tile&nbsp;object&nbsp;at&nbsp;the&nbsp;specified&nbsp;tile&nbsp;coordinates.<br>
+<a href="#TiledLayer-put_tile_at">put_tile_at</a>(coord,&nbsp;obj):&nbsp;put&nbsp;the&nbsp;given&nbsp;tile&nbsp;object&nbsp;in&nbsp;the&nbsp;specified&nbsp;tile&nbsp;coordinates.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.layers.html#TiledLayer">TiledLayer</a></dd>
+<dd><a href="skytree.layers.html#Layer">Layer</a></dd>
+<dd><a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a></dd>
+<dd><a href="skytree.collidable.html#Collidable">skytree.collidable.Collidable</a></dd>
+<dd><a href="skytree.positional.html#Positional">skytree.positional.Positional</a></dd>
+<dd><a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a></dd>
+<dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TiledLayer-__init__"><strong>__init__</strong></a>(self, tileset, tilemap, key2object, active_margins=(0, 0, 0, 0), frame_duration=300, **kwargs)</dt><dd><span class="code">Extend&nbsp;Subsurface,&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>&nbsp;and&nbsp;WithResources&nbsp;to&nbsp;construct&nbsp;an&nbsp;object&nbsp;matrix.<br>
+&nbsp;<br>
+The&nbsp;tileset&nbsp;is&nbsp;going&nbsp;to&nbsp;be&nbsp;used&nbsp;by&nbsp;the&nbsp;tile&nbsp;objects.&nbsp;It's&nbsp;fetched&nbsp;by&nbsp;reference&nbsp;every&nbsp;time&nbsp;(so&nbsp;it&nbsp;can&nbsp;be&nbsp;changed&nbsp;on&nbsp;the&nbsp;fly<br>
+&nbsp;&nbsp;with&nbsp;a&nbsp;noticeable&nbsp;effect&nbsp;and&nbsp;no&nbsp;extra&nbsp;computational&nbsp;cost).<br>
+tilemap&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;file&nbsp;that&nbsp;defines&nbsp;the&nbsp;matrix;&nbsp;every&nbsp;row&nbsp;and&nbsp;every&nbsp;column&nbsp;must&nbsp;have&nbsp;the&nbsp;same&nbsp;length.<br>
+key2object&nbsp;is&nbsp;the&nbsp;dictionary&nbsp;that&nbsp;defines&nbsp;how&nbsp;to&nbsp;convert&nbsp;symbols&nbsp;into&nbsp;objects,&nbsp;in&nbsp;the&nbsp;form&nbsp;{symbol:&nbsp;(Class,&nbsp;kwargs)}.<br>
+&nbsp;&nbsp;Tile&nbsp;objects&nbsp;are&nbsp;baked&nbsp;on&nbsp;this&nbsp;init&nbsp;and&nbsp;they're&nbsp;also&nbsp;given&nbsp;a&nbsp;position,&nbsp;and&nbsp;a&nbsp;reference&nbsp;to&nbsp;this&nbsp;layer.<br>
+active_margins&nbsp;will&nbsp;define&nbsp;how&nbsp;far&nbsp;an&nbsp;updateable&nbsp;tile&nbsp;can&nbsp;be&nbsp;from&nbsp;the&nbsp;screen&nbsp;border&nbsp;and&nbsp;still&nbsp;be&nbsp;updated.<br>
+&nbsp;&nbsp;The&nbsp;value&nbsp;can&nbsp;be&nbsp;a&nbsp;single&nbsp;value,&nbsp;(horizontal,&nbsp;vertical)&nbsp;or&nbsp;(left,&nbsp;top,&nbsp;right,&nbsp;bottom).&nbsp;Value&nbsp;expresses&nbsp;tiles,&nbsp;not&nbsp;pixels.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-delete_tile_at"><strong>delete_tile_at</strong></a>(self, coord)</dt><dd><span class="code">Delete&nbsp;the&nbsp;tile&nbsp;object&nbsp;at&nbsp;the&nbsp;specified&nbsp;tile&nbsp;coordinates.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-get_collisions"><strong>get_collisions</strong></a>(self, obj, obj_tags=None)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.collidable.html#Collidable">Collidable</a>&nbsp;to&nbsp;include&nbsp;tile&nbsp;collisions.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-get_collisions_hitbox"><strong>get_collisions_hitbox</strong></a>(self, hitbox, obj_tags)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.collidable.html#Collidable">Collidable</a>&nbsp;to&nbsp;include&nbsp;tile&nbsp;collisions.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-get_position_of"><strong>get_position_of</strong></a>(self, label)</dt><dd><span class="code">Return&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;component&nbsp;or&nbsp;tile&nbsp;with&nbsp;name&nbsp;matching&nbsp;given&nbsp;label;&nbsp;return&nbsp;None&nbsp;if&nbsp;absent.<br>
+&nbsp;<br>
+Prioritizes&nbsp;components.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-get_tile_at"><strong>get_tile_at</strong></a>(self, coord)</dt><dd><span class="code">Return&nbsp;the&nbsp;tile&nbsp;object&nbsp;at&nbsp;the&nbsp;specified&nbsp;tile&nbsp;coordinates&nbsp;or&nbsp;None&nbsp;if&nbsp;there's&nbsp;no&nbsp;object&nbsp;there&nbsp;or&nbsp;the&nbsp;coordinates&nbsp;are&nbsp;outside&nbsp;the&nbsp;matrix.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-put_tile_at"><strong>put_tile_at</strong></a>(self, coord, obj)</dt><dd><span class="code">Put&nbsp;the&nbsp;tile&nbsp;object&nbsp;in&nbsp;the&nbsp;specified&nbsp;tile&nbsp;coordinates,&nbsp;replacing&nbsp;existing&nbsp;object&nbsp;if&nbsp;any.<br>
+&nbsp;<br>
+Raise&nbsp;AttributeError&nbsp;if&nbsp;the&nbsp;object's&nbsp;name&nbsp;is&nbsp;already&nbsp;in&nbsp;use.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-reset"><strong>reset</strong></a>(self)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;re-bake&nbsp;all&nbsp;tile&nbsp;objects&nbsp;unless&nbsp;prevented&nbsp;by&nbsp;the&nbsp;use&nbsp;of&nbsp;tag&nbsp;'persistent_tiles'.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-update"><strong>update</strong></a>(self, dt)</dt><dd><span class="code">Override&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>&nbsp;to&nbsp;include&nbsp;active&nbsp;tiles,&nbsp;both&nbsp;currently&nbsp;and&nbsp;always&nbsp;active.</span></dd></dl>
+
+<hr>
+Readonly properties defined here:<br>
+<dl><dt><strong>tile_dim</strong></dt>
+<dd><span class="code">Tile&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;TileSet;&nbsp;read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_height</strong></dt>
+<dd><span class="code">Tile&nbsp;height&nbsp;(from&nbsp;TileSet;&nbsp;read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_width</strong></dt>
+<dd><span class="code">Tile&nbsp;width&nbsp;(from&nbsp;TileSet;&nbsp;read-only).</span></dd>
+</dl>
+<hr>
+Readonly properties inherited from <a href="skytree.layers.html#Layer">Layer</a>:<br>
+<dl><dt><strong>board</strong></dt>
+<dd><span class="code">Current&nbsp;game&nbsp;board.</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><a name="TiledLayer-add_component"><strong>add_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;add&nbsp;component&nbsp;to&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-align_bottom"><strong>align_bottom</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-align_center"><strong>align_center</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-align_center_x"><strong>align_center_x</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-align_center_y"><strong>align_center_y</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-align_left"><strong>align_left</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-align_proportion"><strong>align_proportion</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-align_proportion_x"><strong>align_proportion_x</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-align_proportion_y"><strong>align_proportion_y</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-align_right"><strong>align_right</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-align_top"><strong>align_top</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-clear_alignment"><strong>clear_alignment</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-clear_alignment_x"><strong>clear_alignment_x</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;horizontal&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-clear_alignment_y"><strong>clear_alignment_y</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;vertical&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Render&nbsp;own&nbsp;canvas&nbsp;if&nbsp;present,&nbsp;then&nbsp;render&nbsp;components.&nbsp;<br>
+&nbsp;<br>
+Component&nbsp;positions&nbsp;are&nbsp;relative&nbsp;to&nbsp;root&nbsp;canvas&nbsp;(or&nbsp;closest&nbsp;subsurface).</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-get_draw_layer"><strong>get_draw_layer</strong></a>(self, component=None)</dt><dd><span class="code">Return&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-move_backward"><strong>move_backward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;backwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-move_forward"><strong>move_forward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;forwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-move_to_back"><strong>move_to_back</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;back.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-move_to_front"><strong>move_to_front</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;front.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-remove_component"><strong>remove_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;remove&nbsp;component&nbsp;from&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-set_align_bottom"><strong>set_align_bottom</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-set_align_center"><strong>set_align_center</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-set_align_center_x"><strong>set_align_center_x</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-set_align_center_y"><strong>set_align_center_y</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-set_align_left"><strong>set_align_left</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-set_align_proportion"><strong>set_align_proportion</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-set_align_proportion_x"><strong>set_align_proportion_x</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-set_align_proportion_y"><strong>set_align_proportion_y</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-set_align_right"><strong>set_align_right</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-set_align_top"><strong>set_align_top</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-set_draw_layer"><strong>set_draw_layer</strong></a>(self, idx, component=None)</dt><dd><span class="code">Set&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<dl><dt><strong>draw_rect</strong></dt>
+<dd><span class="code">Draw&nbsp;rect&nbsp;for&nbsp;object&nbsp;canvas&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<dl><dt><strong>drawable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;drawable&nbsp;components&nbsp;list&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>frame_dim</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;2D&nbsp;dimensions.</span></dd>
+</dl>
+<dl><dt><strong>frame_height</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;height.</span></dd>
+</dl>
+<dl><dt><strong>frame_width</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;width.</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Object&nbsp;height&nbsp;(from&nbsp;its&nbsp;draw_rect)</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Object&nbsp;width&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>canvas</strong></dt>
+<dd><span class="code">This&nbsp;object's&nbsp;drawable&nbsp;surface&nbsp;(Pygame&nbsp;Surface).</span></dd>
+</dl>
+<dl><dt><strong>frame</strong></dt>
+<dd><span class="code">Object&nbsp;frame&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.collidable.html#Collidable">skytree.collidable.Collidable</a>:<br>
+<dl><dt><a name="TiledLayer-__setattr__"><strong>__setattr__</strong></a>(self, name, value)</dt><dd><span class="code">Extend&nbsp;object&nbsp;setter&nbsp;to&nbsp;update&nbsp;hitbox&nbsp;position&nbsp;when&nbsp;position&nbsp;is&nbsp;changed.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;avoids&nbsp;overriding&nbsp;Positional;&nbsp;it's&nbsp;slower&nbsp;than&nbsp;using&nbsp;property&nbsp;decorators,&nbsp;though.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-collides"><strong>collides</strong></a>(self, obj)</dt><dd><span class="code">Return&nbsp;True&nbsp;in&nbsp;case&nbsp;of&nbsp;collision,&nbsp;False&nbsp;otherwise.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-lock_hitbox"><strong>lock_hitbox</strong></a>(self)</dt><dd><span class="code">Disable&nbsp;the&nbsp;hitbox.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-unlock_hitbox"><strong>unlock_hitbox</strong></a>(self)</dt><dd><span class="code">Enable&nbsp;the&nbsp;hitbox.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.collidable.html#Collidable">skytree.collidable.Collidable</a>:<br>
+<dl><dt><strong>collidable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;collidable&nbsp;components&nbsp;set&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.collidable.html#Collidable">skytree.collidable.Collidable</a>:<br>
+<dl><dt><strong>hitbox</strong></dt>
+<dd><span class="code">Object's&nbsp;hitbox.</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.positional.html#Positional">skytree.positional.Positional</a>:<br>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+<dl><dt><strong>vel</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;velocity.</span></dd>
+</dl>
+<hr>
+Readonly properties inherited from <a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>:<br>
+<dl><dt><strong>updateable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;updateable&nbsp;components&nbsp;list&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><a name="TiledLayer-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><span class="code">Iterate&nbsp;over&nbsp;self.<strong>_components</strong>.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-add_persistent_component"><strong>add_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Add&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;to&nbsp;the&nbsp;object&nbsp;and&nbsp;add&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;tag&nbsp;will&nbsp;prevent&nbsp;the&nbsp;component&nbsp;from&nbsp;being&nbsp;destroyed&nbsp;on&nbsp;reset<br>
+and&nbsp;also&nbsp;have&nbsp;it&nbsp;restored&nbsp;if&nbsp;it&nbsp;was&nbsp;previously&nbsp;destroyed.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-add_tag"><strong>add_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Add&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;keep&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-destroy"><strong>destroy</strong></a>(self)</dt><dd><span class="code">Remove&nbsp;this&nbsp;component&nbsp;from&nbsp;its&nbsp;current&nbsp;owner&nbsp;and&nbsp;propagate&nbsp;the&nbsp;command&nbsp;through&nbsp;its&nbsp;own&nbsp;components.<br>
+&nbsp;<br>
+Avoid&nbsp;calling&nbsp;this&nbsp;method&nbsp;directly,&nbsp;as&nbsp;destroying&nbsp;objects&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;the&nbsp;game&nbsp;loop<br>
+will&nbsp;often&nbsp;yield&nbsp;unexpected&nbsp;(not&nbsp;the&nbsp;fun&nbsp;kind)&nbsp;behaviours.&nbsp;<br>
+Use&nbsp;Game.mark_for_destruction&nbsp;instead&nbsp;and&nbsp;let&nbsp;the&nbsp;game&nbsp;manager&nbsp;do&nbsp;the&nbsp;dirty&nbsp;work&nbsp;for&nbsp;you.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-remove_persistent_component"><strong>remove_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Remove&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;from&nbsp;the&nbsp;object&nbsp;and&nbsp;remove&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;will&nbsp;remove&nbsp;a&nbsp;persistent&nbsp;object&nbsp;permanently.</span></dd></dl>
+
+<dl><dt><a name="TiledLayer-remove_tag"><strong>remove_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Remove&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;not&nbsp;restore&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>named</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tagged</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;tag&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Object&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>game</strong></dt>
+<dd><span class="code">The&nbsp;Game&nbsp;instance&nbsp;(the&nbsp;root&nbsp;of&nbsp;the&nbsp;tree).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;name.</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;owner.</span></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

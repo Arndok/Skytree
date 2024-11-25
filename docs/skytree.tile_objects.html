@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module skytree.tile_objects</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="skytree.html" class="white">skytree</a>.tile_objects</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:d%3A%5Cskytree_repo%5Csrc%5Cskytree%5Ctile_objects.py">d:\skytree_repo\src\skytree\tile_objects.py</a></td></tr></table>
+    <p><span class="code">Definition&nbsp;of&nbsp;objects&nbsp;that&nbsp;can&nbsp;be&nbsp;used&nbsp;as&nbsp;tiles&nbsp;in&nbsp;a&nbsp;TiledLayer.<br>
+&nbsp;<br>
+Tiles&nbsp;are&nbsp;not&nbsp;Components,&nbsp;but&nbsp;their&nbsp;inheritance&nbsp;structure&nbsp;mirror&nbsp;some&nbsp;core&nbsp;Component&nbsp;behaviours.<br>
+&nbsp;<br>
+Classes:<br>
+<a href="#Tile">Tile</a>:&nbsp;the&nbsp;base&nbsp;class&nbsp;for&nbsp;tile&nbsp;objects.<br>
+<a href="#UpdateableTile">UpdateableTile</a>(<a href="#Tile">Tile</a>):&nbsp;a&nbsp;<a href="#Tile">Tile</a>&nbsp;that&nbsp;can&nbsp;do&nbsp;some&nbsp;work&nbsp;on&nbsp;each&nbsp;frame.<br>
+<a href="#DrawableTile">DrawableTile</a>(<a href="#Tile">Tile</a>):&nbsp;a&nbsp;<a href="#Tile">Tile</a>&nbsp;with&nbsp;a&nbsp;visible&nbsp;appearance.<br>
+<a href="#CollidableTile">CollidableTile</a>(<a href="#Tile">Tile</a>):&nbsp;a&nbsp;<a href="#Tile">Tile</a>&nbsp;with&nbsp;a&nbsp;Hitbox.<br>
+<a href="#AnimatedTile">AnimatedTile</a>(<a href="#DrawableTile">DrawableTile</a>,&nbsp;<a href="#UpdateableTile">UpdateableTile</a>):&nbsp;a&nbsp;<a href="#Tile">Tile</a>&nbsp;with&nbsp;an&nbsp;animation.<br>
+<a href="#DraColTile">DraColTile</a>(<a href="#DrawableTile">DrawableTile</a>,&nbsp;<a href="#CollidableTile">CollidableTile</a>):&nbsp;combines&nbsp;<a href="#DrawableTile">DrawableTile</a>&nbsp;with&nbsp;<a href="#CollidableTile">CollidableTile</a>.<br>
+<a href="#AniColTile">AniColTile</a>(<a href="#AnimatedTile">AnimatedTile</a>,&nbsp;<a href="#CollidableTile">CollidableTile</a>):&nbsp;combines&nbsp;<a href="#AnimatedTile">AnimatedTile</a>&nbsp;with&nbsp;<a href="#CollidableTile">CollidableTile</a>.<br>
+<a href="#StartTile">StartTile</a>(<a href="#Tile">Tile</a>):&nbsp;a&nbsp;<a href="#Tile">Tile</a>&nbsp;with&nbsp;a&nbsp;target&nbsp;position&nbsp;for&nbsp;a&nbsp;sprite&nbsp;to&nbsp;place&nbsp;in.<br>
+<a href="#ExitTile">ExitTile</a>(<a href="#CollidableTile">CollidableTile</a>):&nbsp;a&nbsp;collidable&nbsp;<a href="#Tile">Tile</a>&nbsp;that&nbsp;holds&nbsp;information&nbsp;for&nbsp;state&nbsp;transitions.<br>
+<a href="#PathTile">PathTile</a>(<a href="#DrawableTile">DrawableTile</a>):&nbsp;a&nbsp;<a href="#Tile">Tile</a>&nbsp;that&nbsp;holds&nbsp;information&nbsp;for&nbsp;a&nbsp;sprite&nbsp;to&nbsp;traverse&nbsp;a&nbsp;space.<br>
+<a href="#StageTile">StageTile</a>(<a href="#PathTile">PathTile</a>,&nbsp;<a href="#StartTile">StartTile</a>,&nbsp;<a href="skytree.stage.html#Stage">Stage</a>):&nbsp;a&nbsp;<a href="#Tile">Tile</a>&nbsp;that&nbsp;both&nbsp;links&nbsp;to&nbsp;a&nbsp;<a href="skytree.stage.html#Stage">Stage</a>&nbsp;in&nbsp;a&nbsp;map&nbsp;and&nbsp;acts&nbsp;as&nbsp;one.<br>
+<a href="#CheckpointTile">CheckpointTile</a>(<a href="#StartTile">StartTile</a>,&nbsp;<a href="#CollidableTile">CollidableTile</a>):&nbsp;a&nbsp;<a href="#Tile">Tile</a>&nbsp;that&nbsp;has&nbsp;checkpoint&nbsp;functionality&nbsp;for&nbsp;a&nbsp;<a href="skytree.stage.html#Stage">Stage</a>.<br>
+<a href="#VisibleCheckpointTile">VisibleCheckpointTile</a>(<a href="#CheckpointTile">CheckpointTile</a>,&nbsp;<a href="#DrawableTile">DrawableTile</a>):&nbsp;a&nbsp;<a href="#CheckpointTile">CheckpointTile</a>&nbsp;with&nbsp;a&nbsp;visible&nbsp;appearance.<br>
+<a href="#SpawnerTile">SpawnerTile</a>(<a href="#UpdateableTile">UpdateableTile</a>):&nbsp;a&nbsp;tile&nbsp;that&nbsp;can&nbsp;spawn&nbsp;sprites.<br>
+<a href="#DraSpaTile">DraSpaTile</a>(<a href="#DrawableTile">DrawableTile</a>,&nbsp;<a href="#SpawnerTile">SpawnerTile</a>):&nbsp;combines&nbsp;<a href="#DrawableTile">DrawableTile</a>&nbsp;with&nbsp;<a href="#SpawnerTile">SpawnerTile</a>.<br>
+&nbsp;<br>
+Variables&nbsp;used&nbsp;from&nbsp;config:&nbsp;TILE_FRAME_DURATION</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="skytree.config.html">skytree.config</a><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.tile_objects.html#Tile">Tile</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.tile_objects.html#CollidableTile">CollidableTile</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.tile_objects.html#ExitTile">ExitTile</a>
+</dt></dl>
+</dd>
+<dt class="heading-text"><a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.tile_objects.html#AnimatedTile">AnimatedTile</a>(<a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a>, <a href="skytree.tile_objects.html#UpdateableTile">UpdateableTile</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.tile_objects.html#AniColTile">AniColTile</a>(<a href="skytree.tile_objects.html#AnimatedTile">AnimatedTile</a>, <a href="skytree.tile_objects.html#CollidableTile">CollidableTile</a>)
+</dt></dl>
+</dd>
+<dt class="heading-text"><a href="skytree.tile_objects.html#DraColTile">DraColTile</a>(<a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a>, <a href="skytree.tile_objects.html#CollidableTile">CollidableTile</a>)
+</dt><dt class="heading-text"><a href="skytree.tile_objects.html#DraSpaTile">DraSpaTile</a>(<a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a>, <a href="skytree.tile_objects.html#SpawnerTile">SpawnerTile</a>)
+</dt><dt class="heading-text"><a href="skytree.tile_objects.html#PathTile">PathTile</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.tile_objects.html#StageTile">StageTile</a>(<a href="skytree.tile_objects.html#PathTile">PathTile</a>, <a href="skytree.tile_objects.html#StartTile">StartTile</a>, <a href="skytree.stage.html#Stage">skytree.stage.Stage</a>)
+</dt></dl>
+</dd>
+</dl>
+</dd>
+<dt class="heading-text"><a href="skytree.tile_objects.html#StartTile">StartTile</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.tile_objects.html#CheckpointTile">CheckpointTile</a>(<a href="skytree.tile_objects.html#StartTile">StartTile</a>, <a href="skytree.tile_objects.html#CollidableTile">CollidableTile</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.tile_objects.html#VisibleCheckpointTile">VisibleCheckpointTile</a>(<a href="skytree.tile_objects.html#CheckpointTile">CheckpointTile</a>, <a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a>)
+</dt></dl>
+</dd>
+</dl>
+</dd>
+<dt class="heading-text"><a href="skytree.tile_objects.html#UpdateableTile">UpdateableTile</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.tile_objects.html#SpawnerTile">SpawnerTile</a>
+</dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="AniColTile">class <strong>AniColTile</strong></a>(<a href="skytree.tile_objects.html#AnimatedTile">AnimatedTile</a>, <a href="skytree.tile_objects.html#CollidableTile">CollidableTile</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#AniColTile">AniColTile</a>(frame_duration=300,&nbsp;local_timer=False,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Combines&nbsp;<a href="#AnimatedTile">AnimatedTile</a>&nbsp;with&nbsp;<a href="#CollidableTile">CollidableTile</a>.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.tile_objects.html#AniColTile">AniColTile</a></dd>
+<dd><a href="skytree.tile_objects.html#AnimatedTile">AnimatedTile</a></dd>
+<dd><a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#UpdateableTile">UpdateableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#CollidableTile">CollidableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#Tile">Tile</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.tile_objects.html#AnimatedTile">AnimatedTile</a>:<br>
+<dl><dt><a name="AniColTile-__init__"><strong>__init__</strong></a>(self, frame_duration=300, local_timer=False, **kwargs)</dt><dd><span class="code">Extend&nbsp;superclasses&nbsp;to&nbsp;define&nbsp;an&nbsp;animation&nbsp;clock&nbsp;and&nbsp;index.<br>
+&nbsp;<br>
+idx&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;indices&nbsp;for&nbsp;the&nbsp;frames&nbsp;in&nbsp;the&nbsp;tileset&nbsp;that&nbsp;form&nbsp;the&nbsp;animation.<br>
+local_timer&nbsp;defines&nbsp;whether&nbsp;the&nbsp;tile&nbsp;makes&nbsp;its&nbsp;own&nbsp;timer&nbsp;or&nbsp;subscribes&nbsp;to&nbsp;its&nbsp;layer's</span></dd></dl>
+
+<dl><dt><a name="AniColTile-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Override&nbsp;<a href="#DrawableTile">DrawableTile</a>&nbsp;to&nbsp;render&nbsp;on&nbsp;canvas&nbsp;frame&nbsp;of&nbsp;the&nbsp;tileset&nbsp;pointed&nbsp;to&nbsp;by&nbsp;idx[_anim_index].</span></dd></dl>
+
+<dl><dt><a name="AniColTile-tick_anim"><strong>tick_anim</strong></a>(self)</dt><dd><span class="code">Advance&nbsp;the&nbsp;animation&nbsp;index.<br>
+&nbsp;<br>
+Can&nbsp;be&nbsp;called&nbsp;by&nbsp;this&nbsp;<a href="builtins.html#object">object</a>'s&nbsp;animation&nbsp;timer&nbsp;or&nbsp;its&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="AniColTile-update"><strong>update</strong></a>(self, dt)</dt><dd><span class="code">Update&nbsp;the&nbsp;animation&nbsp;clock.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#AnimatedTile">AnimatedTile</a>:<br>
+<dl><dt><strong>anim_timer</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;animation&nbsp;timer&nbsp;if&nbsp;present&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>coords</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;coordinates.</span></dd>
+</dl>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;height&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_x</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;x-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>tile_y</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;y-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;width&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="AnimatedTile">class <strong>AnimatedTile</strong></a>(<a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a>, <a href="skytree.tile_objects.html#UpdateableTile">UpdateableTile</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#AnimatedTile">AnimatedTile</a>(frame_duration=300,&nbsp;local_timer=False,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="#DrawableTile">DrawableTile</a>&nbsp;and&nbsp;<a href="#UpdateableTile">UpdateableTile</a>&nbsp;to&nbsp;have&nbsp;the&nbsp;tile&nbsp;be&nbsp;animated.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;behaviour&nbsp;from&nbsp;<a href="#Tile">Tile</a>,&nbsp;<a href="#DrawableTile">DrawableTile</a>&nbsp;and&nbsp;<a href="#UpdateableTile">UpdateableTile</a>.<br>
+Overrides&nbsp;<a href="#DrawableTile">DrawableTile</a>.<a href="#AnimatedTile-draw">draw</a>(canvas).<br>
+&nbsp;<br>
+Allows&nbsp;only&nbsp;a&nbsp;single&nbsp;animation&nbsp;as&nbsp;a&nbsp;loop&nbsp;of&nbsp;frames&nbsp;with&nbsp;equal&nbsp;time.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#AnimatedTile-tick_anim">tick_anim</a>():&nbsp;advances&nbsp;one&nbsp;animation&nbsp;frame.&nbsp;Can&nbsp;be&nbsp;called&nbsp;by&nbsp;an&nbsp;external&nbsp;timer.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.tile_objects.html#AnimatedTile">AnimatedTile</a></dd>
+<dd><a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#UpdateableTile">UpdateableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#Tile">Tile</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="AnimatedTile-__init__"><strong>__init__</strong></a>(self, frame_duration=300, local_timer=False, **kwargs)</dt><dd><span class="code">Extend&nbsp;superclasses&nbsp;to&nbsp;define&nbsp;an&nbsp;animation&nbsp;clock&nbsp;and&nbsp;index.<br>
+&nbsp;<br>
+idx&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;indices&nbsp;for&nbsp;the&nbsp;frames&nbsp;in&nbsp;the&nbsp;tileset&nbsp;that&nbsp;form&nbsp;the&nbsp;animation.<br>
+local_timer&nbsp;defines&nbsp;whether&nbsp;the&nbsp;tile&nbsp;makes&nbsp;its&nbsp;own&nbsp;timer&nbsp;or&nbsp;subscribes&nbsp;to&nbsp;its&nbsp;layer's</span></dd></dl>
+
+<dl><dt><a name="AnimatedTile-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Override&nbsp;<a href="#DrawableTile">DrawableTile</a>&nbsp;to&nbsp;render&nbsp;on&nbsp;canvas&nbsp;frame&nbsp;of&nbsp;the&nbsp;tileset&nbsp;pointed&nbsp;to&nbsp;by&nbsp;idx[_anim_index].</span></dd></dl>
+
+<dl><dt><a name="AnimatedTile-tick_anim"><strong>tick_anim</strong></a>(self)</dt><dd><span class="code">Advance&nbsp;the&nbsp;animation&nbsp;index.<br>
+&nbsp;<br>
+Can&nbsp;be&nbsp;called&nbsp;by&nbsp;this&nbsp;<a href="builtins.html#object">object</a>'s&nbsp;animation&nbsp;timer&nbsp;or&nbsp;its&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="AnimatedTile-update"><strong>update</strong></a>(self, dt)</dt><dd><span class="code">Update&nbsp;the&nbsp;animation&nbsp;clock.</span></dd></dl>
+
+<hr>
+Readonly properties defined here:<br>
+<dl><dt><strong>anim_timer</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;animation&nbsp;timer&nbsp;if&nbsp;present&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>coords</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;coordinates.</span></dd>
+</dl>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;height&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_x</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;x-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>tile_y</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;y-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;width&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="CheckpointTile">class <strong>CheckpointTile</strong></a>(<a href="skytree.tile_objects.html#StartTile">StartTile</a>, <a href="skytree.tile_objects.html#CollidableTile">CollidableTile</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#CheckpointTile">CheckpointTile</a>(owner,&nbsp;board,&nbsp;name='checkpoint',&nbsp;tags=(),&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="#StartTile">StartTile</a>&nbsp;and&nbsp;<a href="#CollidableTile">CollidableTile</a>&nbsp;to&nbsp;hold&nbsp;a&nbsp;starting&nbsp;position&nbsp;and&nbsp;an&nbsp;active&nbsp;status.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;behaviour&nbsp;from&nbsp;<a href="#Tile">Tile</a>,&nbsp;<a href="#CollidableTile">CollidableTile</a>&nbsp;and&nbsp;<a href="#StartTile">StartTile</a>.<br>
+&nbsp;<br>
+Notes&nbsp;on&nbsp;setters:<br>
+Setting&nbsp;this&nbsp;<a href="builtins.html#object">object</a>'s&nbsp;active&nbsp;status&nbsp;will&nbsp;bind&nbsp;it&nbsp;to&nbsp;or&nbsp;unbind&nbsp;it&nbsp;from&nbsp;the&nbsp;active&nbsp;stage.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.tile_objects.html#CheckpointTile">CheckpointTile</a></dd>
+<dd><a href="skytree.tile_objects.html#StartTile">StartTile</a></dd>
+<dd><a href="skytree.tile_objects.html#CollidableTile">CollidableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#Tile">Tile</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="CheckpointTile-__init__"><strong>__init__</strong></a>(self, owner, board, name='checkpoint', tags=(), **kwargs)</dt><dd><span class="code">Extend&nbsp;superclasses&nbsp;to&nbsp;hold&nbsp;a&nbsp;reference&nbsp;to&nbsp;the&nbsp;active&nbsp;game&nbsp;and&nbsp;another&nbsp;to&nbsp;a&nbsp;specific&nbsp;board.<br>
+&nbsp;<br>
+The&nbsp;tag&nbsp;"checkpoint"&nbsp;is&nbsp;hardcoded&nbsp;into&nbsp;this&nbsp;<a href="builtins.html#object">object</a>.</span></dd></dl>
+
+<hr>
+Readonly properties defined here:<br>
+<dl><dt><strong>game</strong></dt>
+<dd><span class="code">The&nbsp;active&nbsp;Game&nbsp;instance&nbsp;(from&nbsp;owner).</span></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>active</strong></dt>
+<dd><span class="code">Return&nbsp;True&nbsp;if&nbsp;this&nbsp;object's&nbsp;data&nbsp;matches&nbsp;the&nbsp;checkpoint&nbsp;in&nbsp;the&nbsp;active&nbsp;stage;&nbsp;False&nbsp;otherwise.</span></dd>
+</dl>
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>coords</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;coordinates.</span></dd>
+</dl>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;height&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_x</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;x-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>tile_y</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;y-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;width&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="CollidableTile">class <strong>CollidableTile</strong></a>(<a href="skytree.tile_objects.html#Tile">Tile</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#CollidableTile">CollidableTile</a>(hb_dim=None,&nbsp;hb_offset=(0,&nbsp;0),&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="#Tile">Tile</a>&nbsp;to&nbsp;have&nbsp;a&nbsp;hitbox.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;<a href="#Tile">Tile</a>&nbsp;behaviour.<br>
+&nbsp;<br>
+Collidable&nbsp;TileObjects&nbsp;don't&nbsp;look&nbsp;for&nbsp;other&nbsp;collidables.<br>
+It's&nbsp;the&nbsp;colliding&nbsp;entity's&nbsp;responsibility&nbsp;to&nbsp;check&nbsp;the&nbsp;tile's&nbsp;tags&nbsp;and&nbsp;react&nbsp;accordingly.<br>
+Also,&nbsp;keep&nbsp;in&nbsp;mind&nbsp;that&nbsp;when&nbsp;receiving&nbsp;a&nbsp;tile&nbsp;<a href="builtins.html#object">object</a>&nbsp;in&nbsp;the&nbsp;context&nbsp;of&nbsp;a&nbsp;collision&nbsp;check,<br>
+&nbsp;&nbsp;you&nbsp;might&nbsp;be&nbsp;more&nbsp;interested&nbsp;on&nbsp;its&nbsp;owner&nbsp;(such&nbsp;as&nbsp;when&nbsp;updating&nbsp;a&nbsp;sprite's&nbsp;inertial&nbsp;frame&nbsp;of&nbsp;reference).<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.tile_objects.html#CollidableTile">CollidableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#Tile">Tile</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="CollidableTile-__init__"><strong>__init__</strong></a>(self, hb_dim=None, hb_offset=(0, 0), **kwargs)</dt><dd><span class="code">Extend&nbsp;tile&nbsp;to&nbsp;construct&nbsp;a&nbsp;rectangular&nbsp;hitbox.<br>
+&nbsp;<br>
+Hitbox&nbsp;dimensions&nbsp;default&nbsp;to&nbsp;tile&nbsp;dimensions&nbsp;and&nbsp;hitbox&nbsp;offset&nbsp;defaults&nbsp;to&nbsp;(0,&nbsp;0).<br>
+A&nbsp;<a href="#CollidableTile">CollidableTile</a>'s&nbsp;hitbox'&nbsp;dimensions&nbsp;and&nbsp;offset&nbsp;cannot&nbsp;be&nbsp;changed.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>coords</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;coordinates.</span></dd>
+</dl>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;height&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_x</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;x-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>tile_y</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;y-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;width&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="DraColTile">class <strong>DraColTile</strong></a>(<a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a>, <a href="skytree.tile_objects.html#CollidableTile">CollidableTile</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#DraColTile">DraColTile</a>(idx,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Combines&nbsp;<a href="#DrawableTile">DrawableTile</a>&nbsp;with&nbsp;<a href="#CollidableTile">CollidableTile</a>.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.tile_objects.html#DraColTile">DraColTile</a></dd>
+<dd><a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#CollidableTile">CollidableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#Tile">Tile</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a>:<br>
+<dl><dt><a name="DraColTile-__init__"><strong>__init__</strong></a>(self, idx, **kwargs)</dt><dd><span class="code">Extend&nbsp;<a href="#Tile">Tile</a>&nbsp;to&nbsp;store&nbsp;a&nbsp;tileset&nbsp;frame&nbsp;index.</span></dd></dl>
+
+<dl><dt><a name="DraColTile-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Render&nbsp;on&nbsp;given&nbsp;canvas&nbsp;the&nbsp;frame&nbsp;of&nbsp;the&nbsp;tileset&nbsp;pointed&nbsp;to&nbsp;by&nbsp;self.<strong>_idx</strong>.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>coords</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;coordinates.</span></dd>
+</dl>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;height&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_x</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;x-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>tile_y</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;y-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;width&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="DraSpaTile">class <strong>DraSpaTile</strong></a>(<a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a>, <a href="skytree.tile_objects.html#SpawnerTile">SpawnerTile</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#DraSpaTile">DraSpaTile</a>(idx,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Combines&nbsp;<a href="#DrawableTile">DrawableTile</a>&nbsp;with&nbsp;<a href="#SpawnerTile">SpawnerTile</a>.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.tile_objects.html#DraSpaTile">DraSpaTile</a></dd>
+<dd><a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#SpawnerTile">SpawnerTile</a></dd>
+<dd><a href="skytree.tile_objects.html#UpdateableTile">UpdateableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#Tile">Tile</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a>:<br>
+<dl><dt><a name="DraSpaTile-__init__"><strong>__init__</strong></a>(self, idx, **kwargs)</dt><dd><span class="code">Extend&nbsp;<a href="#Tile">Tile</a>&nbsp;to&nbsp;store&nbsp;a&nbsp;tileset&nbsp;frame&nbsp;index.</span></dd></dl>
+
+<dl><dt><a name="DraSpaTile-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Render&nbsp;on&nbsp;given&nbsp;canvas&nbsp;the&nbsp;frame&nbsp;of&nbsp;the&nbsp;tileset&nbsp;pointed&nbsp;to&nbsp;by&nbsp;self.<strong>_idx</strong>.</span></dd></dl>
+
+<hr>
+Methods inherited from <a href="skytree.tile_objects.html#SpawnerTile">SpawnerTile</a>:<br>
+<dl><dt><a name="DraSpaTile-notify_death"><strong>notify_death</strong></a>(self, obj)</dt><dd><span class="code">Remove&nbsp;the&nbsp;given&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;the&nbsp;spawned&nbsp;set.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;is&nbsp;called&nbsp;from&nbsp;the&nbsp;spawned&nbsp;<a href="builtins.html#object">object</a>'s&nbsp;destroy&nbsp;method.</span></dd></dl>
+
+<dl><dt><a name="DraSpaTile-spawn"><strong>spawn</strong></a>(self)</dt><dd><span class="code">Build&nbsp;<a href="builtins.html#object">object</a>,&nbsp;add&nbsp;it&nbsp;to&nbsp;the&nbsp;board&nbsp;and&nbsp;to&nbsp;the&nbsp;spawned&nbsp;set&nbsp;and&nbsp;reset&nbsp;cooldown.<br>
+&nbsp;<br>
+Position&nbsp;is&nbsp;taken&nbsp;from&nbsp;tile&nbsp;position&nbsp;and&nbsp;offset.&nbsp;This&nbsp;tile&nbsp;<a href="builtins.html#object">object</a>&nbsp;is&nbsp;passed&nbsp;to&nbsp;the&nbsp;spawned&nbsp;<a href="builtins.html#object">object</a>&nbsp;as&nbsp;"spawner".<br>
+Direction,&nbsp;as&nbsp;stated&nbsp;on&nbsp;class&nbsp;and&nbsp;init&nbsp;docstrings,&nbsp;can&nbsp;be&nbsp;set&nbsp;as&nbsp;absolute&nbsp;or&nbsp;relative&nbsp;to&nbsp;the&nbsp;frame<br>
+&nbsp;&nbsp;(going&nbsp;towards&nbsp;its&nbsp;center&nbsp;either&nbsp;horizontally&nbsp;or&nbsp;vertically).</span></dd></dl>
+
+<dl><dt><a name="DraSpaTile-update"><strong>update</strong></a>(self, dt)</dt><dd><span class="code">Perform&nbsp;a&nbsp;spawn&nbsp;whenever&nbsp;the&nbsp;conditions&nbsp;are&nbsp;right.<br>
+&nbsp;<br>
+Conditions:&nbsp;the&nbsp;number&nbsp;of&nbsp;spawned&nbsp;objects&nbsp;are&nbsp;below&nbsp;this&nbsp;tile's&nbsp;<a href="builtins.html#object">object</a>&nbsp;limit&nbsp;and&nbsp;the&nbsp;cooldown&nbsp;time&nbsp;is&nbsp;at&nbsp;or&nbsp;below&nbsp;zero.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>coords</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;coordinates.</span></dd>
+</dl>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;height&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_x</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;x-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>tile_y</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;y-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;width&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="DrawableTile">class <strong>DrawableTile</strong></a>(<a href="skytree.tile_objects.html#Tile">Tile</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#DrawableTile">DrawableTile</a>(idx,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="#Tile">Tile</a>&nbsp;to&nbsp;be&nbsp;able&nbsp;to&nbsp;be&nbsp;drawn.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;<a href="#Tile">Tile</a>&nbsp;behaviour.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#DrawableTile-draw">draw</a>(canvas):&nbsp;renders&nbsp;on&nbsp;canvas&nbsp;frame&nbsp;of&nbsp;the&nbsp;tileset&nbsp;pointed&nbsp;to&nbsp;by&nbsp;idx.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#Tile">Tile</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="DrawableTile-__init__"><strong>__init__</strong></a>(self, idx, **kwargs)</dt><dd><span class="code">Extend&nbsp;<a href="#Tile">Tile</a>&nbsp;to&nbsp;store&nbsp;a&nbsp;tileset&nbsp;frame&nbsp;index.</span></dd></dl>
+
+<dl><dt><a name="DrawableTile-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Render&nbsp;on&nbsp;given&nbsp;canvas&nbsp;the&nbsp;frame&nbsp;of&nbsp;the&nbsp;tileset&nbsp;pointed&nbsp;to&nbsp;by&nbsp;self.<strong>_idx</strong>.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>coords</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;coordinates.</span></dd>
+</dl>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;height&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_x</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;x-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>tile_y</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;y-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;width&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="ExitTile">class <strong>ExitTile</strong></a>(<a href="skytree.tile_objects.html#CollidableTile">CollidableTile</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#ExitTile">ExitTile</a>(dest_board=None,&nbsp;start_label=None,&nbsp;tags=(),&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="#CollidableTile">CollidableTile</a>&nbsp;to&nbsp;hold&nbsp;a&nbsp;board&nbsp;and&nbsp;start&nbsp;position&nbsp;labels&nbsp;to&nbsp;transition&nbsp;to&nbsp;on&nbsp;player&nbsp;collision.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;<a href="#Tile">Tile</a>&nbsp;and&nbsp;<a href="#CollidableTile">CollidableTile</a>&nbsp;behaviour.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.tile_objects.html#ExitTile">ExitTile</a></dd>
+<dd><a href="skytree.tile_objects.html#CollidableTile">CollidableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#Tile">Tile</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ExitTile-__init__"><strong>__init__</strong></a>(self, dest_board=None, start_label=None, tags=(), **kwargs)</dt><dd><span class="code">Extend&nbsp;<a href="#CollidableTile">CollidableTile</a>;&nbsp;store&nbsp;destination&nbsp;board&nbsp;and&nbsp;start&nbsp;label.<br>
+&nbsp;<br>
+Exit&nbsp;references&nbsp;are&nbsp;going&nbsp;to&nbsp;be&nbsp;used&nbsp;on&nbsp;Game.set_state,&nbsp;so&nbsp;destination&nbsp;board&nbsp;can&nbsp;either&nbsp;be<br>
+an&nbsp;actual&nbsp;game&nbsp;state&nbsp;or&nbsp;a&nbsp;string&nbsp;label&nbsp;pointing&nbsp;to&nbsp;it&nbsp;on&nbsp;the&nbsp;Game.states&nbsp;dictionary.<br>
+The&nbsp;tag&nbsp;"exit"&nbsp;is&nbsp;hardcoded&nbsp;into&nbsp;this&nbsp;<a href="builtins.html#object">object</a>.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>coords</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;coordinates.</span></dd>
+</dl>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;height&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_x</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;x-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>tile_y</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;y-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;width&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="PathTile">class <strong>PathTile</strong></a>(<a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#PathTile">PathTile</a>(traversable=False,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="#DrawableTile">DrawableTile</a>&nbsp;to&nbsp;hold&nbsp;valid&nbsp;direction&nbsp;information&nbsp;and&nbsp;a&nbsp;traversable&nbsp;status.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;<a href="#Tile">Tile</a>&nbsp;and&nbsp;<a href="#DrawableTile">DrawableTile</a>&nbsp;behaviour.<br>
+Extends&nbsp;<a href="#DrawableTile">DrawableTile</a>.<a href="#PathTile-draw">draw</a>(canvas).<br>
+&nbsp;<br>
+Valid&nbsp;directions&nbsp;are&nbsp;expressed&nbsp;as&nbsp;present&nbsp;or&nbsp;absent&nbsp;directional&nbsp;tags&nbsp;("left",&nbsp;"up",&nbsp;"right",&nbsp;"down").<br>
+Traversable&nbsp;status&nbsp;is&nbsp;a&nbsp;boolean&nbsp;attribute,&nbsp;and&nbsp;it&nbsp;defines&nbsp;both&nbsp;whether&nbsp;a&nbsp;sprite&nbsp;can&nbsp;move&nbsp;into&nbsp;this&nbsp;tile<br>
+&nbsp;&nbsp;and&nbsp;whether&nbsp;the&nbsp;tile's&nbsp;image&nbsp;is&nbsp;drawn&nbsp;or&nbsp;not.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#PathTile-open">open</a>():&nbsp;make&nbsp;this&nbsp;tile&nbsp;traversable&nbsp;and&nbsp;propagate&nbsp;the&nbsp;command&nbsp;to&nbsp;all&nbsp;reachable&nbsp;path&nbsp;tiles.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.tile_objects.html#PathTile">PathTile</a></dd>
+<dd><a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#Tile">Tile</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="PathTile-__init__"><strong>__init__</strong></a>(self, traversable=False, **kwargs)</dt><dd><span class="code">Extend&nbsp;<a href="#DrawableTile">DrawableTile</a>&nbsp;to&nbsp;store&nbsp;a&nbsp;traversable&nbsp;flag&nbsp;(defaults&nbsp;to&nbsp;False).</span></dd></dl>
+
+<dl><dt><a name="PathTile-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Extend&nbsp;<a href="#DrawableTile">DrawableTile</a>&nbsp;to&nbsp;only&nbsp;draw&nbsp;this&nbsp;tile&nbsp;if&nbsp;it's&nbsp;currently&nbsp;traversable.</span></dd></dl>
+
+<dl><dt><a name="PathTile-open"><strong>open</strong></a>(self)</dt><dd><span class="code">Make&nbsp;this&nbsp;tile&nbsp;traversable&nbsp;and&nbsp;propagate&nbsp;the&nbsp;command&nbsp;to&nbsp;all&nbsp;reachable&nbsp;path&nbsp;tiles.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>coords</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;coordinates.</span></dd>
+</dl>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;height&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_x</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;x-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>tile_y</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;y-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;width&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="SpawnerTile">class <strong>SpawnerTile</strong></a>(<a href="skytree.tile_objects.html#UpdateableTile">UpdateableTile</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#SpawnerTile">SpawnerTile</a>(obj,&nbsp;offset=(0,&nbsp;0),&nbsp;obj_limit=1,&nbsp;cooldown=inf,&nbsp;first_delay=0,&nbsp;direction=None,&nbsp;tags=(),&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="#UpdateableTile">UpdateableTile</a>&nbsp;to&nbsp;be&nbsp;able&nbsp;to&nbsp;spawns&nbsp;objects.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;<a href="#Tile">Tile</a>&nbsp;and&nbsp;<a href="#UpdateableTile">UpdateableTile</a>&nbsp;behaviours.<br>
+Implements&nbsp;<a href="#UpdateableTile">UpdateableTile</a>.<a href="#SpawnerTile-update">update</a>().<br>
+&nbsp;<br>
+Holds&nbsp;one&nbsp;<a href="builtins.html#object">object</a>&nbsp;type.&nbsp;Allows&nbsp;for&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;limit,&nbsp;cooldown&nbsp;between&nbsp;spawns,<br>
+an&nbsp;initial&nbsp;delay&nbsp;and&nbsp;a&nbsp;direction&nbsp;for&nbsp;the&nbsp;movement&nbsp;of&nbsp;the&nbsp;spawned&nbsp;objects.<br>
+The&nbsp;direction&nbsp;can&nbsp;be&nbsp;absolute&nbsp;or&nbsp;towards&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;frame&nbsp;either&nbsp;horizontally&nbsp;or&nbsp;vertically.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#SpawnerTile-spawn">spawn</a>():&nbsp;build&nbsp;the&nbsp;<a href="builtins.html#object">object</a>,&nbsp;add&nbsp;it&nbsp;to&nbsp;the&nbsp;board&nbsp;and&nbsp;spawned&nbsp;set&nbsp;and&nbsp;reset&nbsp;cooldown.<br>
+<a href="#SpawnerTile-notify_death">notify_death</a>(obj):&nbsp;remove&nbsp;the&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;the&nbsp;spawned&nbsp;set.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.tile_objects.html#SpawnerTile">SpawnerTile</a></dd>
+<dd><a href="skytree.tile_objects.html#UpdateableTile">UpdateableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#Tile">Tile</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SpawnerTile-__init__"><strong>__init__</strong></a>(self, obj, offset=(0, 0), obj_limit=1, cooldown=inf, first_delay=0, direction=None, tags=(), **kwargs)</dt><dd><span class="code">Extend&nbsp;<a href="#UpdateableTile">UpdateableTile</a>&nbsp;to&nbsp;store&nbsp;the&nbsp;necessary&nbsp;information&nbsp;to&nbsp;spawn&nbsp;the&nbsp;given&nbsp;<a href="builtins.html#object">object</a>&nbsp;in&nbsp;the&nbsp;intended&nbsp;way.<br>
+&nbsp;<br>
+obj&nbsp;is&nbsp;the&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;be&nbsp;spawned&nbsp;--unbaked;&nbsp;in&nbsp;the&nbsp;form&nbsp;(Type,&nbsp;{kwargs})</span></dd></dl>
+
+<dl><dt><a name="SpawnerTile-notify_death"><strong>notify_death</strong></a>(self, obj)</dt><dd><span class="code">Remove&nbsp;the&nbsp;given&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;the&nbsp;spawned&nbsp;set.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;is&nbsp;called&nbsp;from&nbsp;the&nbsp;spawned&nbsp;<a href="builtins.html#object">object</a>'s&nbsp;destroy&nbsp;method.</span></dd></dl>
+
+<dl><dt><a name="SpawnerTile-spawn"><strong>spawn</strong></a>(self)</dt><dd><span class="code">Build&nbsp;<a href="builtins.html#object">object</a>,&nbsp;add&nbsp;it&nbsp;to&nbsp;the&nbsp;board&nbsp;and&nbsp;to&nbsp;the&nbsp;spawned&nbsp;set&nbsp;and&nbsp;reset&nbsp;cooldown.<br>
+&nbsp;<br>
+Position&nbsp;is&nbsp;taken&nbsp;from&nbsp;tile&nbsp;position&nbsp;and&nbsp;offset.&nbsp;This&nbsp;tile&nbsp;<a href="builtins.html#object">object</a>&nbsp;is&nbsp;passed&nbsp;to&nbsp;the&nbsp;spawned&nbsp;<a href="builtins.html#object">object</a>&nbsp;as&nbsp;"spawner".<br>
+Direction,&nbsp;as&nbsp;stated&nbsp;on&nbsp;class&nbsp;and&nbsp;init&nbsp;docstrings,&nbsp;can&nbsp;be&nbsp;set&nbsp;as&nbsp;absolute&nbsp;or&nbsp;relative&nbsp;to&nbsp;the&nbsp;frame<br>
+&nbsp;&nbsp;(going&nbsp;towards&nbsp;its&nbsp;center&nbsp;either&nbsp;horizontally&nbsp;or&nbsp;vertically).</span></dd></dl>
+
+<dl><dt><a name="SpawnerTile-update"><strong>update</strong></a>(self, dt)</dt><dd><span class="code">Perform&nbsp;a&nbsp;spawn&nbsp;whenever&nbsp;the&nbsp;conditions&nbsp;are&nbsp;right.<br>
+&nbsp;<br>
+Conditions:&nbsp;the&nbsp;number&nbsp;of&nbsp;spawned&nbsp;objects&nbsp;are&nbsp;below&nbsp;this&nbsp;tile's&nbsp;<a href="builtins.html#object">object</a>&nbsp;limit&nbsp;and&nbsp;the&nbsp;cooldown&nbsp;time&nbsp;is&nbsp;at&nbsp;or&nbsp;below&nbsp;zero.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>coords</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;coordinates.</span></dd>
+</dl>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;height&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_x</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;x-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>tile_y</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;y-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;width&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="StageTile">class <strong>StageTile</strong></a>(<a href="skytree.tile_objects.html#PathTile">PathTile</a>, <a href="skytree.tile_objects.html#StartTile">StartTile</a>, <a href="skytree.stage.html#Stage">skytree.stage.Stage</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#StageTile">StageTile</a>(idx,&nbsp;entry_state,&nbsp;start_label='start1',&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="#PathTile">PathTile</a>,&nbsp;<a href="#StartTile">StartTile</a>&nbsp;and&nbsp;<a href="skytree.stage.html#Stage">Stage</a>&nbsp;to&nbsp;represents&nbsp;a&nbsp;stage&nbsp;in&nbsp;an&nbsp;overworld&nbsp;map.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;behaviour&nbsp;from&nbsp;<a href="#Tile">Tile</a>,&nbsp;<a href="#DrawableTile">DrawableTile</a>,&nbsp;<a href="#PathTile">PathTile</a>,&nbsp;<a href="#StartTile">StartTile</a>&nbsp;and&nbsp;<a href="skytree.stage.html#Stage">Stage</a>.<br>
+Overrides&nbsp;<a href="#PathTile">PathTile</a>.<a href="#StageTile-open">open</a>().<br>
+&nbsp;<br>
+As&nbsp;this&nbsp;<a href="builtins.html#object">object</a>&nbsp;inherits&nbsp;not&nbsp;only&nbsp;from&nbsp;<a href="#Tile">Tile</a>&nbsp;objects&nbsp;but&nbsp;also&nbsp;from&nbsp;<a href="skytree.stage.html#Stage">Stage</a>,&nbsp;it&nbsp;can&nbsp;hold<br>
+&nbsp;&nbsp;checkpoint&nbsp;information&nbsp;and&nbsp;work&nbsp;as&nbsp;an&nbsp;active&nbsp;stage.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#StageTile-beat">beat</a>(exit_label,&nbsp;**kwargs):&nbsp;set&nbsp;image&nbsp;for&nbsp;a&nbsp;complete&nbsp;stage&nbsp;and&nbsp;open&nbsp;the&nbsp;appropriate&nbsp;path.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.tile_objects.html#StageTile">StageTile</a></dd>
+<dd><a href="skytree.tile_objects.html#PathTile">PathTile</a></dd>
+<dd><a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#StartTile">StartTile</a></dd>
+<dd><a href="skytree.tile_objects.html#Tile">Tile</a></dd>
+<dd><a href="skytree.stage.html#Stage">skytree.stage.Stage</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="StageTile-__init__"><strong>__init__</strong></a>(self, idx, entry_state, start_label='start1', **kwargs)</dt><dd><span class="code">Extend&nbsp;<a href="#PathTile">PathTile</a>,&nbsp;<a href="#StartTile">StartTile</a>&nbsp;and&nbsp;<a href="skytree.stage.html#Stage">Stage</a>&nbsp;to&nbsp;store&nbsp;indices&nbsp;for&nbsp;both&nbsp;pending&nbsp;and&nbsp;complete&nbsp;stage.</span></dd></dl>
+
+<dl><dt><a name="StageTile-beat"><strong>beat</strong></a>(self, exit_label, **kwargs)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.stage.html#Stage">Stage</a>&nbsp;to&nbsp;set&nbsp;'complete'&nbsp;image&nbsp;and&nbsp;open&nbsp;path&nbsp;indicated&nbsp;by&nbsp;exit_label.</span></dd></dl>
+
+<dl><dt><a name="StageTile-open"><strong>open</strong></a>(self)</dt><dd><span class="code">Override&nbsp;<a href="#PathTile">PathTile</a>&nbsp;to&nbsp;avoid&nbsp;propagating&nbsp;the&nbsp;command&nbsp;to&nbsp;neighbouring&nbsp;paths.</span></dd></dl>
+
+<hr>
+Methods inherited from <a href="skytree.tile_objects.html#PathTile">PathTile</a>:<br>
+<dl><dt><a name="StageTile-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Extend&nbsp;<a href="#DrawableTile">DrawableTile</a>&nbsp;to&nbsp;only&nbsp;draw&nbsp;this&nbsp;tile&nbsp;if&nbsp;it's&nbsp;currently&nbsp;traversable.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>coords</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;coordinates.</span></dd>
+</dl>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;height&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_x</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;x-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>tile_y</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;y-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;width&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.stage.html#Stage">skytree.stage.Stage</a>:<br>
+<dl><dt><a name="StageTile-enter"><strong>enter</strong></a>(self, exit_state=None)</dt><dd><span class="code">Tell&nbsp;the&nbsp;Game&nbsp;to&nbsp;enter&nbsp;entry_state&nbsp;with&nbsp;start_label.&nbsp;Optionally,&nbsp;update&nbsp;exit_state.</span></dd></dl>
+
+<dl><dt><a name="StageTile-exit"><strong>exit</strong></a>(self)</dt><dd><span class="code">Activate&nbsp;a&nbsp;transition&nbsp;towards&nbsp;exit_state&nbsp;if&nbsp;present;&nbsp;otherwise,&nbsp;quit&nbsp;the&nbsp;game.</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="skytree.stage.html#Stage">skytree.stage.Stage</a>:<br>
+<dl><dt><strong>checkpoint</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object&nbsp;holding&nbsp;the&nbsp;current&nbsp;point&nbsp;of&nbsp;entry.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="StartTile">class <strong>StartTile</strong></a>(<a href="skytree.tile_objects.html#Tile">Tile</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#StartTile">StartTile</a>(owner,&nbsp;target_pos=None,&nbsp;offset=(0,&nbsp;0),&nbsp;name=None,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="#Tile">Tile</a>&nbsp;to&nbsp;hold&nbsp;a&nbsp;target&nbsp;position&nbsp;and&nbsp;ensure&nbsp;a&nbsp;unique&nbsp;name.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;<a href="#Tile">Tile</a>&nbsp;behaviour.<br>
+&nbsp;<br>
+Signals&nbsp;towards&nbsp;a&nbsp;point&nbsp;where&nbsp;a&nbsp;sprite&nbsp;(i.e&nbsp;the&nbsp;player)&nbsp;should&nbsp;be&nbsp;placed&nbsp;on&nbsp;board&nbsp;entry.<br>
+Target&nbsp;position&nbsp;can&nbsp;be&nbsp;set&nbsp;as&nbsp;absolute&nbsp;(with&nbsp;target_pos)&nbsp;or&nbsp;relative&nbsp;to&nbsp;the&nbsp;tile's&nbsp;position&nbsp;(target_offset).<br>
+If&nbsp;none&nbsp;of&nbsp;those&nbsp;are&nbsp;passed&nbsp;as&nbsp;arguments,&nbsp;target&nbsp;position&nbsp;defaults&nbsp;to&nbsp;tile&nbsp;position.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.tile_objects.html#StartTile">StartTile</a></dd>
+<dd><a href="skytree.tile_objects.html#Tile">Tile</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="StartTile-__init__"><strong>__init__</strong></a>(self, owner, target_pos=None, offset=(0, 0), name=None, **kwargs)</dt><dd><span class="code">Extend&nbsp;<a href="#Tile">Tile</a>;&nbsp;store&nbsp;an&nbsp;offset&nbsp;and&nbsp;set&nbsp;a&nbsp;tag&nbsp;for&nbsp;later&nbsp;identification.<br>
+&nbsp;<br>
+If&nbsp;a&nbsp;unique&nbsp;(at&nbsp;the&nbsp;moment)&nbsp;name&nbsp;is&nbsp;not&nbsp;provided,&nbsp;use&nbsp;'start{n}'&nbsp;<br>
+with&nbsp;n&nbsp;being&nbsp;the&nbsp;first&nbsp;int&nbsp;resulting&nbsp;in&nbsp;a&nbsp;unique&nbsp;name.<br>
+Caution&nbsp;is&nbsp;advised&nbsp;when&nbsp;using&nbsp;this&nbsp;behaviour:<br>
+-&nbsp;The&nbsp;resulting&nbsp;name&nbsp;could&nbsp;be&nbsp;set&nbsp;manually&nbsp;in&nbsp;a&nbsp;tile&nbsp;<a href="builtins.html#object">object</a>&nbsp;instantiated&nbsp;later<br>
+&nbsp;&nbsp;(an&nbsp;exception&nbsp;would&nbsp;be&nbsp;raised).<br>
+-&nbsp;More&nbsp;importantly,&nbsp;the&nbsp;resulting&nbsp;name&nbsp;depends&nbsp;on&nbsp;closeness&nbsp;to&nbsp;origin&nbsp;and&nbsp;will<br>
+&nbsp;&nbsp;change&nbsp;if&nbsp;tiles&nbsp;are&nbsp;moved&nbsp;around.<br>
+Points&nbsp;of&nbsp;entry&nbsp;into&nbsp;a&nbsp;board&nbsp;are&nbsp;referenced&nbsp;by&nbsp;<a href="builtins.html#object">object</a>&nbsp;position.&nbsp;Keeping&nbsp;in&nbsp;mind&nbsp;that<br>
+origin&nbsp;in&nbsp;Pygame&nbsp;is&nbsp;(left,&nbsp;top),&nbsp;this&nbsp;means&nbsp;that&nbsp;these&nbsp;points&nbsp;are&nbsp;coupled&nbsp;with&nbsp;sprite<br>
+height.&nbsp;If&nbsp;you&nbsp;want&nbsp;to&nbsp;account&nbsp;for&nbsp;player&nbsp;sprites&nbsp;with&nbsp;different&nbsp;heights,&nbsp;you&nbsp;need&nbsp;to<br>
+do&nbsp;that&nbsp;on&nbsp;Board.enter.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>coords</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;coordinates.</span></dd>
+</dl>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;height&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_x</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;x-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>tile_y</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;y-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;width&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Tile">class <strong>Tile</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Tile">Tile</a>(owner,&nbsp;pos,&nbsp;name=None,&nbsp;tags=(),&nbsp;**kwargs)<br>
+&nbsp;<br>
+An&nbsp;<a href="builtins.html#object">object</a>&nbsp;representing&nbsp;a&nbsp;tile&nbsp;on&nbsp;a&nbsp;tiled&nbsp;layer.<br>
+&nbsp;<br>
+It&nbsp;is&nbsp;not&nbsp;a&nbsp;Component,&nbsp;so&nbsp;it&nbsp;can't&nbsp;leverage&nbsp;the&nbsp;Component&nbsp;system.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="Tile-__init__"><strong>__init__</strong></a>(self, owner, pos, name=None, tags=(), **kwargs)</dt><dd><span class="code">Store&nbsp;owner&nbsp;(a&nbsp;tile&nbsp;layer),&nbsp;position&nbsp;and&nbsp;possibly&nbsp;name&nbsp;and/or&nbsp;tags.<br>
+&nbsp;<br>
+<a href="#Tile">Tile</a>&nbsp;constructor&nbsp;will&nbsp;always&nbsp;receive&nbsp;an&nbsp;owner&nbsp;and&nbsp;position.<br>
+Once&nbsp;set&nbsp;by&nbsp;the&nbsp;layer,&nbsp;position&nbsp;shouldn't&nbsp;be&nbsp;changed&nbsp;anymore.</span></dd></dl>
+
+<hr>
+Readonly properties defined here:<br>
+<dl><dt><strong>coords</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;coordinates.</span></dd>
+</dl>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;height&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_x</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;x-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>tile_y</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;y-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;width&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="UpdateableTile">class <strong>UpdateableTile</strong></a>(<a href="skytree.tile_objects.html#Tile">Tile</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#UpdateableTile">UpdateableTile</a>(always_active=False,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="#Tile">Tile</a>&nbsp;to&nbsp;be&nbsp;able&nbsp;to&nbsp;update.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;<a href="#Tile">Tile</a>&nbsp;behaviour.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#UpdateableTile-update">update</a>(dt):&nbsp;receive&nbsp;delta&nbsp;time&nbsp;and&nbsp;do&nbsp;some&nbsp;work&nbsp;every&nbsp;frame&nbsp;the&nbsp;tile's&nbsp;active.<br>
+&nbsp;&nbsp;On&nbsp;each&nbsp;frame,&nbsp;this&nbsp;method&nbsp;is&nbsp;called&nbsp;by&nbsp;owner&nbsp;if&nbsp;either&nbsp;its&nbsp;position&nbsp;is&nbsp;close<br>
+&nbsp;&nbsp;enough&nbsp;to&nbsp;the&nbsp;board&nbsp;frame&nbsp;or&nbsp;it&nbsp;is&nbsp;marked&nbsp;as&nbsp;always&nbsp;active.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.tile_objects.html#UpdateableTile">UpdateableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#Tile">Tile</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="UpdateableTile-__init__"><strong>__init__</strong></a>(self, always_active=False, **kwargs)</dt><dd><span class="code">Excend&nbsp;<a href="#Tile">Tile</a>&nbsp;to&nbsp;include&nbsp;always_active&nbsp;flag&nbsp;(False&nbsp;by&nbsp;default).</span></dd></dl>
+
+<dl><dt><a name="UpdateableTile-update"><strong>update</strong></a>(self, dt)</dt><dd><span class="code">Implement&nbsp;on&nbsp;subclasses&nbsp;to&nbsp;do&nbsp;some&nbsp;work&nbsp;on&nbsp;every&nbsp;frame&nbsp;this&nbsp;<a href="builtins.html#object">object</a>'s&nbsp;active.<br>
+&nbsp;<br>
+dt&nbsp;is&nbsp;delta&nbsp;time&nbsp;(time&nbsp;elapsed&nbsp;since&nbsp;previous&nbsp;frame),&nbsp;passed&nbsp;by&nbsp;Game&nbsp;at&nbsp;the&nbsp;root&nbsp;level.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>coords</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;coordinates.</span></dd>
+</dl>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;height&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_x</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;x-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>tile_y</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;y-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;width&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="VisibleCheckpointTile">class <strong>VisibleCheckpointTile</strong></a>(<a href="skytree.tile_objects.html#CheckpointTile">CheckpointTile</a>, <a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#VisibleCheckpointTile">VisibleCheckpointTile</a>(idx,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="#CheckpointTile">CheckpointTile</a>&nbsp;to&nbsp;have&nbsp;an&nbsp;image,&nbsp;with&nbsp;two&nbsp;variants&nbsp;according&nbsp;to&nbsp;active&nbsp;status.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;behaviour&nbsp;from&nbsp;<a href="#Tile">Tile</a>,&nbsp;<a href="#DrawableTile">DrawableTile</a>,&nbsp;<a href="#CollidableTile">CollidableTile</a>,&nbsp;<a href="#StartTile">StartTile</a>&nbsp;and&nbsp;<a href="#CheckpointTile">CheckpointTile</a>.<br>
+Overrides&nbsp;<a href="#DrawableTile">DrawableTile</a>.<a href="#VisibleCheckpointTile-draw">draw</a>(canvas).<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.tile_objects.html#VisibleCheckpointTile">VisibleCheckpointTile</a></dd>
+<dd><a href="skytree.tile_objects.html#CheckpointTile">CheckpointTile</a></dd>
+<dd><a href="skytree.tile_objects.html#StartTile">StartTile</a></dd>
+<dd><a href="skytree.tile_objects.html#CollidableTile">CollidableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#DrawableTile">DrawableTile</a></dd>
+<dd><a href="skytree.tile_objects.html#Tile">Tile</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="VisibleCheckpointTile-__init__"><strong>__init__</strong></a>(self, idx, **kwargs)</dt><dd><span class="code">Extend&nbsp;superclasses&nbsp;to&nbsp;hold&nbsp;a&nbsp;reference&nbsp;to&nbsp;the&nbsp;active&nbsp;game&nbsp;and&nbsp;another&nbsp;to&nbsp;a&nbsp;specific&nbsp;board.<br>
+&nbsp;<br>
+The&nbsp;tag&nbsp;"checkpoint"&nbsp;is&nbsp;hardcoded&nbsp;into&nbsp;this&nbsp;<a href="builtins.html#object">object</a>.</span></dd></dl>
+
+<dl><dt><a name="VisibleCheckpointTile-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Extend&nbsp;Drawable&nbsp;to&nbsp;select&nbsp;the&nbsp;approppriate&nbsp;image&nbsp;before&nbsp;drawing.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#CheckpointTile">CheckpointTile</a>:<br>
+<dl><dt><strong>game</strong></dt>
+<dd><span class="code">The&nbsp;active&nbsp;Game&nbsp;instance&nbsp;(from&nbsp;owner).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.tile_objects.html#CheckpointTile">CheckpointTile</a>:<br>
+<dl><dt><strong>active</strong></dt>
+<dd><span class="code">Return&nbsp;True&nbsp;if&nbsp;this&nbsp;object's&nbsp;data&nbsp;matches&nbsp;the&nbsp;checkpoint&nbsp;in&nbsp;the&nbsp;active&nbsp;stage;&nbsp;False&nbsp;otherwise.</span></dd>
+</dl>
+<hr>
+Readonly properties inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>coords</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;coordinates.</span></dd>
+</dl>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;height&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;tile&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;object's&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tile_x</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;x-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>tile_y</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;y-coordinate.</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;width&nbsp;(from&nbsp;owner's&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.tile_objects.html#Tile">Tile</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Tile&nbsp;object's&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

@@ -9,7 +9,7 @@ run_demo(): Run the demo. Called by default when executing as a script.
 """
 
 # Import pygame constants
-from pygame.locals import *
+from pygame.locals import K_a, K_w, K_d, K_s, K_LEFT, K_UP, K_RIGHT, K_DOWN, K_ESCAPE, K_RETURN, K_SPACE, K_RCTRL, K_LCTRL, K_f, KEYUP, KEYDOWN
 
 def run_demo():
     """Run the demo."""
@@ -37,7 +37,7 @@ def run_demo():
 
     keyboard_reader = KeyboardReader({
         **{key: "left" for key in (K_a, K_LEFT)},
-        **{key: "up" for key in (K_w, K_UP, K_SPACE)},
+        **{key: "up" for key in (K_w, K_UP)},
         **{key: "right" for key in (K_d, K_RIGHT)},
         **{key: "down" for key in (K_s, K_DOWN)},
         K_SPACE: "action1", #Shoot

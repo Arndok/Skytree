@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module skytree.drawable</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="skytree.html" class="white">skytree</a>.drawable</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:d%3A%5Cskytree_repo%5Csrc%5Cskytree%5Cdrawable.py">d:\skytree_repo\src\skytree\drawable.py</a></td></tr></table>
+    <p><span class="code">Definition&nbsp;of&nbsp;a&nbsp;<a href="skytree.positional.html#Positional">Positional</a>&nbsp;Component&nbsp;that&nbsp;can&nbsp;be&nbsp;drawn&nbsp;into&nbsp;a&nbsp;canvas&nbsp;or&nbsp;hold&nbsp;other&nbsp;components&nbsp;that&nbsp;do&nbsp;so.</span></p>
+<p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="skytree.positional.html#Positional">skytree.positional.Positional</a>(<a href="skytree.component.html#Component">skytree.component.Component</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.drawable.html#Drawable">Drawable</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Drawable">class <strong>Drawable</strong></a>(<a href="skytree.positional.html#Positional">skytree.positional.Positional</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Drawable">Drawable</a>(canvas=None,&nbsp;frame=None,&nbsp;subsurface=False,&nbsp;bgcolor=(0,&nbsp;0,&nbsp;0,&nbsp;0),&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="skytree.positional.html#Positional">Positional</a>&nbsp;to&nbsp;draw&nbsp;on&nbsp;every&nbsp;frame.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;Component&nbsp;and&nbsp;<a href="skytree.positional.html#Positional">Positional</a>&nbsp;behaviour.<br>
+Extends&nbsp;Component.<a href="#Drawable-add_component">add_component</a>(component)&nbsp;and&nbsp;Component.<a href="#Drawable-remove_component">remove_component</a>(component).<br>
+&nbsp;<br>
+A&nbsp;component&nbsp;must&nbsp;be&nbsp;<a href="#Drawable">Drawable</a>&nbsp;for&nbsp;its&nbsp;own&nbsp;components&nbsp;to&nbsp;be&nbsp;drawn.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#Drawable-draw">draw</a>(canvas):&nbsp;renders&nbsp;self&nbsp;and&nbsp;components&nbsp;on&nbsp;canvas;&nbsp;called&nbsp;from&nbsp;root&nbsp;on&nbsp;every&nbsp;frame.<br>
+Draw&nbsp;layer&nbsp;manipulation&nbsp;(for&nbsp;these&nbsp;methods,&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;apply&nbsp;to&nbsp;them&nbsp;or&nbsp;don't&nbsp;to&nbsp;apply&nbsp;to&nbsp;self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-get_draw_layer">get_draw_layer</a>(component):&nbsp;return&nbsp;index&nbsp;on&nbsp;_drawable<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-set_draw_layer">set_draw_layer</a>(idx,&nbsp;component):&nbsp;move&nbsp;to&nbsp;stated&nbsp;index&nbsp;on&nbsp;_drawable<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-move_forward">move_forward</a>(component):&nbsp;move&nbsp;to&nbsp;next&nbsp;position&nbsp;on&nbsp;_drawable<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-move_backward">move_backward</a>(component):&nbsp;move&nbsp;to&nbsp;previous&nbsp;position&nbsp;on&nbsp;_drawable<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-move_to_front">move_to_front</a>(component):&nbsp;move&nbsp;to&nbsp;last&nbsp;position&nbsp;on&nbsp;_drawable<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-move_to_back">move_to_back</a>(component):&nbsp;move&nbsp;to&nbsp;first&nbsp;position&nbsp;on&nbsp;_drawable<br>
+One-time&nbsp;alignment&nbsp;(for&nbsp;these&nbsp;methods,&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;reference&nbsp;or&nbsp;don't&nbsp;to&nbsp;try&nbsp;and&nbsp;use&nbsp;owner&nbsp;canvas):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-align_left">align_left</a>(canvas):&nbsp;align&nbsp;left&nbsp;to&nbsp;given&nbsp;canvas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-align_top">align_top</a>(canvas):&nbsp;align&nbsp;top&nbsp;to&nbsp;given&nbsp;canvas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-align_right">align_right</a>(canvas):&nbsp;align&nbsp;right&nbsp;to&nbsp;given&nbsp;canvas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-align_bottom">align_bottom</a>(canvas):&nbsp;align&nbsp;bottom&nbsp;to&nbsp;given&nbsp;canvas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-align_center_x">align_center_x</a>(canvas):&nbsp;align&nbsp;horizontal&nbsp;center&nbsp;to&nbsp;given&nbsp;canvas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-align_center_y">align_center_y</a>(canvas):&nbsp;align&nbsp;vertical&nbsp;center&nbsp;to&nbsp;given&nbsp;canvas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-align_center">align_center</a>(canvas):&nbsp;align&nbsp;center&nbsp;to&nbsp;given&nbsp;canvas<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-align_proportion_x">align_proportion_x</a>(proportion,&nbsp;canvas):&nbsp;align&nbsp;horizontally&nbsp;to&nbsp;given&nbsp;canvas&nbsp;following&nbsp;proportion<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-align_proportion_y">align_proportion_y</a>(proportion,&nbsp;canvas):&nbsp;align&nbsp;vertically&nbsp;to&nbsp;given&nbsp;canvas&nbsp;following&nbsp;proportion<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-align_proportion">align_proportion</a>(proportion,&nbsp;canvas):&nbsp;align&nbsp;to&nbsp;given&nbsp;canvas&nbsp;following&nbsp;proportion<br>
+Alignment&nbsp;on&nbsp;draw&nbsp;time:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-set_align_left">set_align_left</a>():&nbsp;align&nbsp;left&nbsp;on&nbsp;draw&nbsp;time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-set_align_top">set_align_top</a>():&nbsp;align&nbsp;top&nbsp;on&nbsp;draw&nbsp;time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-set_align_right">set_align_right</a>():&nbsp;align&nbsp;right&nbsp;on&nbsp;draw&nbsp;time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-set_align_bottom">set_align_bottom</a>():&nbsp;align&nbsp;bottom&nbsp;on&nbsp;draw&nbsp;time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-set_align_center_x">set_align_center_x</a>():&nbsp;align&nbsp;horizontal&nbsp;center&nbsp;on&nbsp;draw&nbsp;time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-set_align_center_y">set_align_center_y</a>():&nbsp;align&nbsp;vertical&nbsp;center&nbsp;on&nbsp;draw&nbsp;time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-set_align_center">set_align_center</a>():&nbsp;align&nbsp;center&nbsp;on&nbsp;draw&nbsp;time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-set_align_proportion_x">set_align_proportion_x</a>(proportion):&nbsp;align&nbsp;horizontally&nbsp;on&nbsp;draw&nbsp;time&nbsp;following&nbsp;proportion<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-set_align_proportion_y">set_align_proportion_y</a>(proportion):&nbsp;align&nbsp;vertically&nbsp;on&nbsp;draw&nbsp;time&nbsp;following&nbsp;proportion<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-set_align_proportion">set_align_proportion</a>(proportion):&nbsp;align&nbsp;on&nbsp;draw&nbsp;time&nbsp;following&nbsp;proportion<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-clear_alignment_x">clear_alignment_x</a>():&nbsp;cancel&nbsp;horizontal&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-clear_alignment_y">clear_alignment_y</a>():&nbsp;cancel&nbsp;vertical&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Drawable-clear_alignment">clear_alignment</a>():&nbsp;cancel&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Notes&nbsp;on&nbsp;setters:<br>
+canvas&nbsp;can&nbsp;be&nbsp;set&nbsp;as&nbsp;2D&nbsp;dimensions&nbsp;(tuple&nbsp;or&nbsp;single&nbsp;number),&nbsp;a&nbsp;Pygame&nbsp;Surface,&nbsp;an&nbsp;image&nbsp;filename&nbsp;or&nbsp;None.<br>
+It&nbsp;will&nbsp;also&nbsp;update&nbsp;this&nbsp;object's&nbsp;draw&nbsp;rectangle.<br>
+frame&nbsp;can&nbsp;be&nbsp;set&nbsp;as&nbsp;2D&nbsp;dimensions&nbsp;(tuple&nbsp;or&nbsp;single&nbsp;number),&nbsp;a&nbsp;Pygame&nbsp;Rect&nbsp;or&nbsp;None.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.drawable.html#Drawable">Drawable</a></dd>
+<dd><a href="skytree.positional.html#Positional">skytree.positional.Positional</a></dd>
+<dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Drawable-__init__"><strong>__init__</strong></a>(self, canvas=None, frame=None, subsurface=False, bgcolor=(0, 0, 0, 0), **kwargs)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;include&nbsp;a&nbsp;_drawable&nbsp;list&nbsp;and&nbsp;generate&nbsp;a&nbsp;canvas&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and/or&nbsp;frame&nbsp;if&nbsp;needed.<br>
+&nbsp;<br>
+canvas&nbsp;can&nbsp;be&nbsp;None,&nbsp;Pygame&nbsp;Surface,&nbsp;image&nbsp;filename&nbsp;or&nbsp;dimensions&nbsp;(single&nbsp;or&nbsp;(width,&nbsp;height)).<br>
+Pygame&nbsp;draw&nbsp;methods&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;build&nbsp;an&nbsp;image&nbsp;on&nbsp;a&nbsp;Surface.<br>
+frame&nbsp;can&nbsp;be&nbsp;None&nbsp;or&nbsp;dimensions&nbsp;(single&nbsp;or&nbsp;(width,&nbsp;height)).<br>
+subsurface&nbsp;can&nbsp;be&nbsp;set&nbsp;as&nbsp;True&nbsp;to&nbsp;have&nbsp;this&nbsp;object&nbsp;draw&nbsp;its&nbsp;components&nbsp;on&nbsp;its&nbsp;canvas&nbsp;on&nbsp;main&nbsp;draw.<br>
+bgcolor&nbsp;can&nbsp;be&nbsp;set&nbsp;for&nbsp;subsurfaces&nbsp;(transparent&nbsp;by&nbsp;default).</span></dd></dl>
+
+<dl><dt><a name="Drawable-add_component"><strong>add_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;add&nbsp;component&nbsp;to&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="Drawable-align_bottom"><strong>align_bottom</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Drawable-align_center"><strong>align_center</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Drawable-align_center_x"><strong>align_center_x</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Drawable-align_center_y"><strong>align_center_y</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Drawable-align_left"><strong>align_left</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Drawable-align_proportion"><strong>align_proportion</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value.</span></dd></dl>
+
+<dl><dt><a name="Drawable-align_proportion_x"><strong>align_proportion_x</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Drawable-align_proportion_y"><strong>align_proportion_y</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Drawable-align_right"><strong>align_right</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Drawable-align_top"><strong>align_top</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Drawable-clear_alignment"><strong>clear_alignment</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Drawable-clear_alignment_x"><strong>clear_alignment_x</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;horizontal&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Drawable-clear_alignment_y"><strong>clear_alignment_y</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;vertical&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Drawable-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Render&nbsp;own&nbsp;canvas&nbsp;if&nbsp;present,&nbsp;then&nbsp;render&nbsp;components.&nbsp;<br>
+&nbsp;<br>
+Component&nbsp;positions&nbsp;are&nbsp;relative&nbsp;to&nbsp;root&nbsp;canvas&nbsp;(or&nbsp;closest&nbsp;subsurface).</span></dd></dl>
+
+<dl><dt><a name="Drawable-get_draw_layer"><strong>get_draw_layer</strong></a>(self, component=None)</dt><dd><span class="code">Return&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Drawable-move_backward"><strong>move_backward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;backwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Drawable-move_forward"><strong>move_forward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;forwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Drawable-move_to_back"><strong>move_to_back</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;back.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Drawable-move_to_front"><strong>move_to_front</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;front.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Drawable-remove_component"><strong>remove_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;remove&nbsp;component&nbsp;from&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="Drawable-set_align_bottom"><strong>set_align_bottom</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Drawable-set_align_center"><strong>set_align_center</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Drawable-set_align_center_x"><strong>set_align_center_x</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Drawable-set_align_center_y"><strong>set_align_center_y</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Drawable-set_align_left"><strong>set_align_left</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Drawable-set_align_proportion"><strong>set_align_proportion</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value</span></dd></dl>
+
+<dl><dt><a name="Drawable-set_align_proportion_x"><strong>set_align_proportion_x</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Drawable-set_align_proportion_y"><strong>set_align_proportion_y</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Drawable-set_align_right"><strong>set_align_right</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Drawable-set_align_top"><strong>set_align_top</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Drawable-set_draw_layer"><strong>set_draw_layer</strong></a>(self, idx, component=None)</dt><dd><span class="code">Set&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<hr>
+Readonly properties defined here:<br>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<dl><dt><strong>draw_rect</strong></dt>
+<dd><span class="code">Draw&nbsp;rect&nbsp;for&nbsp;object&nbsp;canvas&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<dl><dt><strong>drawable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;drawable&nbsp;components&nbsp;list&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>frame_dim</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;2D&nbsp;dimensions.</span></dd>
+</dl>
+<dl><dt><strong>frame_height</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;height.</span></dd>
+</dl>
+<dl><dt><strong>frame_width</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;width.</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Object&nbsp;height&nbsp;(from&nbsp;its&nbsp;draw_rect)</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Object&nbsp;width&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>canvas</strong></dt>
+<dd><span class="code">This&nbsp;object's&nbsp;drawable&nbsp;surface&nbsp;(Pygame&nbsp;Surface).</span></dd>
+</dl>
+<dl><dt><strong>frame</strong></dt>
+<dd><span class="code">Object&nbsp;frame&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.positional.html#Positional">skytree.positional.Positional</a>:<br>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+<dl><dt><strong>vel</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;velocity.</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><a name="Drawable-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><span class="code">Iterate&nbsp;over&nbsp;self.<strong>_components</strong>.</span></dd></dl>
+
+<dl><dt><a name="Drawable-add_persistent_component"><strong>add_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Add&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;to&nbsp;the&nbsp;object&nbsp;and&nbsp;add&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;tag&nbsp;will&nbsp;prevent&nbsp;the&nbsp;component&nbsp;from&nbsp;being&nbsp;destroyed&nbsp;on&nbsp;reset<br>
+and&nbsp;also&nbsp;have&nbsp;it&nbsp;restored&nbsp;if&nbsp;it&nbsp;was&nbsp;previously&nbsp;destroyed.</span></dd></dl>
+
+<dl><dt><a name="Drawable-add_tag"><strong>add_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Add&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;keep&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="Drawable-destroy"><strong>destroy</strong></a>(self)</dt><dd><span class="code">Remove&nbsp;this&nbsp;component&nbsp;from&nbsp;its&nbsp;current&nbsp;owner&nbsp;and&nbsp;propagate&nbsp;the&nbsp;command&nbsp;through&nbsp;its&nbsp;own&nbsp;components.<br>
+&nbsp;<br>
+Avoid&nbsp;calling&nbsp;this&nbsp;method&nbsp;directly,&nbsp;as&nbsp;destroying&nbsp;objects&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;the&nbsp;game&nbsp;loop<br>
+will&nbsp;often&nbsp;yield&nbsp;unexpected&nbsp;(not&nbsp;the&nbsp;fun&nbsp;kind)&nbsp;behaviours.&nbsp;<br>
+Use&nbsp;Game.mark_for_destruction&nbsp;instead&nbsp;and&nbsp;let&nbsp;the&nbsp;game&nbsp;manager&nbsp;do&nbsp;the&nbsp;dirty&nbsp;work&nbsp;for&nbsp;you.</span></dd></dl>
+
+<dl><dt><a name="Drawable-remove_persistent_component"><strong>remove_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Remove&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;from&nbsp;the&nbsp;object&nbsp;and&nbsp;remove&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;will&nbsp;remove&nbsp;a&nbsp;persistent&nbsp;object&nbsp;permanently.</span></dd></dl>
+
+<dl><dt><a name="Drawable-remove_tag"><strong>remove_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Remove&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;not&nbsp;restore&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="Drawable-reset"><strong>reset</strong></a>(self)</dt><dd><span class="code">Restore&nbsp;initial&nbsp;data&nbsp;and&nbsp;propagate&nbsp;command&nbsp;through&nbsp;components.<br>
+&nbsp;<br>
+Restore&nbsp;value&nbsp;of&nbsp;attributes&nbsp;on&nbsp;reset_data["attributes"].<br>
+Restore&nbsp;deleted&nbsp;tags&nbsp;from&nbsp;reset_data["tags"]&nbsp;and&nbsp;delete&nbsp;added&nbsp;tags&nbsp;not&nbsp;registered&nbsp;there.<br>
+Restore&nbsp;removed&nbsp;components&nbsp;from&nbsp;reset_data["components"]&nbsp;and&nbsp;remove&nbsp;added&nbsp;components<br>
+not&nbsp;registered&nbsp;there.<br>
+Extend&nbsp;on&nbsp;subclasses&nbsp;to&nbsp;recover&nbsp;initial&nbsp;state&nbsp;as&nbsp;needed.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>named</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tagged</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;tag&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Object&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>game</strong></dt>
+<dd><span class="code">The&nbsp;Game&nbsp;instance&nbsp;(the&nbsp;root&nbsp;of&nbsp;the&nbsp;tree).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;name.</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;owner.</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>SRCALPHA</strong> = 65536</td></tr></table>
+</body></html>
