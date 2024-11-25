@@ -44,6 +44,8 @@ MAIN_COLOR = (0,0,0) # Black
 """Default color for drawing shapes and text."""
 GAME_BGCOLOR = (0,0,0) # Black
 """Default color for game background."""
+FONT_SIZE = 14
+"""Default font size."""
 
 # Audio
 MIXER_FREQUENCY = 44100
@@ -64,6 +66,8 @@ BOARD_BGCOLOR = (100, 100, 255) # Light blue. Well-- kinda light; not super ligh
 """Default color for board background."""
 KILL_MARGINS = 16
 """Default threshold to kill a Sprite when it exits a board."""
+LAYER_SPEED = 50
+"""Default lerp speed for layers (in pizels per second)."""
 
 # Animations
 SPRITE_FRAME_DURATION = 150
@@ -96,8 +100,6 @@ ORIENTATION_CHECK_DELAY = 50
 """Default millisecond delay for checking orientation on omnidirectional walking \
 player controlled sprites after releasing a key (see sprites.TopDownWalk)."""
 
-# Miscelaneous
-FONT_SIZE = 14
-"""Default font size."""
-LAYER_SPEED = 50
-"""Default lerp speed for layers (in pizels per second)."""
+# Sounds
+SOUND_ENTER_STAGE = None
+SOUND_ACTIVATE_CHECKPOINT = None

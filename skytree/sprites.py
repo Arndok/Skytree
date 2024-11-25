@@ -82,15 +82,17 @@ class Sprite(Animated, Collidable, Updateable):
     kill(): trigger entity death.
     unpause(): do some work on unpausing if needed.
     lock_movement(), unlock_movement(): disable or enable sprite movement.
+    play_sound(sound), stop_sound(sound): play or stop a sound if present in the Sprite's sound dictionary.
     """
     
-    def __init__(self, tileset, hb_adjust=(0,0,0,0), kill_margins="board", border_policies="board", solids=("solid",), spawner=None, **kwargs):
+    def __init__(self, tileset, hb_adjust=(0,0,0,0), kill_margins="board", border_policies="board", solids=("solid",), spawner=None, sounds={}, **kwargs):
         """
         Extend superclasses to store some values used to interact with the active board, possibly a spawner entity, and to keep track of sprite orientation.
         
         The tileset can be passed as a (canvas, tile_dim) pair; the Animated constructor will build it.
           This is useful when several sprites need to use the "same" tileset. An Animated object's tileset is a componet, so it can't be shared.
         Hitbox adjustments go (trim_width, trim_height, offset_x, offset_y). Trims are ADDED (express them as negative).
+        Sounds is a dictionary of items in the format sound_label: sound_file_path
         """
         tileset = bake_obj(tileset)
         super().__init__(tileset=tileset, hb_dim=(tileset.width + hb_adjust[0], tileset.height + hb_adjust[1]), \
@@ -120,6 +122,10 @@ class Sprite(Animated, Collidable, Updateable):
         """The horizontal and vertical orientation of this object."""
         self._movement_lock = False
         """Whether movement is locked or not."""
+        self._sounds = {}
+        """A dictionary of sounds available for the Sprite."""
+        for sound in sounds:
+            self._sounds[sound] = ResourceManager().get_sound(sounds[sound])
 
     @property
     def _orientation(self):
@@ -285,6 +291,16 @@ class Sprite(Animated, Collidable, Updateable):
     def unlock_movement(self):
         """Enable movement."""
         self._movement_lock = False
+    
+    def play_sound(self, sound):
+        """Play the sound if present."""
+        if sound in self._sounds:
+            self._sounds[sound].play()
+            
+    def stop_sound(self, sound):
+        """Stop the sound if present."""
+        if sound in self._sounds:
+            self._sounds[sound].stop()
 
 ############
 # MOVEMENT #
@@ -1196,15 +1212,11 @@ class SidescrollerPlayer(SidescrollerJump, SidescrollerCrouch, AccelerationSpeed
     
     def __init__(self, tileset, **kwargs):
         """
-        Extend superclasses to load jump and death sounds and hardcode name="player".
+        Extend superclasses to hardcode name="player".
         """
         super().__init__(tileset=tileset, name="player", **kwargs)
         self._alive = True
         """Whether the player is alive or not."""
-        self._jump_sound = ResourceManager().get_sound("jump.ogg")
-        """Sound to be played on jumping."""
-        self._death_sound = ResourceManager().get_sound("player_death.ogg")
-        """Sound to be played on death."""
             
     def _determine_anim(self, dt):
         """Determine and set animation."""
@@ -1327,7 +1339,7 @@ class SidescrollerPlayer(SidescrollerJump, SidescrollerCrouch, AccelerationSpeed
     def kill(self, note="natural causes"):
         """Extend Sprite to lock the sprite, play the stored death sound, set the death animation and trigger quick retry on a delay."""
         if self._alive:
-            self._death_sound.play()
+            self.play_sound("death")
             self._alive = False
             self.anim = "death"
             self._accel, self.vel=(0,0),(0,0)
@@ -1352,7 +1364,7 @@ class SidescrollerPlayer(SidescrollerJump, SidescrollerCrouch, AccelerationSpeed
     def jump(self):
         """Extend SidescrollerJump to play the stored jump sound."""
         if super().jump():
-            self._jump_sound.play()
+            self.play_sound("jump")
 
 class TopDownPlayer(TopDownWalk, AccelerationSpeedUp, KeyCommandReader):
     """
@@ -1505,9 +1517,6 @@ class MapPlayer(GridPlayer):
     
     Required animations: [default], enter.
     """
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self._enter_sound = ResourceManager().get_sound("enter_stage.ogg")
 
     def enter_stage(self):
         """Enter the active stage; reset and unlock the player sprite (called from a delay)."""
@@ -1526,7 +1535,7 @@ class MapPlayer(GridPlayer):
         if press and self._destination == self.pos:
             tile = self.board.get_tile_at(self.tile)
             if tile and isinstance(tile, StageTile):
-                self._enter_sound.play()
+                self.play_sound("enter")
                 self.game.active_stage = tile
                 self.anim = "enter"
                 self.lock_controller()
@@ -1561,7 +1570,6 @@ class SsWalkingEnemy(SidescrollerWalk):
         """The sprite's movement direction."""
         self._reset_data["attributes"]["_direction"] = direction
         exec("self.walk_{d}()".format(d=direction))
-        self._stomp_sound = ResourceManager().get_sound("stomp.ogg")
         
     def _collide_solid_left(self, x, obj=None):
         """Solid left collision; extend VelocityMovement to change direction."""
@@ -1579,7 +1587,7 @@ class SsWalkingEnemy(SidescrollerWalk):
         
         Lock the sprite's hitbox, stop its movement and set a delay for its destruction.
         """
-        self._stomp_sound.play()
+        self.play_sound("stomp")
         self.anim = "stomped"
         self.lock_hitbox()
         self.vel, self._accel = (0,0), (0,0)

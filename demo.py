@@ -7,6 +7,8 @@ config.set_all_paths("./demo_resources/")
 config.CANVAS_DIM = (208, 160)
 config.WINDOW_DIM = (832, 640)
 config.MIXER_BUFFER = (1024)
+config.SOUND_ENTER_STAGE = "orb.ogg"
+config.SOUND_ACTIVATE_CHECKPOINT = "checkpoint.ogg"
 
 keyboard_reader = KeyboardReader({
     **{key: "left" for key in (K_a, K_LEFT)},
@@ -151,22 +153,21 @@ class ExitArea(Collidable):
 class PungBall(FixedBounce, GravityBound):
     def __init__(self, size_factor=2, pos=[50,50], direction=1, tags=()):
         """Calculate image filename, tile size, horizontal velocity and vertical bounce from size factor."""
-        super().__init__(pos=pos, tileset=TileSet("ball"+str(size_factor)+".png", 2**(size_factor+3)), 
+        super().__init__(pos=pos, tileset=TileSet("ball{s}.png".format(s=size_factor), 2**(size_factor+3)), 
                          Shape=CircleHB, tags=tags+("ball",), vel = ((1 + size_factor * 0.5) * direction, -2),
-                         gravity=8, bounce=((1 + size_factor * 0.5), size_factor + 3.5))
+                         gravity=8, bounce=((1 + size_factor * 0.5), size_factor + 3.5), sounds={"pop":"pung_pop{s}.ogg".format(s=size_factor)})
         # Size factor must be between 0 and 2
         self.size_factor = size_factor
-        self._pop_sound = ResourceManager().get_sound("pung_pop{s}.ogg".format(s=size_factor))
 
     def pop(self):
         """It the ball's big enough, spawn two balls of the immediatly smaller size class going in opposite directions."""
         if self.size_factor > 0:
-            self._pop_sound.play()
+            self.play_sound("pop")
             self.owner.add_component(PungBall(self.size_factor-1, self.pos, -1))
             self.owner.add_component(PungBall(self.size_factor-1, (self.x+(self.width/2), self.y)))
         else:
             if len(tuple(filter(lambda x: isinstance(x, PungBall), self.board._components))) > 1:
-                self._pop_sound.play()
+                self.play_sound("pop")
                 self.owner.add_component(Particle(TileSet("ball_pop.png",8), pos=self.pos, frame_duration=50))
             else:
                 self.game.active_stage.beat(exit_state="map", start_label="stage3", exit_label="up")
@@ -175,10 +176,9 @@ class PungBall(FixedBounce, GravityBound):
 class Hook(VelocityMovement):
     def __init__(self, pos, **kwargs):
         anims = {"default":((0,1), (1,1)), "tail":((2,1),(3,1))}
-        super().__init__(pos=pos, tileset=hook_ts, vel=(0,-HOOK_SPEED), anims=anims, tags=("hook",), **kwargs)
+        super().__init__(pos=pos, tileset=hook_ts, vel=(0,-HOOK_SPEED), anims=anims, tags=("hook",), sounds={"shoot":"pung_shoot.ogg"}, **kwargs)
         self.init_y = self.y
-        self._pop_sound = ResourceManager().get_sound("pung_shoot.ogg")
-        self._pop_sound.play()
+        self.play_sound("shoot")
         
     def _move_and_collide_board(self, dt):
         # Base class works fine, but it does some extraneous work.
@@ -204,11 +204,11 @@ class Hook(VelocityMovement):
     def destroy(self):
         self.owner.allow_commands()
         super().destroy()
-        self._pop_sound.stop()
+        self.stop_sound("shoot")
 
 class PungPlayer(SidescrollerPlayer):
     def __init__(self, pos=(20,104), hp=3):
-        super().__init__(pos=pos, tileset=TileSet("player.png", PLAYER_IMG_DIM), anims=ss_player_anims, first_anim=ss_player_first_anim, hb_adjust=ss_player_hb_adjust)
+        super().__init__(pos=pos, tileset=TileSet("player.png", PLAYER_IMG_DIM), anims=ss_player_anims, first_anim=ss_player_first_anim, hb_adjust=ss_player_hb_adjust, sounds={"jump":"jump.ogg", "death":"player_death.ogg", "hurt":"player_hurt.ogg"})
         self.anims["shoot"] = ((6,1), (13,float("inf"))) # Extend animations painlessly :)
         self.hp = hp
         self._reset_data["attributes"]["hp"] = hp
@@ -216,7 +216,6 @@ class PungPlayer(SidescrollerPlayer):
         self.hud = Drawable(self._font.render("HP: 3", 0, (255,255,255)))
         Game().add_component(self.hud)
         self.hud.align_right()
-        self._hurt_sound = ResourceManager().get_sound("player_hurt.ogg")
 
     @property
     def shooting(self):
@@ -244,7 +243,7 @@ class PungPlayer(SidescrollerPlayer):
         if self.hp < 1:
             self.kill("a dodgeball accident")
         else:
-            self._hurt_sound.play()
+            self.play_sound("hurt")
 
     def draw(self, canvas):
         # Blink if damage boosting.
@@ -279,7 +278,7 @@ MAP_TILES = {
                 "10": (PathTile, {"idx": 10, "tags": ("right", "down", "left")}),
                 "11": (PathTile, {"idx": 11, "tags": ("down", "left", "up")}),
                 "12": (PathTile, {"idx": 12, "tags": ("left", "up", "right", "down")}),
-                "A": (StageTile, {"idx": (0, 1), "name": "stage1", "entry_state": "simple", "traversable": True, "tags": ("right", "down")}),
+                "A": (StageTile, {"idx": (0, 1), "name": "stage1", "entry_state": "simple", "traversable": True, "tags": ("right",)}),
                 "B": (StageTile, {"idx": (0, 1), "name": "stage2", "entry_state": "sidescroller1", "tags": ("left", "down")}),
                 "C": (StageTile, {"idx": (0, 1), "name": "stage3", "entry_state": "pung", "tags": ("left", "up")}),
             }
@@ -301,9 +300,9 @@ BCK_NOTSOLID = {
 
 # Players
 
-sidescroller_player = (SidescrollerPlayer, {"tileset": (TileSet, {"canvas": "player.png", "tile_dim": PLAYER_IMG_DIM}), "anims": ss_player_anims, "first_anim": ss_player_first_anim, "hb_adjust": ss_player_hb_adjust})
+sidescroller_player = (SidescrollerPlayer, {"tileset": (TileSet, {"canvas": "player.png", "tile_dim": PLAYER_IMG_DIM}), "anims": ss_player_anims, "first_anim": ss_player_first_anim, "hb_adjust": ss_player_hb_adjust, "sounds": {"jump": "jump.ogg", "death": "player_death.ogg"}})
 topdown_player = TopDownPlayer(tileset=TileSet(canvas = "player.png", tile_dim=PLAYER_IMG_DIM), pos=(16, 120), anims=td_player_anims, first_anim=td_player_first_anim, hb_adjust=td_player_hb_adjust)
-map_player = MapPlayer(tileset=TileSet("player_map.png", MAP_TILE_DIM), pos=(48,32), frame_duration=300, anims=map_player_anims)
+map_player = MapPlayer(tileset=TileSet("player_map.png", MAP_TILE_DIM), pos=(48,32), frame_duration=300, anims=map_player_anims, sounds={"enter":"enter_stage.ogg"})
 
 # Music
 
@@ -453,10 +452,12 @@ OnePlayerTiledBoard(TiledLayer(level_tset, "demo_scr11.txt",
                                 "C1": (VisibleCheckpointTile, {"board": "sidescroller13", "idx":(51,52), "offset":(0,-16)}),
                                 "s1": (SpawnerTile, {"obj":(SsCautiousEnemy, {"tileset":(TileSet,{"canvas":"squishy_serious.png", "tile_dim":GOON_DIM}),
                                                                               "speed":GOON_SPEED, "direction":"right", "tags":("stompable",),
-                                                                              "anims":ss_enemy_anims, "hb_adjust":ss_enemy_hb_adjust})}),
+                                                                              "anims":ss_enemy_anims, "hb_adjust":ss_enemy_hb_adjust,
+                                                                              "sounds":{"stomp":"stomp.ogg"}})}),
                                 "s2": (SpawnerTile, {"obj":(SsWalkingEnemy, {"tileset":(TileSet,{"canvas":"squishy_grinny.png", "tile_dim":GOON_DIM}),
                                                                              "speed":GOON_SPEED, "direction":"left", "tags":("stompable",),
-                                                                             "anims":ss_enemy_anims, "hb_adjust":ss_enemy_hb_adjust})})
+                                                                             "anims":ss_enemy_anims, "hb_adjust":ss_enemy_hb_adjust,
+                                                                             "sounds":{"stomp":"stomp.ogg"}})})
                                 }),
                     name="sidescroller13", entities=(Text("YOU CAN STOMP THESE", pos=(18,18)), sidescroller_player,), music=level_music)
 # Jumping enemies
@@ -467,10 +468,12 @@ OnePlayerTiledBoard(TiledLayer(level_tset, "demo_scr12.txt",
                                 "C1": (VisibleCheckpointTile, {"board": "sidescroller14", "idx":(51,52), "offset":(0,-16)}),
                                 "s1": (SpawnerTile, {"obj":(SsJumpyEnemy, {"tileset":(TileSet,{"canvas":"squishy_serious.png", "tile_dim":GOON_DIM}),
                                                                            "speed":GOON_SPEED_HEAVY, "jump_speed":GOON_JUMP_HEAVY, "jump_cooldown":GOON_JUMP_HEAVY_COOLDOWN,
-                                                                           "direction":"right", "tags":("stompable",), "anims":ss_enemy_anims, "hb_adjust":ss_enemy_hb_adjust})}),
+                                                                           "direction":"right", "tags":("stompable",), "anims":ss_enemy_anims, "hb_adjust":ss_enemy_hb_adjust,
+                                                                           "sounds":{"stomp":"stomp.ogg"}})}),
                                 "s2": (SpawnerTile, {"obj":(SsJumpyEnemy, {"tileset":(TileSet,{"canvas":"squishy_grinny.png", "tile_dim":GOON_DIM}),
                                                                            "speed":GOON_SPEED, "jump_speed":GOON_JUMP, "direction":"left", "tags":("stompable",),
-                                                                           "anims":ss_enemy_anims, "hb_adjust":ss_enemy_hb_adjust})})
+                                                                           "anims":ss_enemy_anims, "hb_adjust":ss_enemy_hb_adjust,
+                                                                           "sounds":{"stomp":"stomp.ogg"}})})
                                 }),
                     name="sidescroller14", entities=(Text("THEY CAN JUMP NOW", pos=(50,18)), sidescroller_player,), music=level_music)
 # Hovering enemies and spawner options

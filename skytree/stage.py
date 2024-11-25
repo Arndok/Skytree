@@ -1,6 +1,7 @@
 """Definition of a class to help keep track of a group of boards."""
 
 from . import game
+from . import config
 from .resource_manager import ResourceManager
 
 class Stage:
@@ -45,7 +46,7 @@ class Stage:
         """The object holding the current point of entry (entry_state and start_label)."""
         self.game = game.Game()
         """The active Game instance."""
-        self._beat_sound = ResourceManager().get_sound("orb.ogg")
+        self._beat_sound = ResourceManager().get_sound(config.SOUND_ENTER_STAGE)
         """A sound to be played on beating a stage."""
 
     @property

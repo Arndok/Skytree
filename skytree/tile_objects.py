@@ -380,7 +380,7 @@ class CheckpointTile(StartTile, CollidableTile):
         """
         self.board = board
         """The Board this checkpoint points to."""
-        self._sound = ResourceManager().get_sound("checkpoint.ogg")
+        self._sound = ResourceManager().get_sound(config.SOUND_ACTIVATE_CHECKPOINT)
         """A sound to play on activation."""
         super().__init__(owner=owner, name=name, tags=tags+("checkpoint",), **kwargs)
         
