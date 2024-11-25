@@ -1,8 +1,8 @@
 """Definition of a Drawable Component with a tiled canvas and ability to select which of those tiles is drawn on any given moment."""
 
 from pygame import Rect
-from .helpers import repack2
-from .drawable import Drawable
+from skytree.helpers import repack2
+from skytree.drawable import Drawable
 
 class TileSet(Drawable):
     """

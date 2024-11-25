@@ -8,11 +8,11 @@ Particle(Animated): plays a single animation and then self-destructs.
 Variables used from config: SPRITE_FRAME_DURATION
 """
 
-from .helpers import bake_obj
-from . import config
-from .drawable import Drawable
-from .updateable import Updateable
-from .timers import Cycle, Delay
+from skytree.helpers import bake_obj
+from skytree import config
+from skytree.drawable import Drawable
+from skytree.updateable import Updateable
+from skytree.timers import Cycle, Delay
 
 class Animated(Drawable, Updateable):
     """

@@ -11,11 +11,11 @@ Variables used from config: CANVAS_DIM
 
 from functools import reduce
 import pygame
-from . import config
-from .drawable import Drawable
-from .key_commands import KeyCommandReader
-from .resource_manager import ResourceManager
-from .game import Game, GameState
+from skytree import config
+from skytree.drawable import Drawable
+from skytree.key_commands import KeyCommandReader
+from skytree.resource_manager import ResourceManager
+from skytree.game import Game, GameState
 
 class Menu(Drawable, KeyCommandReader):
     """
@@ -34,7 +34,7 @@ class Menu(Drawable, KeyCommandReader):
     enter: confirm the option; perform its associated function.
     """
     
-    def __init__(self, title, options, font, fsize=None, color=(255,255,255), **kwargs):
+    def __init__(self, title, options, font=config.DEFAULT_FONT, fsize=None, color=(255,255,255), **kwargs):
         """
         Extend superclasses to build the drawable objects needed to represent the menu.
         
@@ -52,15 +52,15 @@ class Menu(Drawable, KeyCommandReader):
         """A tuple holding one function for each option."""
         # Calculate some measures and pass them to super init to build canvas.
         lines = (self._title,)+self._options
-        arrow_length = self._title.height*0.6
+        arrow_length = self._title.height * 0.6
         width = reduce(lambda x,y: x if x.width>y.width else y, lines).width + arrow_length*3
-        height = self._title.height * (len(self._options) + 1)
+        height = self._title.height * 1.4 * (len(self._options) + 1)
         super().__init__(canvas=(width,height), subsurface=True)
         # Add text objects as persistent.
         for i, line in enumerate(lines):
             self.add_persistent_component(line)
             line.align_center_x()
-            line.y += line.height*i
+            line.y += line.height * i * 1.4
         self._arrow = Drawable((arrow_length, arrow_length+1))
         """A drawable arrow that points to the currently selected option."""
         # Draw the arrow.
@@ -126,9 +126,7 @@ class PauseState(Drawable, KeyCommandReader, GameState):
         """
         super().__init__(name="pause", canvas=config.CANVAS_DIM, commands=commands+("esc",), **kwargs)
         self.canvas.fill((0,0,0,100))
-        self._menu = Menu("PAUSE",
-                               (("CONTINUE", self._command_esc), ("END", self.exit_stage)),
-                               "ArcadeClassic.ttf")
+        self._menu = Menu("PAUSE", (("CONTINUE", self._command_esc), ("END", self.exit_stage)))
         """The pause menu."""
         self.add_persistent_component(self._menu)
         self._menu.align_center()

@@ -1,9 +1,9 @@
 """Definition of a Positional Component that can be drawn into a canvas or hold other components that do so."""
 
 from pygame import Rect, Surface, SRCALPHA
-from .helpers import repack2
-from .positional import Positional
-from .resource_manager import ResourceManager
+from skytree.helpers import repack2
+from skytree.positional import Positional
+from skytree.resource_manager import ResourceManager
 
 class Drawable(Positional):
     """

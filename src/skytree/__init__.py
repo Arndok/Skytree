@@ -38,6 +38,7 @@ boards: enclosed game spaces.
 layers: visible layers on a game space.
 tile_objects: objects associated with tiles on a grid (tightly connected to layers.TiledLayer).
 sprites: a collection of classes used to build game entities, mostly through multiple inheritance.
+examples: a runnable demo!
 """
 
 __author__ = "Pablo Reyes de Rojas"
@@ -62,5 +63,6 @@ __all__ = [
     "boards",
     "layers",
     "tile_objects",
-    "sprites"
+    "sprites",
+    "examples"
     ]

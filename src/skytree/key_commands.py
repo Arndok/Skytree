@@ -17,7 +17,7 @@ CommandReaders will propagate received commands through their components ONLY WH
 from pygame.locals import KEYDOWN, KEYUP
 import warnings
 from abc import ABC, abstractmethod
-from .component import Component
+from skytree.component import Component
 
 class EventController(ABC):
     """

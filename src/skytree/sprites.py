@@ -51,17 +51,17 @@ Variables used from config: SPRITE_GRAVITY, SPRITE_ACCEL_SPEED, SPRITE_FRICTION,
 import warnings
 from functools import reduce
 from pygame import Rect
-from .helpers import repack2, repack4, bake_obj
-from . import config
-from .updateable import Updateable
-from .key_commands import KeyCommandReader
-from .positional import Positional
-from .collidable import Collidable, RectHB
-from .animated import Animated
-from .timers import Timer, Delay, Cycle
-from .tile_objects import Tile, PathTile, StageTile
-from .resource_manager import ResourceManager
-from .user_interface import PauseState
+from skytree.helpers import repack2, repack4, bake_obj
+from skytree import config
+from skytree.updateable import Updateable
+from skytree.key_commands import KeyCommandReader
+from skytree.positional import Positional
+from skytree.collidable import Collidable, RectHB
+from skytree.animated import Animated
+from skytree.timers import Timer, Delay, Cycle
+from skytree.tile_objects import Tile, PathTile, StageTile
+from skytree.resource_manager import ResourceManager
+from skytree.user_interface import PauseState
 
 class Sprite(Animated, Collidable, Updateable):
     """

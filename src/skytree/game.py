@@ -13,15 +13,15 @@ import warnings
 from abc import ABC, abstractmethod
 import pygame
 from pygame.locals import *
-from .helpers import repack2, bake_obj
-from .singleton import Singleton
-from . import config
-from .component import Component
-from .drawable import Drawable
-from .updateable import Updateable
-from .key_commands import KeyCommandReader, KeyboardReader
-from .resource_manager import ResourceManager
-from .stage import Stage
+from skytree.helpers import repack2, bake_obj
+from skytree.singleton import Singleton
+from skytree import config
+from skytree.component import Component
+from skytree.drawable import Drawable
+from skytree.updateable import Updateable
+from skytree.key_commands import KeyCommandReader, KeyboardReader
+from skytree.resource_manager import ResourceManager
+from skytree.stage import Stage
 
 class Game(Updateable, Drawable, KeyCommandReader, metaclass=Singleton):
     """

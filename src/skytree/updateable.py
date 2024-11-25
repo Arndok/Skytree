@@ -1,6 +1,6 @@
 """Definition of a Component subclass that can keep track of time and do some work on every frame, or hold other components that do so."""
 
-from .component import Component
+from skytree.component import Component
 
 class Updateable(Component):
     """

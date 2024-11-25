@@ -44,7 +44,9 @@ MAIN_COLOR = (0,0,0) # Black
 """Default color for drawing shapes and text."""
 GAME_BGCOLOR = (0,0,0) # Black
 """Default color for game background."""
-FONT_SIZE = 14
+DEFAULT_FONT = "SkyFont.ttf"
+"""Default font."""
+FONT_SIZE = 8
 """Default font size."""
 
 # Audio

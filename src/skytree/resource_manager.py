@@ -5,8 +5,8 @@ Variables used from config: IMG_PATH, FONT_SIZE, FONT_PATH, SOUND_PATH, FILE_PAT
 """
 
 import pygame
-from .singleton import Singleton
-from . import config
+from skytree.singleton import Singleton
+from skytree import config
 
 class ResourceManager(metaclass=Singleton):
     """

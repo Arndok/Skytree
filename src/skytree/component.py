@@ -10,8 +10,8 @@ Collidable components propagate collision checks.
 CommandReader components propagate commands (but only when they cannot process them themselves).
 """
 
-from .helpers import bake_obj
-from . import game
+from skytree.helpers import bake_obj
+from skytree import game
 
 class Component:
     """

@@ -13,16 +13,16 @@ Variables used from config: BOARD_BGCOLOR, CANVAS_DIM
 
 from itertools import chain
 from pygame import Rect
-from .helpers import repack2, repack4, bake_obj
-from . import config
-from .game import GameState
-from .updateable import Updateable
-from .collidable import Collidable
-from .drawable import Drawable
-from .key_commands import KeyCommandReader
-from .layers import Layer, TiledLayer
-from .stage import Stage
-from .user_interface import PauseState
+from skytree.helpers import repack2, repack4, bake_obj
+from skytree import config
+from skytree.game import GameState
+from skytree.updateable import Updateable
+from skytree.collidable import Collidable
+from skytree.drawable import Drawable
+from skytree.key_commands import KeyCommandReader
+from skytree.layers import Layer, TiledLayer
+from skytree.stage import Stage
+from skytree.user_interface import PauseState
 
 class LayerContainer(Updateable, Drawable, Collidable):
     """Combine Updateable, Drawable and Collidable."""

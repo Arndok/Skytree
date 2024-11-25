@@ -8,8 +8,8 @@ Delay(Countdown): a Delay that self-destructs when reaching zero.
 Cycle(Countdown): a Countdown that resets itself when reaching zero.
 """
 
-from .helpers import nop
-from .updateable import Updateable
+from skytree.helpers import nop
+from skytree.updateable import Updateable
 
 class Timer(Updateable):
     """

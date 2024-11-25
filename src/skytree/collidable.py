@@ -22,8 +22,8 @@ Beyond sprite collisions with solids (which is its own thing; check sprites.Velo
 import warnings
 from abc import ABC, abstractmethod
 from pygame import Rect
-from .helpers import distance, repack2
-from .positional import Positional
+from skytree.helpers import distance, repack2
+from skytree.positional import Positional
 
 ##########
 # SHAPES #

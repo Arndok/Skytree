@@ -11,14 +11,14 @@ Variables used from config: LAYER_SPEED, TILE_FRAME_DURATION
 """
 
 import warnings
-from .helpers import repack4, bake_obj
-from . import config
-from .drawable import Drawable
-from .updateable import Updateable
-from .collidable import Collidable
-from .resource_manager import ResourceManager
-from .tile_objects import UpdateableTile, DrawableTile, CollidableTile, AnimatedTile
-from .timers import Timer, Delay, Cycle
+from skytree.helpers import repack4, bake_obj
+from skytree import config
+from skytree.drawable import Drawable
+from skytree.updateable import Updateable
+from skytree.collidable import Collidable
+from skytree.resource_manager import ResourceManager
+from skytree.tile_objects import UpdateableTile, DrawableTile, CollidableTile, AnimatedTile
+from skytree.timers import Timer, Delay, Cycle
 
 class Layer(Drawable, Updateable):
     """

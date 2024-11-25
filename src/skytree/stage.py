@@ -1,8 +1,8 @@
 """Definition of a class to help keep track of a group of boards."""
 
-from . import game
-from . import config
-from .resource_manager import ResourceManager
+from skytree import game
+from skytree import config
+from skytree.resource_manager import ResourceManager
 
 class Stage:
     """

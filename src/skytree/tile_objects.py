@@ -23,12 +23,12 @@ DraSpaTile(DrawableTile, SpawnerTile): combines DrawableTile with SpawnerTile.
 Variables used from config: TILE_FRAME_DURATION
 """
 
-from .helpers import repack2, bake_obj
-from . import config
-from .collidable import RectHB
-from .timers import Cycle, Countdown
-from .stage import Stage
-from .resource_manager import ResourceManager
+from skytree.helpers import repack2, bake_obj
+from skytree import config
+from skytree.collidable import RectHB
+from skytree.timers import Cycle, Countdown
+from skytree.stage import Stage
+from skytree.resource_manager import ResourceManager
 
 class Tile:
     """

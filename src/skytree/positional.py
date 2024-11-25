@@ -1,6 +1,6 @@
 """Definition of a Component subclass that can have a presence in a 2d space."""
 
-from .component import Component
+from skytree.component import Component
 
 class Positional(Component):
     """
