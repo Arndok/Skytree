@@ -26,9 +26,9 @@ def run_demo():
     # Set configurations
 
     import os
-    config.set_all_paths(os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__))), 'example_resources/'))
+    #config.set_all_paths("[desired_path]/") # Use this to set up your resources folders. You can also set them separately (check out config functions).
     config.CANVAS_DIM = (208, 160)
-    config.WINDOW_DIM = (832, 640)
+    config.WINDOW_MAGNIFY = 4
     config.MIXER_BUFFER = (1024)
     config.SOUND_ENTER_STAGE = "orb.ogg"
     config.SOUND_ACTIVATE_CHECKPOINT = "checkpoint.ogg"
@@ -516,7 +516,7 @@ def run_demo():
                                     "C1": (VisibleCheckpointTile, {"board": "sidescroller7", "idx":(51,52), "offset":(0,-16)})
                                     }),
                         backgrounds=(Layer("demo_bg.png"), Layer("demo_bg2.png")),
-                        foregrounds=(Layer(config.CANVAS_DIM, subsurface=True, components=(Text("PARALLAX LAYERS", pos=(72,18)),)),),
+                        foregrounds=(Layer(config.CANVAS_DIM, subsurface=True, components=(Text("PARALLAX LAYERS", pos=(96,18)),)),),
                         name="sidescroller7", entities=(sidescroller_player,), music=LEVEL_MUSIC)
     # Moving, solid and animated layers
     # - Layer with automatic movement.
@@ -568,7 +568,7 @@ def run_demo():
                                                                                  "anims":ss_enemy_anims, "hb_adjust":ss_enemy_hb_adjust})})
                                     }),
                         backgrounds=(MovingTiledLayer(level_tset, "demo_scr10_bg.txt", BCK_SOLID, destinations=(((0,40),0),((0,0),0))),),
-                        name="sidescroller11", entities=(Text("SPAWNERS", pos=(118,18)), sidescroller_player,), music=LEVEL_MUSIC)
+                        name="sidescroller11", entities=(Text("SPAWNERS", pos=(136,18)), sidescroller_player,), music=LEVEL_MUSIC)
     # Different enemy behaviours
     # - One example enemy turns around when encountering a platform border; the other drops.
     # - Most basic enemy behaviour distinction in Super Mario Bros.

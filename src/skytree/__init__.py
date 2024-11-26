@@ -73,6 +73,5 @@ __all__ = [
     "boards",
     "layers",
     "tile_objects",
-    "sprites",
-    "examples"
+    "sprites"
     ]

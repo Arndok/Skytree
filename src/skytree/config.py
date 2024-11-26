@@ -8,16 +8,25 @@ Functions:
 set_all_paths(path): set every resource path to the given string.
 """
 
+import sys
+
 # Paths
-FILE_PATH = "./resources/"
+if sys.version_info >= (3, 7):
+    from importlib.resources import files
+    EXAMPLE_RESOURCES_PATH = str(files("skytree") / "example_resources") + "/"
+else:
+    import pkg_resources
+    EXAMPLE_RESOURCES_PATH = pkg_resources.resource_filename("skytree", "example_resources") + "/"
+
+FILE_PATH = EXAMPLE_RESOURCES_PATH
 """Default path for files."""
-IMG_PATH = "./resources/"
+IMG_PATH = EXAMPLE_RESOURCES_PATH
 """Default path for image files."""
-FONT_PATH = "./resources/"
+FONT_PATH = EXAMPLE_RESOURCES_PATH
 """Default path for font files."""
-MUSIC_PATH = "./resources/"
+MUSIC_PATH = EXAMPLE_RESOURCES_PATH
 """Default path for music files."""
-SOUND_PATH = "./resources/"
+SOUND_PATH = EXAMPLE_RESOURCES_PATH
 """Default path for sound files."""
 
 def set_all_paths(path):
@@ -38,7 +47,7 @@ CAPTION = "SkyTree"
 """Default window caption."""
 CANVAS_DIM = (256, 240)
 """Default game canvas dimensions."""
-WINDOW_MAGNIFY = 4
+WINDOW_MAGNIFY = 1
 """Default window scaling."""
 MAIN_COLOR = (0,0,0) # Black
 """Default color for drawing shapes and text."""

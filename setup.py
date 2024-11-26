@@ -14,7 +14,7 @@ setup(
     package_dir={"": "src"},
     include_package_data=True,
     install_requires=[
-        "pygame>=2.6",
+        "pygame==2.6",
     ],
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -22,7 +22,7 @@ setup(
         "Intended Audience :: Education",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.11",
-        "License :: OSI Approved :: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License",
+        "License :: Other/Proprietary License",
         "Operating System :: OS Independent",
         "Topic :: Software Development :: Libraries",
         "Topic :: Games/Entertainment"

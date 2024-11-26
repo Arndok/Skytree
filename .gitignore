@@ -1,5 +1,9 @@
+build/
+dist/
+dist_demo/
 src/skytree/__pycache__/
-first_binary/
+src/skytree.egg-info/
+test/
+venv/
+Instucciones_consultor.md
 TO-DO.txt
-make_docs.py
-README - Copia.md
