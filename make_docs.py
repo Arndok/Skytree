@@ -120,7 +120,7 @@ def process_html(file_path):
         href = match.group(1)
         link_text = match.group(2)
         # Check if the file exists within the folder
-        if not os.path.exists(os.path.join(docs_dir, href.split("#")[0])):
+        if not os.path.exists(os.path.join(docs_dir, href.split("#")[0])) and href != "https://creativecommons.org/licenses/by-nc-sa/4.0/":
             return f'<span style="color: #000099; font-style: italic;">{link_text}</span>'  # Darker blue, italics
         return match.group(0)  # Keep the link as-is if valid
 

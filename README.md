@@ -1,6 +1,11 @@
 # Skytree
 2D game framework for Python
-Version 0.1
+Version 0.1.1
+
+![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey)
+
+This project is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License, which allows you to share and adapt the material for non-commercial purposes as long as you provide appropriate attribution and share any adaptations under the same license.  
+For more information, see [CC BY-NC-SA 4.0 License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 # Features
 Skytree is a general 2D game engine that can be used as a Python package.

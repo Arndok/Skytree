@@ -1,5 +1,16 @@
 """
-A framework for structuring game objects and running a real-time game based on 2D spaces.
+Skytree - A 2D game framework for Python
+
+Version: 0.1.1
+
+This project is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. 
+You may share and adapt the material for non-commercial purposes, as long as you provide appropriate attribution and share any adaptations under the same license.
+
+For more details, see: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+Copyright (c) Pablo Reyes de Rojas 2024
+
+###
 
 The broad object structure is a tree graph, with nodes inheriting from component.Component.
   Components can be owned by another component and can own their own components.
