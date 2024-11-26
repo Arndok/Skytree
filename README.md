@@ -44,7 +44,7 @@ INSTRUCCIONES DE INSTALACIÓN Y USO PARA LA DEMO JUGABLE:
   - Descargar e instalar Python 3.11 (https://www.python.org/downloads/)
   - Instalar Skytree mediante pip:
 ```
-pip install skytree)
+pip install skytree
 ```
   - Ejecutar la demo desde el paquete:
 ```python

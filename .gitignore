@@ -1,6 +1,6 @@
 build/
+demo/
 dist/
-dist_demo/
 src/skytree/__pycache__/
 src/skytree.egg-info/
 test/
