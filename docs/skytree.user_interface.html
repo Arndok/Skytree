@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module skytree.user_interface</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="skytree.html" class="white">skytree</a>.user_interface</strong></td>
+</tr></table>
+    <p><span class="code">Definition&nbsp;of&nbsp;UI&nbsp;objects&nbsp;and&nbsp;states.<br>
+&nbsp;<br>
+Classes:<br>
+<a href="#Menu">Menu</a>(<a href="skytree.drawable.html#Drawable">Drawable</a>,&nbsp;<a href="skytree.key_commands.html#KeyCommandReader">KeyCommandReader</a>):&nbsp;a&nbsp;list&nbsp;of&nbsp;selectable&nbsp;options&nbsp;with&nbsp;associated&nbsp;actions.<br>
+<a href="#PauseState">PauseState</a>(<a href="skytree.drawable.html#Drawable">Drawable</a>,&nbsp;<a href="skytree.key_commands.html#KeyCommandReader">KeyCommandReader</a>,&nbsp;<a href="skytree.game.html#GameState">GameState</a>):&nbsp;a&nbsp;game&nbsp;state&nbsp;that&nbsp;freezes&nbsp;the&nbsp;current&nbsp;board&nbsp;and&nbsp;can<br>
+&nbsp;&nbsp;go&nbsp;back&nbsp;to&nbsp;it,&nbsp;either&nbsp;to&nbsp;unfreeze&nbsp;it&nbsp;or&nbsp;to&nbsp;exit&nbsp;from&nbsp;it.<br>
+&nbsp;<br>
+Variables&nbsp;used&nbsp;from&nbsp;config:&nbsp;CANVAS_DIM</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="skytree.config.html">skytree.config</a><br>
+</td><td class="multicolumn"><span style="color: #000099; font-style: italic;">pygame</span><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>(<a href="skytree.positional.html#Positional">skytree.positional.Positional</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.user_interface.html#Menu">Menu</a>(<a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>, <a href="skytree.key_commands.html#KeyCommandReader">skytree.key_commands.KeyCommandReader</a>)
+</dt><dt class="heading-text"><a href="skytree.user_interface.html#PauseState">PauseState</a>(<a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>, <a href="skytree.key_commands.html#KeyCommandReader">skytree.key_commands.KeyCommandReader</a>, <a href="skytree.game.html#GameState">skytree.game.GameState</a>)
+</dt></dl>
+</dd>
+<dt class="heading-text"><a href="skytree.game.html#GameState">skytree.game.GameState</a>(<span style="color: #000099; font-style: italic;">abc.ABC</span>, <a href="skytree.component.html#Component">skytree.component.Component</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.user_interface.html#PauseState">PauseState</a>(<a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>, <a href="skytree.key_commands.html#KeyCommandReader">skytree.key_commands.KeyCommandReader</a>, <a href="skytree.game.html#GameState">skytree.game.GameState</a>)
+</dt></dl>
+</dd>
+<dt class="heading-text"><a href="skytree.key_commands.html#KeyCommandReader">skytree.key_commands.KeyCommandReader</a>(<a href="skytree.key_commands.html#CommandReader">skytree.key_commands.CommandReader</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.user_interface.html#Menu">Menu</a>(<a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>, <a href="skytree.key_commands.html#KeyCommandReader">skytree.key_commands.KeyCommandReader</a>)
+</dt><dt class="heading-text"><a href="skytree.user_interface.html#PauseState">PauseState</a>(<a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>, <a href="skytree.key_commands.html#KeyCommandReader">skytree.key_commands.KeyCommandReader</a>, <a href="skytree.game.html#GameState">skytree.game.GameState</a>)
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Menu">class <strong>Menu</strong></a>(<a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>, <a href="skytree.key_commands.html#KeyCommandReader">skytree.key_commands.KeyCommandReader</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Menu">Menu</a>(title,&nbsp;options,&nbsp;font='SkyFont.ttf',&nbsp;fsize=None,&nbsp;color=(255,&nbsp;255,&nbsp;255),&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>&nbsp;and&nbsp;<a href="skytree.key_commands.html#KeyCommandReader">KeyCommandReader</a>&nbsp;to&nbsp;represent&nbsp;a&nbsp;menu&nbsp;with&nbsp;selectable&nbsp;options.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;behaviour&nbsp;from&nbsp;Component,&nbsp;Positional,&nbsp;<a href="skytree.key_commands.html#KeyCommandReader">KeyCommandReader</a>&nbsp;and&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>.<br>
+&nbsp;<br>
+Options&nbsp;are&nbsp;paired&nbsp;with&nbsp;functions.&nbsp;Currently&nbsp;highlighted&nbsp;option&nbsp;is&nbsp;indicated<br>
+by&nbsp;an&nbsp;arrow&nbsp;pointing&nbsp;right&nbsp;on&nbsp;the&nbsp;left&nbsp;side&nbsp;of&nbsp;the&nbsp;menu.<br>
+&nbsp;<br>
+Extra&nbsp;behaviour&nbsp;on&nbsp;setters:<br>
+Setting&nbsp;selected&nbsp;will&nbsp;move&nbsp;the&nbsp;arrow&nbsp;to&nbsp;the&nbsp;appropriate&nbsp;y&nbsp;position.<br>
+&nbsp;<br>
+Key&nbsp;commands:<br>
+up&nbsp;and&nbsp;down:&nbsp;change&nbsp;the&nbsp;selected&nbsp;option.<br>
+enter:&nbsp;confirm&nbsp;the&nbsp;option;&nbsp;perform&nbsp;its&nbsp;associated&nbsp;function.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.user_interface.html#Menu">Menu</a></dd>
+<dd><a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a></dd>
+<dd><a href="skytree.positional.html#Positional">skytree.positional.Positional</a></dd>
+<dd><a href="skytree.key_commands.html#KeyCommandReader">skytree.key_commands.KeyCommandReader</a></dd>
+<dd><a href="skytree.key_commands.html#CommandReader">skytree.key_commands.CommandReader</a></dd>
+<dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Menu-__init__"><strong>__init__</strong></a>(self, title, options, font='SkyFont.ttf', fsize=None, color=(255, 255, 255), **kwargs)</dt><dd><span class="code">Extend&nbsp;superclasses&nbsp;to&nbsp;build&nbsp;the&nbsp;drawable&nbsp;objects&nbsp;needed&nbsp;to&nbsp;represent&nbsp;the&nbsp;menu.<br>
+&nbsp;<br>
+title&nbsp;is&nbsp;a&nbsp;string&nbsp;that's&nbsp;going&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;build&nbsp;a&nbsp;text&nbsp;object&nbsp;with&nbsp;the&nbsp;given&nbsp;font,&nbsp;font&nbsp;size&nbsp;and&nbsp;color.<br>
+options&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;tuples&nbsp;(label,&nbsp;function)&nbsp;in&nbsp;which&nbsp;each&nbsp;label&nbsp;will&nbsp;also&nbsp;be&nbsp;used&nbsp;to&nbsp;build&nbsp;a&nbsp;text&nbsp;object,<br>
+&nbsp;&nbsp;and&nbsp;the&nbsp;function&nbsp;is&nbsp;going&nbsp;to&nbsp;be&nbsp;called&nbsp;when&nbsp;its&nbsp;associated&nbsp;option&nbsp;is&nbsp;selected&nbsp;and&nbsp;confirmed.<br>
+The&nbsp;color&nbsp;is&nbsp;used&nbsp;for&nbsp;building&nbsp;the&nbsp;arrow&nbsp;as&nbsp;well.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>selected</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;the&nbsp;index&nbsp;of&nbsp;the&nbsp;currently&nbsp;selected&nbsp;option.</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><a name="Menu-add_component"><strong>add_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;add&nbsp;component&nbsp;to&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="Menu-align_bottom"><strong>align_bottom</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Menu-align_center"><strong>align_center</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Menu-align_center_x"><strong>align_center_x</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Menu-align_center_y"><strong>align_center_y</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Menu-align_left"><strong>align_left</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Menu-align_proportion"><strong>align_proportion</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value.</span></dd></dl>
+
+<dl><dt><a name="Menu-align_proportion_x"><strong>align_proportion_x</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Menu-align_proportion_y"><strong>align_proportion_y</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Menu-align_right"><strong>align_right</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Menu-align_top"><strong>align_top</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Menu-clear_alignment"><strong>clear_alignment</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Menu-clear_alignment_x"><strong>clear_alignment_x</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;horizontal&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Menu-clear_alignment_y"><strong>clear_alignment_y</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;vertical&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Menu-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Render&nbsp;own&nbsp;canvas&nbsp;if&nbsp;present,&nbsp;then&nbsp;render&nbsp;components.&nbsp;<br>
+&nbsp;<br>
+Component&nbsp;positions&nbsp;are&nbsp;relative&nbsp;to&nbsp;root&nbsp;canvas&nbsp;(or&nbsp;closest&nbsp;subsurface).</span></dd></dl>
+
+<dl><dt><a name="Menu-get_draw_layer"><strong>get_draw_layer</strong></a>(self, component=None)</dt><dd><span class="code">Return&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Menu-move_backward"><strong>move_backward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;backwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Menu-move_forward"><strong>move_forward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;forwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Menu-move_to_back"><strong>move_to_back</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;back.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Menu-move_to_front"><strong>move_to_front</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;front.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Menu-remove_component"><strong>remove_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;remove&nbsp;component&nbsp;from&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="Menu-set_align_bottom"><strong>set_align_bottom</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Menu-set_align_center"><strong>set_align_center</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Menu-set_align_center_x"><strong>set_align_center_x</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Menu-set_align_center_y"><strong>set_align_center_y</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Menu-set_align_left"><strong>set_align_left</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Menu-set_align_proportion"><strong>set_align_proportion</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value</span></dd></dl>
+
+<dl><dt><a name="Menu-set_align_proportion_x"><strong>set_align_proportion_x</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Menu-set_align_proportion_y"><strong>set_align_proportion_y</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Menu-set_align_right"><strong>set_align_right</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Menu-set_align_top"><strong>set_align_top</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Menu-set_draw_layer"><strong>set_draw_layer</strong></a>(self, idx, component=None)</dt><dd><span class="code">Set&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<dl><dt><strong>draw_rect</strong></dt>
+<dd><span class="code">Draw&nbsp;rect&nbsp;for&nbsp;object&nbsp;canvas&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<dl><dt><strong>drawable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;drawable&nbsp;components&nbsp;list&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>frame_dim</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;2D&nbsp;dimensions.</span></dd>
+</dl>
+<dl><dt><strong>frame_height</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;height.</span></dd>
+</dl>
+<dl><dt><strong>frame_width</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;width.</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Object&nbsp;height&nbsp;(from&nbsp;its&nbsp;draw_rect)</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Object&nbsp;width&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>canvas</strong></dt>
+<dd><span class="code">This&nbsp;object's&nbsp;drawable&nbsp;surface&nbsp;(Pygame&nbsp;Surface).</span></dd>
+</dl>
+<dl><dt><strong>frame</strong></dt>
+<dd><span class="code">Object&nbsp;frame&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.positional.html#Positional">skytree.positional.Positional</a>:<br>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+<dl><dt><strong>vel</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;velocity.</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.key_commands.html#KeyCommandReader">skytree.key_commands.KeyCommandReader</a>:<br>
+<dl><dt><a name="Menu-activate_if_pressing"><strong>activate_if_pressing</strong></a>(self, *commands)</dt><dd><span class="code">Activate&nbsp;commands&nbsp;if&nbsp;their&nbsp;associated&nbsp;keys&nbsp;are&nbsp;being&nbsp;pressed.&nbsp;Default&nbsp;to&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="Menu-allow_command"><strong>allow_command</strong></a>(self, command)</dt><dd><span class="code">Set&nbsp;command&nbsp;as&nbsp;allowed,&nbsp;then&nbsp;activate&nbsp;if&nbsp;associated&nbsp;key&nbsp;is&nbsp;being&nbsp;pressed.</span></dd></dl>
+
+<dl><dt><a name="Menu-block_command"><strong>block_command</strong></a>(self, command)</dt><dd><span class="code">Set&nbsp;command&nbsp;as&nbsp;blocked,&nbsp;then&nbsp;deactivate&nbsp;it.</span></dd></dl>
+
+<dl><dt><a name="Menu-check_commands"><strong>check_commands</strong></a>(self)</dt><dd><span class="code">For&nbsp;every&nbsp;command,&nbsp;activate&nbsp;it&nbsp;if&nbsp;its&nbsp;associated&nbsp;keys&nbsp;are&nbsp;being&nbsp;pressed;&nbsp;deactivate&nbsp;it&nbsp;otherwise.</span></dd></dl>
+
+<dl><dt><a name="Menu-deactivate_all"><strong>deactivate_all</strong></a>(self)</dt><dd><span class="code">Deactivate&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="Menu-deactivate_unless_pressing"><strong>deactivate_unless_pressing</strong></a>(self, *commands)</dt><dd><span class="code">Deactivate&nbsp;commands&nbsp;if&nbsp;their&nbsp;associated&nbsp;keys&nbsp;are&nbsp;not&nbsp;being&nbsp;pressed.&nbsp;Default&nbsp;to&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<hr>
+Methods inherited from <a href="skytree.key_commands.html#CommandReader">skytree.key_commands.CommandReader</a>:<br>
+<dl><dt><a name="Menu-allow_commands"><strong>allow_commands</strong></a>(self, *commands)</dt><dd><span class="code">Allow&nbsp;execution&nbsp;of&nbsp;given&nbsp;commands.&nbsp;Default&nbsp;to&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="Menu-block_commands"><strong>block_commands</strong></a>(self, *commands)</dt><dd><span class="code">Block&nbsp;execution&nbsp;of&nbsp;given&nbsp;commands.&nbsp;Default&nbsp;to&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="Menu-lock_controller"><strong>lock_controller</strong></a>(self)</dt><dd><span class="code">Lock&nbsp;command&nbsp;processing.</span></dd></dl>
+
+<dl><dt><a name="Menu-process"><strong>process</strong></a>(self, command, **kwargs)</dt><dd><span class="code">Perform&nbsp;appropriate&nbsp;method&nbsp;if&nbsp;implemented,&nbsp;otherwise&nbsp;propagate&nbsp;command&nbsp;to&nbsp;components.</span></dd></dl>
+
+<dl><dt><a name="Menu-unlock_controller"><strong>unlock_controller</strong></a>(self)</dt><dd><span class="code">Unlock&nbsp;command&nbsp;processing.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.key_commands.html#CommandReader">skytree.key_commands.CommandReader</a>:<br>
+<dl><dt><strong>command_readers</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;command&nbsp;reading&nbsp;components&nbsp;set&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><a name="Menu-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><span class="code">Iterate&nbsp;over&nbsp;self.<strong>_components</strong>.</span></dd></dl>
+
+<dl><dt><a name="Menu-add_persistent_component"><strong>add_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Add&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;to&nbsp;the&nbsp;object&nbsp;and&nbsp;add&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;tag&nbsp;will&nbsp;prevent&nbsp;the&nbsp;component&nbsp;from&nbsp;being&nbsp;destroyed&nbsp;on&nbsp;reset<br>
+and&nbsp;also&nbsp;have&nbsp;it&nbsp;restored&nbsp;if&nbsp;it&nbsp;was&nbsp;previously&nbsp;destroyed.</span></dd></dl>
+
+<dl><dt><a name="Menu-add_tag"><strong>add_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Add&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;keep&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="Menu-destroy"><strong>destroy</strong></a>(self)</dt><dd><span class="code">Remove&nbsp;this&nbsp;component&nbsp;from&nbsp;its&nbsp;current&nbsp;owner&nbsp;and&nbsp;propagate&nbsp;the&nbsp;command&nbsp;through&nbsp;its&nbsp;own&nbsp;components.<br>
+&nbsp;<br>
+Avoid&nbsp;calling&nbsp;this&nbsp;method&nbsp;directly,&nbsp;as&nbsp;destroying&nbsp;objects&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;the&nbsp;game&nbsp;loop<br>
+will&nbsp;often&nbsp;yield&nbsp;unexpected&nbsp;(not&nbsp;the&nbsp;fun&nbsp;kind)&nbsp;behaviours.&nbsp;<br>
+Use&nbsp;Game.mark_for_destruction&nbsp;instead&nbsp;and&nbsp;let&nbsp;the&nbsp;game&nbsp;manager&nbsp;do&nbsp;the&nbsp;dirty&nbsp;work&nbsp;for&nbsp;you.</span></dd></dl>
+
+<dl><dt><a name="Menu-remove_persistent_component"><strong>remove_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Remove&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;from&nbsp;the&nbsp;object&nbsp;and&nbsp;remove&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;will&nbsp;remove&nbsp;a&nbsp;persistent&nbsp;object&nbsp;permanently.</span></dd></dl>
+
+<dl><dt><a name="Menu-remove_tag"><strong>remove_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Remove&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;not&nbsp;restore&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="Menu-reset"><strong>reset</strong></a>(self)</dt><dd><span class="code">Restore&nbsp;initial&nbsp;data&nbsp;and&nbsp;propagate&nbsp;command&nbsp;through&nbsp;components.<br>
+&nbsp;<br>
+Restore&nbsp;value&nbsp;of&nbsp;attributes&nbsp;on&nbsp;reset_data["attributes"].<br>
+Restore&nbsp;deleted&nbsp;tags&nbsp;from&nbsp;reset_data["tags"]&nbsp;and&nbsp;delete&nbsp;added&nbsp;tags&nbsp;not&nbsp;registered&nbsp;there.<br>
+Restore&nbsp;removed&nbsp;components&nbsp;from&nbsp;reset_data["components"]&nbsp;and&nbsp;remove&nbsp;added&nbsp;components<br>
+not&nbsp;registered&nbsp;there.<br>
+Extend&nbsp;on&nbsp;subclasses&nbsp;to&nbsp;recover&nbsp;initial&nbsp;state&nbsp;as&nbsp;needed.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>named</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tagged</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;tag&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Object&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>game</strong></dt>
+<dd><span class="code">The&nbsp;Game&nbsp;instance&nbsp;(the&nbsp;root&nbsp;of&nbsp;the&nbsp;tree).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;name.</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;owner.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="PauseState">class <strong>PauseState</strong></a>(<a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>, <a href="skytree.key_commands.html#KeyCommandReader">skytree.key_commands.KeyCommandReader</a>, <a href="skytree.game.html#GameState">skytree.game.GameState</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#PauseState">PauseState</a>(commands=(),&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>&nbsp;and&nbsp;<a href="skytree.key_commands.html#KeyCommandReader">KeyCommandReader</a>&nbsp;to&nbsp;represent&nbsp;a&nbsp;pause&nbsp;state.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;behaviours&nbsp;from&nbsp;Component,&nbsp;Positional,&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>&nbsp;and&nbsp;<a href="skytree.key_commands.html#KeyCommandReader">KeyCommandReader</a>.<br>
+Implements&nbsp;game.<a href="skytree.game.html#GameState">GameState</a>&nbsp;interface.<br>
+Extends&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>.<a href="#PauseState-draw">draw</a>(canvas).<br>
+&nbsp;<br>
+Draws,&nbsp;but&nbsp;doesn't&nbsp;update,&nbsp;current&nbsp;board&nbsp;in&nbsp;its&nbsp;last&nbsp;state&nbsp;before&nbsp;pausing.<br>
+On&nbsp;CONTINUE,&nbsp;transitions&nbsp;back&nbsp;to&nbsp;the&nbsp;board.<br>
+On&nbsp;END,&nbsp;exits&nbsp;the&nbsp;board.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#PauseState-enter">enter</a>(exit_state,&nbsp;**kwargs):&nbsp;store&nbsp;the&nbsp;exit&nbsp;state&nbsp;and&nbsp;reset&nbsp;the&nbsp;menu.<br>
+<a href="#PauseState-leave">leave</a>(**kwargs):&nbsp;if&nbsp;there's&nbsp;an&nbsp;active&nbsp;player&nbsp;on&nbsp;the&nbsp;exit&nbsp;state,&nbsp;tell&nbsp;them&nbsp;to&nbsp;check&nbsp;their&nbsp;commands.<br>
+&nbsp;<br>
+Key&nbsp;commands:<br>
+esc:&nbsp;go&nbsp;back&nbsp;to&nbsp;the&nbsp;exit&nbsp;state.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.user_interface.html#PauseState">PauseState</a></dd>
+<dd><a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a></dd>
+<dd><a href="skytree.positional.html#Positional">skytree.positional.Positional</a></dd>
+<dd><a href="skytree.key_commands.html#KeyCommandReader">skytree.key_commands.KeyCommandReader</a></dd>
+<dd><a href="skytree.key_commands.html#CommandReader">skytree.key_commands.CommandReader</a></dd>
+<dd><a href="skytree.game.html#GameState">skytree.game.GameState</a></dd>
+<dd><span style="color: #000099; font-style: italic;">abc.ABC</span></dd>
+<dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="PauseState-__init__"><strong>__init__</strong></a>(self, commands=(), **kwargs)</dt><dd><span class="code">Extend&nbsp;superclasses&nbsp;to&nbsp;build&nbsp;a&nbsp;pause&nbsp;menu&nbsp;and&nbsp;presentation.<br>
+&nbsp;<br>
+<a href="#Menu">Menu</a>&nbsp;is&nbsp;hardcoded&nbsp;to&nbsp;the&nbsp;two&nbsp;options&nbsp;"CONTINUE"&nbsp;(go&nbsp;back&nbsp;to&nbsp;the&nbsp;board)&nbsp;and&nbsp;"END"&nbsp;(exit&nbsp;the&nbsp;board).<br>
+<a href="#Menu">Menu</a>&nbsp;is&nbsp;drawn&nbsp;over&nbsp;this&nbsp;object's&nbsp;canvas,&nbsp;which&nbsp;is&nbsp;a&nbsp;translucid&nbsp;grey&nbsp;which&nbsp;is&nbsp;in&nbsp;turn&nbsp;drawn&nbsp;over&nbsp;the&nbsp;board's&nbsp;last&nbsp;state.<br>
+Name&nbsp;of&nbsp;this&nbsp;class&nbsp;is&nbsp;hardcoded&nbsp;to&nbsp;"pause",&nbsp;and&nbsp;will&nbsp;be&nbsp;automatically&nbsp;added&nbsp;to&nbsp;the&nbsp;game&nbsp;states&nbsp;dictionary&nbsp;on&nbsp;instantiation.</span></dd></dl>
+
+<dl><dt><a name="PauseState-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>&nbsp;to&nbsp;draw&nbsp;the&nbsp;board's&nbsp;last&nbsp;state&nbsp;before&nbsp;entering&nbsp;pause&nbsp;under&nbsp;this&nbsp;object's&nbsp;canvas&nbsp;(translucid&nbsp;grey).</span></dd></dl>
+
+<dl><dt><a name="PauseState-enter"><strong>enter</strong></a>(self, exit_state, **kwargs)</dt><dd><span class="code">Store&nbsp;the&nbsp;exit&nbsp;state;&nbsp;reset&nbsp;the&nbsp;menu.</span></dd></dl>
+
+<dl><dt><a name="PauseState-exit_stage"><strong>exit_stage</strong></a>(self)</dt><dd><span class="code">Execute&nbsp;leave&nbsp;actions&nbsp;from&nbsp;current&nbsp;board,&nbsp;then&nbsp;exit&nbsp;active&nbsp;stage.</span></dd></dl>
+
+<dl><dt><a name="PauseState-leave"><strong>leave</strong></a>(self, **kwargs)</dt><dd><span class="code">If&nbsp;there's&nbsp;an&nbsp;active&nbsp;player,&nbsp;tell&nbsp;them&nbsp;to&nbsp;check&nbsp;their&nbsp;pending&nbsp;commands.</span></dd></dl>
+
+<hr>
+Readonly properties defined here:<br>
+<dl><dt><strong>board</strong></dt>
+<dd><span class="code">Alias&nbsp;for&nbsp;the&nbsp;exit&nbsp;state,&nbsp;for&nbsp;the&nbsp;sake&nbsp;of&nbsp;generalizing&nbsp;board&nbsp;access&nbsp;from&nbsp;game&nbsp;state.</span></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+<hr>
+Methods inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><a name="PauseState-add_component"><strong>add_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;add&nbsp;component&nbsp;to&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="PauseState-align_bottom"><strong>align_bottom</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="PauseState-align_center"><strong>align_center</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="PauseState-align_center_x"><strong>align_center_x</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="PauseState-align_center_y"><strong>align_center_y</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="PauseState-align_left"><strong>align_left</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="PauseState-align_proportion"><strong>align_proportion</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value.</span></dd></dl>
+
+<dl><dt><a name="PauseState-align_proportion_x"><strong>align_proportion_x</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="PauseState-align_proportion_y"><strong>align_proportion_y</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="PauseState-align_right"><strong>align_right</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="PauseState-align_top"><strong>align_top</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="PauseState-clear_alignment"><strong>clear_alignment</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="PauseState-clear_alignment_x"><strong>clear_alignment_x</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;horizontal&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="PauseState-clear_alignment_y"><strong>clear_alignment_y</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;vertical&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="PauseState-get_draw_layer"><strong>get_draw_layer</strong></a>(self, component=None)</dt><dd><span class="code">Return&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="PauseState-move_backward"><strong>move_backward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;backwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="PauseState-move_forward"><strong>move_forward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;forwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="PauseState-move_to_back"><strong>move_to_back</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;back.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="PauseState-move_to_front"><strong>move_to_front</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;front.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="PauseState-remove_component"><strong>remove_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;remove&nbsp;component&nbsp;from&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="PauseState-set_align_bottom"><strong>set_align_bottom</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="PauseState-set_align_center"><strong>set_align_center</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="PauseState-set_align_center_x"><strong>set_align_center_x</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="PauseState-set_align_center_y"><strong>set_align_center_y</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="PauseState-set_align_left"><strong>set_align_left</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="PauseState-set_align_proportion"><strong>set_align_proportion</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value</span></dd></dl>
+
+<dl><dt><a name="PauseState-set_align_proportion_x"><strong>set_align_proportion_x</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="PauseState-set_align_proportion_y"><strong>set_align_proportion_y</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="PauseState-set_align_right"><strong>set_align_right</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="PauseState-set_align_top"><strong>set_align_top</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="PauseState-set_draw_layer"><strong>set_draw_layer</strong></a>(self, idx, component=None)</dt><dd><span class="code">Set&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<dl><dt><strong>draw_rect</strong></dt>
+<dd><span class="code">Draw&nbsp;rect&nbsp;for&nbsp;object&nbsp;canvas&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<dl><dt><strong>drawable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;drawable&nbsp;components&nbsp;list&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>frame_dim</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;2D&nbsp;dimensions.</span></dd>
+</dl>
+<dl><dt><strong>frame_height</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;height.</span></dd>
+</dl>
+<dl><dt><strong>frame_width</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;width.</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Object&nbsp;height&nbsp;(from&nbsp;its&nbsp;draw_rect)</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Object&nbsp;width&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>canvas</strong></dt>
+<dd><span class="code">This&nbsp;object's&nbsp;drawable&nbsp;surface&nbsp;(Pygame&nbsp;Surface).</span></dd>
+</dl>
+<dl><dt><strong>frame</strong></dt>
+<dd><span class="code">Object&nbsp;frame&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.positional.html#Positional">skytree.positional.Positional</a>:<br>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+<dl><dt><strong>vel</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;velocity.</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.key_commands.html#KeyCommandReader">skytree.key_commands.KeyCommandReader</a>:<br>
+<dl><dt><a name="PauseState-activate_if_pressing"><strong>activate_if_pressing</strong></a>(self, *commands)</dt><dd><span class="code">Activate&nbsp;commands&nbsp;if&nbsp;their&nbsp;associated&nbsp;keys&nbsp;are&nbsp;being&nbsp;pressed.&nbsp;Default&nbsp;to&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="PauseState-allow_command"><strong>allow_command</strong></a>(self, command)</dt><dd><span class="code">Set&nbsp;command&nbsp;as&nbsp;allowed,&nbsp;then&nbsp;activate&nbsp;if&nbsp;associated&nbsp;key&nbsp;is&nbsp;being&nbsp;pressed.</span></dd></dl>
+
+<dl><dt><a name="PauseState-block_command"><strong>block_command</strong></a>(self, command)</dt><dd><span class="code">Set&nbsp;command&nbsp;as&nbsp;blocked,&nbsp;then&nbsp;deactivate&nbsp;it.</span></dd></dl>
+
+<dl><dt><a name="PauseState-check_commands"><strong>check_commands</strong></a>(self)</dt><dd><span class="code">For&nbsp;every&nbsp;command,&nbsp;activate&nbsp;it&nbsp;if&nbsp;its&nbsp;associated&nbsp;keys&nbsp;are&nbsp;being&nbsp;pressed;&nbsp;deactivate&nbsp;it&nbsp;otherwise.</span></dd></dl>
+
+<dl><dt><a name="PauseState-deactivate_all"><strong>deactivate_all</strong></a>(self)</dt><dd><span class="code">Deactivate&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="PauseState-deactivate_unless_pressing"><strong>deactivate_unless_pressing</strong></a>(self, *commands)</dt><dd><span class="code">Deactivate&nbsp;commands&nbsp;if&nbsp;their&nbsp;associated&nbsp;keys&nbsp;are&nbsp;not&nbsp;being&nbsp;pressed.&nbsp;Default&nbsp;to&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<hr>
+Methods inherited from <a href="skytree.key_commands.html#CommandReader">skytree.key_commands.CommandReader</a>:<br>
+<dl><dt><a name="PauseState-allow_commands"><strong>allow_commands</strong></a>(self, *commands)</dt><dd><span class="code">Allow&nbsp;execution&nbsp;of&nbsp;given&nbsp;commands.&nbsp;Default&nbsp;to&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="PauseState-block_commands"><strong>block_commands</strong></a>(self, *commands)</dt><dd><span class="code">Block&nbsp;execution&nbsp;of&nbsp;given&nbsp;commands.&nbsp;Default&nbsp;to&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="PauseState-lock_controller"><strong>lock_controller</strong></a>(self)</dt><dd><span class="code">Lock&nbsp;command&nbsp;processing.</span></dd></dl>
+
+<dl><dt><a name="PauseState-process"><strong>process</strong></a>(self, command, **kwargs)</dt><dd><span class="code">Perform&nbsp;appropriate&nbsp;method&nbsp;if&nbsp;implemented,&nbsp;otherwise&nbsp;propagate&nbsp;command&nbsp;to&nbsp;components.</span></dd></dl>
+
+<dl><dt><a name="PauseState-unlock_controller"><strong>unlock_controller</strong></a>(self)</dt><dd><span class="code">Unlock&nbsp;command&nbsp;processing.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.key_commands.html#CommandReader">skytree.key_commands.CommandReader</a>:<br>
+<dl><dt><strong>command_readers</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;command&nbsp;reading&nbsp;components&nbsp;set&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.game.html#GameState">skytree.game.GameState</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><a name="PauseState-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><span class="code">Iterate&nbsp;over&nbsp;self.<strong>_components</strong>.</span></dd></dl>
+
+<dl><dt><a name="PauseState-add_persistent_component"><strong>add_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Add&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;to&nbsp;the&nbsp;object&nbsp;and&nbsp;add&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;tag&nbsp;will&nbsp;prevent&nbsp;the&nbsp;component&nbsp;from&nbsp;being&nbsp;destroyed&nbsp;on&nbsp;reset<br>
+and&nbsp;also&nbsp;have&nbsp;it&nbsp;restored&nbsp;if&nbsp;it&nbsp;was&nbsp;previously&nbsp;destroyed.</span></dd></dl>
+
+<dl><dt><a name="PauseState-add_tag"><strong>add_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Add&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;keep&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="PauseState-destroy"><strong>destroy</strong></a>(self)</dt><dd><span class="code">Remove&nbsp;this&nbsp;component&nbsp;from&nbsp;its&nbsp;current&nbsp;owner&nbsp;and&nbsp;propagate&nbsp;the&nbsp;command&nbsp;through&nbsp;its&nbsp;own&nbsp;components.<br>
+&nbsp;<br>
+Avoid&nbsp;calling&nbsp;this&nbsp;method&nbsp;directly,&nbsp;as&nbsp;destroying&nbsp;objects&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;the&nbsp;game&nbsp;loop<br>
+will&nbsp;often&nbsp;yield&nbsp;unexpected&nbsp;(not&nbsp;the&nbsp;fun&nbsp;kind)&nbsp;behaviours.&nbsp;<br>
+Use&nbsp;Game.mark_for_destruction&nbsp;instead&nbsp;and&nbsp;let&nbsp;the&nbsp;game&nbsp;manager&nbsp;do&nbsp;the&nbsp;dirty&nbsp;work&nbsp;for&nbsp;you.</span></dd></dl>
+
+<dl><dt><a name="PauseState-remove_persistent_component"><strong>remove_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Remove&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;from&nbsp;the&nbsp;object&nbsp;and&nbsp;remove&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;will&nbsp;remove&nbsp;a&nbsp;persistent&nbsp;object&nbsp;permanently.</span></dd></dl>
+
+<dl><dt><a name="PauseState-remove_tag"><strong>remove_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Remove&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;not&nbsp;restore&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="PauseState-reset"><strong>reset</strong></a>(self)</dt><dd><span class="code">Restore&nbsp;initial&nbsp;data&nbsp;and&nbsp;propagate&nbsp;command&nbsp;through&nbsp;components.<br>
+&nbsp;<br>
+Restore&nbsp;value&nbsp;of&nbsp;attributes&nbsp;on&nbsp;reset_data["attributes"].<br>
+Restore&nbsp;deleted&nbsp;tags&nbsp;from&nbsp;reset_data["tags"]&nbsp;and&nbsp;delete&nbsp;added&nbsp;tags&nbsp;not&nbsp;registered&nbsp;there.<br>
+Restore&nbsp;removed&nbsp;components&nbsp;from&nbsp;reset_data["components"]&nbsp;and&nbsp;remove&nbsp;added&nbsp;components<br>
+not&nbsp;registered&nbsp;there.<br>
+Extend&nbsp;on&nbsp;subclasses&nbsp;to&nbsp;recover&nbsp;initial&nbsp;state&nbsp;as&nbsp;needed.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>named</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tagged</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;tag&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Object&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>game</strong></dt>
+<dd><span class="code">The&nbsp;Game&nbsp;instance&nbsp;(the&nbsp;root&nbsp;of&nbsp;the&nbsp;tree).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;name.</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;owner.</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-reduce"><strong>reduce</strong></a>(...)</dt><dd><span class="code"><a href="#-reduce">reduce</a>(function,&nbsp;iterable[,&nbsp;initial])&nbsp;-&gt;&nbsp;value<br>
+&nbsp;<br>
+Apply&nbsp;a&nbsp;function&nbsp;of&nbsp;two&nbsp;arguments&nbsp;cumulatively&nbsp;to&nbsp;the&nbsp;items&nbsp;of&nbsp;a&nbsp;sequence<br>
+or&nbsp;iterable,&nbsp;from&nbsp;left&nbsp;to&nbsp;right,&nbsp;so&nbsp;as&nbsp;to&nbsp;reduce&nbsp;the&nbsp;iterable&nbsp;to&nbsp;a&nbsp;single<br>
+value.&nbsp;&nbsp;For&nbsp;example,&nbsp;<a href="#-reduce">reduce</a>(lambda&nbsp;x,&nbsp;y:&nbsp;x+y,&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5])&nbsp;calculates<br>
+((((1+2)+3)+4)+5).&nbsp;&nbsp;If&nbsp;initial&nbsp;is&nbsp;present,&nbsp;it&nbsp;is&nbsp;placed&nbsp;before&nbsp;the&nbsp;items<br>
+of&nbsp;the&nbsp;iterable&nbsp;in&nbsp;the&nbsp;calculation,&nbsp;and&nbsp;serves&nbsp;as&nbsp;a&nbsp;default&nbsp;when&nbsp;the<br>
+iterable&nbsp;is&nbsp;empty.</span></dd></dl>
+</td></tr></table>
+</body></html>

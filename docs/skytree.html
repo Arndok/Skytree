@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: package skytree</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title">skytree</strong> (version 0.1.1)</td>
+</tr></table>
+    <p><span class="code">Skytree&nbsp;-&nbsp;A&nbsp;2D&nbsp;game&nbsp;framework&nbsp;for&nbsp;Python<br>
+&nbsp;<br>
+Version:&nbsp;0.1.1<br>
+&nbsp;<br>
+This&nbsp;project&nbsp;is&nbsp;licensed&nbsp;under&nbsp;the&nbsp;Creative&nbsp;Commons&nbsp;Attribution-NonCommercial-ShareAlike&nbsp;4.0&nbsp;International&nbsp;License.&nbsp;<br>
+You&nbsp;may&nbsp;share&nbsp;and&nbsp;adapt&nbsp;the&nbsp;material&nbsp;for&nbsp;non-commercial&nbsp;purposes,&nbsp;as&nbsp;long&nbsp;as&nbsp;you&nbsp;provide&nbsp;appropriate&nbsp;attribution&nbsp;and&nbsp;share&nbsp;any&nbsp;adaptations&nbsp;under&nbsp;the&nbsp;same&nbsp;license.<br>
+&nbsp;<br>
+For&nbsp;more&nbsp;details,&nbsp;see:&nbsp;<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">https://creativecommons.org/licenses/by-nc-sa/4.0/</a><br>
+&nbsp;<br>
+Copyright&nbsp;(c)&nbsp;Pablo&nbsp;Reyes&nbsp;de&nbsp;Rojas&nbsp;2024<br>
+&nbsp;<br>
+###<br>
+&nbsp;<br>
+The&nbsp;broad&nbsp;object&nbsp;structure&nbsp;is&nbsp;a&nbsp;tree&nbsp;graph,&nbsp;with&nbsp;nodes&nbsp;inheriting&nbsp;from&nbsp;component.Component.<br>
+&nbsp;&nbsp;Components&nbsp;can&nbsp;be&nbsp;owned&nbsp;by&nbsp;another&nbsp;component&nbsp;and&nbsp;can&nbsp;own&nbsp;their&nbsp;own&nbsp;components.<br>
+&nbsp;&nbsp;Basic&nbsp;functionalities&nbsp;are&nbsp;propagated&nbsp;through&nbsp;components&nbsp;(see&nbsp;component&nbsp;documentation).<br>
+The&nbsp;root&nbsp;of&nbsp;the&nbsp;tree&nbsp;is&nbsp;a&nbsp;singleton&nbsp;game.Game&nbsp;object.<br>
+Resources&nbsp;are&nbsp;managed&nbsp;through&nbsp;a&nbsp;singleton&nbsp;resource_manager.ResourceManager&nbsp;object.<br>
+There's&nbsp;heavy&nbsp;use&nbsp;of&nbsp;multiple&nbsp;inheritance&nbsp;for&nbsp;constructing&nbsp;objects;&nbsp;most&nbsp;importantly&nbsp;Sprites&nbsp;(see&nbsp;sprites&nbsp;documentation).<br>
+The&nbsp;framework&nbsp;features&nbsp;some&nbsp;funcionalities&nbsp;for&nbsp;working&nbsp;with&nbsp;tiled&nbsp;spaces&nbsp;(see&nbsp;layer,&nbsp;tile_objects,&nbsp;sprites&nbsp;and&nbsp;board&nbsp;documentation).<br>
+&nbsp;<br>
+General&nbsp;usage&nbsp;goes&nbsp;like&nbsp;this:<br>
+-&nbsp;Import&nbsp;config&nbsp;and&nbsp;set&nbsp;variables&nbsp;as&nbsp;needed&nbsp;(at&nbsp;the&nbsp;very&nbsp;least&nbsp;variables&nbsp;needed&nbsp;to&nbsp;instantiate&nbsp;Game).<br>
+-&nbsp;Instantiate&nbsp;Game&nbsp;and&nbsp;set&nbsp;event&nbsp;controllers&nbsp;(these&nbsp;can&nbsp;also&nbsp;be&nbsp;set&nbsp;right&nbsp;before&nbsp;running&nbsp;the&nbsp;game).<br>
+-&nbsp;Import&nbsp;every&nbsp;other&nbsp;necessary&nbsp;part&nbsp;of&nbsp;the&nbsp;framework.<br>
+-&nbsp;Set&nbsp;game&nbsp;variables&nbsp;and&nbsp;objects.<br>
+-&nbsp;Define&nbsp;game&nbsp;entities,&nbsp;layers,&nbsp;boards&nbsp;and&nbsp;stages.<br>
+-&nbsp;Run&nbsp;the&nbsp;game.<br>
+&nbsp;<br>
+Modules:<br>
+config:&nbsp;a&nbsp;repository&nbsp;of&nbsp;variables&nbsp;to&nbsp;be&nbsp;used&nbsp;as&nbsp;definitions&nbsp;for&nbsp;other&nbsp;classes.<br>
+helpers:&nbsp;a&nbsp;repository&nbsp;of&nbsp;helper&nbsp;functions.<br>
+tools:&nbsp;a&nbsp;repository&nbsp;of&nbsp;file&nbsp;manipulation&nbsp;functions.<br>
+singleton:&nbsp;a&nbsp;singleton&nbsp;metaclass,&nbsp;used&nbsp;by&nbsp;game.Game&nbsp;and&nbsp;resource_manager.ResourceManager.<br>
+component:&nbsp;the&nbsp;base&nbsp;class&nbsp;for&nbsp;the&nbsp;nodes&nbsp;of&nbsp;the&nbsp;game&nbsp;tree&nbsp;--the&nbsp;core&nbsp;of&nbsp;the&nbsp;framework.<br>
+updateable:&nbsp;a&nbsp;Component&nbsp;direct&nbsp;subclass&nbsp;that&nbsp;can&nbsp;keep&nbsp;track&nbsp;of&nbsp;time&nbsp;and&nbsp;do&nbsp;some&nbsp;work&nbsp;on&nbsp;each&nbsp;frame.<br>
+positional:&nbsp;a&nbsp;Component&nbsp;direct&nbsp;subclass&nbsp;that&nbsp;can&nbsp;have&nbsp;a&nbsp;presence&nbsp;in&nbsp;a&nbsp;2d&nbsp;space.<br>
+collidable:&nbsp;Hitbox&nbsp;classes&nbsp;and&nbsp;a&nbsp;Positional&nbsp;subclass&nbsp;that&nbsp;uses&nbsp;them&nbsp;to&nbsp;test&nbsp;collisions.<br>
+resource_manager:&nbsp;a&nbsp;singleton&nbsp;class&nbsp;to&nbsp;organize&nbsp;all&nbsp;resource&nbsp;management&nbsp;for&nbsp;the&nbsp;game.<br>
+drawable:&nbsp;a&nbsp;Positional&nbsp;subclass&nbsp;that&nbsp;can&nbsp;have&nbsp;a&nbsp;visible&nbsp;appearance.<br>
+tileset:&nbsp;a&nbsp;Drawable&nbsp;subclass&nbsp;with&nbsp;a&nbsp;tiled&nbsp;canvas&nbsp;and&nbsp;ability&nbsp;to&nbsp;select&nbsp;which&nbsp;of&nbsp;those&nbsp;tiles&nbsp;is&nbsp;drawn&nbsp;on&nbsp;any&nbsp;given&nbsp;moment.<br>
+timers:&nbsp;Updateable&nbsp;subclasses&nbsp;that&nbsp;can&nbsp;keep&nbsp;track&nbsp;of&nbsp;time;&nbsp;includes&nbsp;countdowns&nbsp;that&nbsp;can&nbsp;trigger&nbsp;an&nbsp;action&nbsp;when&nbsp;reaching&nbsp;zero,&nbsp;with&nbsp;two&nbsp;subclass&nbsp;variants.<br>
+animated:&nbsp;Drawable&nbsp;subclasses&nbsp;that&nbsp;use&nbsp;a&nbsp;tileset&nbsp;to&nbsp;support&nbsp;frame-by-frame&nbsp;animation.<br>
+key_commands:&nbsp;an&nbsp;event&nbsp;controller&nbsp;for&nbsp;key&nbsp;pressed&nbsp;and&nbsp;releases&nbsp;and&nbsp;a&nbsp;Component&nbsp;direct&nbsp;subclass&nbsp;that&nbsp;can&nbsp;process&nbsp;commands&nbsp;coming&nbsp;from&nbsp;it.<br>
+user_interface:&nbsp;UI&nbsp;objects&nbsp;and&nbsp;states.<br>
+game:&nbsp;a&nbsp;singleton&nbsp;class&nbsp;to&nbsp;initialize&nbsp;the&nbsp;game&nbsp;and&nbsp;run&nbsp;the&nbsp;main&nbsp;loop&nbsp;(the&nbsp;root&nbsp;of&nbsp;the&nbsp;game&nbsp;tree),&nbsp;and&nbsp;a&nbsp;base&nbsp;class&nbsp;for&nbsp;the&nbsp;game&nbsp;states.<br>
+stage:&nbsp;an&nbsp;object&nbsp;to&nbsp;help&nbsp;organize&nbsp;groups&nbsp;of&nbsp;interconnected&nbsp;game&nbsp;spaces.<br>
+boards:&nbsp;enclosed&nbsp;game&nbsp;spaces.<br>
+layers:&nbsp;visible&nbsp;layers&nbsp;on&nbsp;a&nbsp;game&nbsp;space.<br>
+tile_objects:&nbsp;objects&nbsp;associated&nbsp;with&nbsp;tiles&nbsp;on&nbsp;a&nbsp;grid&nbsp;(tightly&nbsp;connected&nbsp;to&nbsp;layers.TiledLayer).<br>
+sprites:&nbsp;a&nbsp;collection&nbsp;of&nbsp;classes&nbsp;used&nbsp;to&nbsp;build&nbsp;game&nbsp;entities,&nbsp;mostly&nbsp;through&nbsp;multiple&nbsp;inheritance.<br>
+examples:&nbsp;a&nbsp;runnable&nbsp;demo!</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Package Contents</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="skytree.animated.html">animated</a><br>
+<a href="skytree.boards.html">boards</a><br>
+<a href="skytree.collidable.html">collidable</a><br>
+<a href="skytree.component.html">component</a><br>
+<a href="skytree.config.html">config</a><br>
+<a href="skytree.drawable.html">drawable</a><br>
+</td><td class="multicolumn"><a href="skytree.examples.html">examples</a><br>
+<a href="skytree.game.html">game</a><br>
+<a href="skytree.helpers.html">helpers</a><br>
+<a href="skytree.key_commands.html">key_commands</a><br>
+<a href="skytree.layers.html">layers</a><br>
+<a href="skytree.positional.html">positional</a><br>
+</td><td class="multicolumn"><a href="skytree.resource_manager.html">resource_manager</a><br>
+<a href="skytree.singleton.html">singleton</a><br>
+<a href="skytree.sprites.html">sprites</a><br>
+<a href="skytree.stage.html">stage</a><br>
+<a href="skytree.tile_objects.html">tile_objects</a><br>
+<a href="skytree.tileset.html">tileset</a><br>
+</td><td class="multicolumn"><a href="skytree.timers.html">timers</a><br>
+<a href="skytree.tools.html">tools</a><br>
+<a href="skytree.updateable.html">updateable</a><br>
+<a href="skytree.user_interface.html">user_interface</a><br>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>__all__</strong> = ['config', 'component', 'updateable', 'positional', 'collidable', 'resource_manager', 'drawable', 'tileset', 'timers', 'animated', 'key_commands', 'user_interface', 'game', 'stage', 'boards', 'layers', 'tile_objects', 'sprites']</td></tr></table><p>
+<table class="section">
+<tr class="decor author-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Author</strong></td></tr>
+    
+<tr><td class="decor author-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn">Pablo&nbsp;Reyes&nbsp;de&nbsp;Rojas</td></tr></table>
+</body></html>

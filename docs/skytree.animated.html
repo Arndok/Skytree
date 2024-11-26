@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module skytree.animated</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="skytree.html" class="white">skytree</a>.animated</strong></td>
+</tr></table>
+    <p><span class="code">Definition&nbsp;of&nbsp;classes&nbsp;that&nbsp;use&nbsp;TileSets&nbsp;to&nbsp;support&nbsp;frame-by-frame&nbsp;animation.<br>
+&nbsp;<br>
+Classes:<br>
+<a href="#Animated">Animated</a>(<a href="skytree.drawable.html#Drawable">Drawable</a>,&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>):&nbsp;holds&nbsp;a&nbsp;tileset,&nbsp;methods&nbsp;to&nbsp;select&nbsp;its&nbsp;drawable&nbsp;frame&nbsp;and&nbsp;an&nbsp;animation&nbsp;timer.<br>
+<a href="#Particle">Particle</a>(<a href="#Animated">Animated</a>):&nbsp;plays&nbsp;a&nbsp;single&nbsp;animation&nbsp;and&nbsp;then&nbsp;self-destructs.<br>
+&nbsp;<br>
+Variables&nbsp;used&nbsp;from&nbsp;config:&nbsp;SPRITE_FRAME_DURATION</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="skytree.config.html">skytree.config</a><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>(<a href="skytree.positional.html#Positional">skytree.positional.Positional</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.animated.html#Animated">Animated</a>(<a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>, <a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.animated.html#Particle">Particle</a>
+</dt></dl>
+</dd>
+</dl>
+</dd>
+<dt class="heading-text"><a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>(<a href="skytree.component.html#Component">skytree.component.Component</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.animated.html#Animated">Animated</a>(<a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>, <a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.animated.html#Particle">Particle</a>
+</dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Animated">class <strong>Animated</strong></a>(<a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>, <a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Animated">Animated</a>(tileset,&nbsp;anims=None,&nbsp;first_anim=None,&nbsp;frame_duration=150,&nbsp;local_timer=True,&nbsp;**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>&nbsp;and&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>&nbsp;to&nbsp;support&nbsp;frame-by-frame&nbsp;animation.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;behaviour&nbsp;from&nbsp;Component,&nbsp;Positional,&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>&nbsp;and&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>.<br>
+Extends&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>.<a href="#Animated-draw">draw</a>(canvas).<br>
+&nbsp;<br>
+Animation&nbsp;frames&nbsp;are&nbsp;fetched&nbsp;from&nbsp;a&nbsp;TileSet.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#Animated-tick_anim">tick_anim</a>():&nbsp;advance&nbsp;the&nbsp;animation&nbsp;frame&nbsp;(triggered&nbsp;by&nbsp;an&nbsp;animation&nbsp;timer).<br>
+<a href="#Animated-lock_anim">lock_anim</a>():&nbsp;disable&nbsp;animation&nbsp;changes.<br>
+<a href="#Animated-unlock_anim">unlock_anim</a>():&nbsp;enable&nbsp;animation&nbsp;changes.<br>
+<a href="#Animated-draw">draw</a>(canvas):&nbsp;set&nbsp;the&nbsp;appropriate&nbsp;frame&nbsp;in&nbsp;the&nbsp;tileset&nbsp;and&nbsp;draw.<br>
+&nbsp;<br>
+Notes&nbsp;on&nbsp;setters:<br>
+Setting&nbsp;tileset&nbsp;will&nbsp;update&nbsp;components&nbsp;and&nbsp;reset_data.<br>
+Setting&nbsp;anim&nbsp;will&nbsp;reset&nbsp;the&nbsp;animation.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.animated.html#Animated">Animated</a></dd>
+<dd><a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a></dd>
+<dd><a href="skytree.positional.html#Positional">skytree.positional.Positional</a></dd>
+<dd><a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a></dd>
+<dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Animated-__init__"><strong>__init__</strong></a>(self, tileset, anims=None, first_anim=None, frame_duration=150, local_timer=True, **kwargs)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>&nbsp;to&nbsp;construct&nbsp;tileset&nbsp;if&nbsp;needed,&nbsp;set&nbsp;animation&nbsp;timer,&nbsp;store&nbsp;animations&nbsp;and&nbsp;set&nbsp;first&nbsp;active&nbsp;animation.<br>
+&nbsp;<br>
+tileset&nbsp;may&nbsp;be&nbsp;a&nbsp;Tileset&nbsp;object&nbsp;or&nbsp;a&nbsp;(Type,&nbsp;{kwargs})&nbsp;tuple.<br>
+anims&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;animations&nbsp;data,&nbsp;structured&nbsp;like&nbsp;this:&nbsp;{name:&nbsp;((tileset&nbsp;idx,&nbsp;duration&nbsp;in&nbsp;frames),&nbsp;...),&nbsp;...}<br>
+&nbsp;&nbsp;Duration&nbsp;in&nbsp;frames&nbsp;can&nbsp;be&nbsp;float("inf")&nbsp;(use&nbsp;at&nbsp;the&nbsp;end&nbsp;to&nbsp;prevent&nbsp;looping).<br>
+&nbsp;&nbsp;If&nbsp;left&nbsp;empty,&nbsp;defaults&nbsp;to&nbsp;a&nbsp;continuous&nbsp;looped&nbsp;animation&nbsp;using&nbsp;all&nbsp;tiles&nbsp;in&nbsp;the&nbsp;tileset,&nbsp;labeled&nbsp;as&nbsp;"default".<br>
+first_anim&nbsp;is&nbsp;the&nbsp;identifying&nbsp;label&nbsp;of&nbsp;the&nbsp;first&nbsp;animation&nbsp;that&nbsp;should&nbsp;be&nbsp;set.<br>
+frame_duration&nbsp;is&nbsp;expressed&nbsp;in&nbsp;milliseconds.<br>
+&nbsp;&nbsp;Can&nbsp;be&nbsp;set&nbsp;to&nbsp;float("inf")&nbsp;to&nbsp;have&nbsp;a&nbsp;static&nbsp;image&nbsp;with&nbsp;a&nbsp;selectable&nbsp;tile,&nbsp;but&nbsp;that&nbsp;would&nbsp;be&nbsp;best&nbsp;achieved&nbsp;by&nbsp;setting&nbsp;local_timer&nbsp;=&nbsp;False.<br>
+local_timer&nbsp;indicates&nbsp;whether&nbsp;the&nbsp;object&nbsp;should&nbsp;build&nbsp;a&nbsp;clock&nbsp;to&nbsp;tick&nbsp;its&nbsp;animation.&nbsp;Defaults&nbsp;to&nbsp;True.</span></dd></dl>
+
+<dl><dt><a name="Animated-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>&nbsp;to&nbsp;set&nbsp;the&nbsp;appropriate&nbsp;frame&nbsp;in&nbsp;the&nbsp;tileset&nbsp;before&nbsp;drawing.</span></dd></dl>
+
+<dl><dt><a name="Animated-lock_anim"><strong>lock_anim</strong></a>(self)</dt><dd><span class="code">Prevent&nbsp;animation&nbsp;from&nbsp;being&nbsp;changed.</span></dd></dl>
+
+<dl><dt><a name="Animated-tick_anim"><strong>tick_anim</strong></a>(self)</dt><dd><span class="code">Advance&nbsp;animation&nbsp;(called&nbsp;by&nbsp;the&nbsp;animation&nbsp;timer).</span></dd></dl>
+
+<dl><dt><a name="Animated-unlock_anim"><strong>unlock_anim</strong></a>(self)</dt><dd><span class="code">Stop&nbsp;preventing&nbsp;animation&nbsp;from&nbsp;being&nbsp;changed.</span></dd></dl>
+
+<hr>
+Readonly properties defined here:<br>
+<dl><dt><strong>tile_dim</strong></dt>
+<dd><span class="code">Tile&nbsp;dimensions&nbsp;(from&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>tile_height</strong></dt>
+<dd><span class="code">Tile&nbsp;height&nbsp;(from&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>tile_width</strong></dt>
+<dd><span class="code">Tile&nbsp;width&nbsp;(from&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>anim</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;current&nbsp;animation.</span></dd>
+</dl>
+<dl><dt><strong>tileset</strong></dt>
+<dd><span class="code">Object's&nbsp;tileset.</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><a name="Animated-add_component"><strong>add_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;add&nbsp;component&nbsp;to&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="Animated-align_bottom"><strong>align_bottom</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Animated-align_center"><strong>align_center</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Animated-align_center_x"><strong>align_center_x</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Animated-align_center_y"><strong>align_center_y</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Animated-align_left"><strong>align_left</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Animated-align_proportion"><strong>align_proportion</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value.</span></dd></dl>
+
+<dl><dt><a name="Animated-align_proportion_x"><strong>align_proportion_x</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Animated-align_proportion_y"><strong>align_proportion_y</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Animated-align_right"><strong>align_right</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Animated-align_top"><strong>align_top</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Animated-clear_alignment"><strong>clear_alignment</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Animated-clear_alignment_x"><strong>clear_alignment_x</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;horizontal&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Animated-clear_alignment_y"><strong>clear_alignment_y</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;vertical&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Animated-get_draw_layer"><strong>get_draw_layer</strong></a>(self, component=None)</dt><dd><span class="code">Return&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Animated-move_backward"><strong>move_backward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;backwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Animated-move_forward"><strong>move_forward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;forwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Animated-move_to_back"><strong>move_to_back</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;back.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Animated-move_to_front"><strong>move_to_front</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;front.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Animated-remove_component"><strong>remove_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;remove&nbsp;component&nbsp;from&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="Animated-set_align_bottom"><strong>set_align_bottom</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Animated-set_align_center"><strong>set_align_center</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Animated-set_align_center_x"><strong>set_align_center_x</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Animated-set_align_center_y"><strong>set_align_center_y</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Animated-set_align_left"><strong>set_align_left</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Animated-set_align_proportion"><strong>set_align_proportion</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value</span></dd></dl>
+
+<dl><dt><a name="Animated-set_align_proportion_x"><strong>set_align_proportion_x</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Animated-set_align_proportion_y"><strong>set_align_proportion_y</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Animated-set_align_right"><strong>set_align_right</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Animated-set_align_top"><strong>set_align_top</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Animated-set_draw_layer"><strong>set_draw_layer</strong></a>(self, idx, component=None)</dt><dd><span class="code">Set&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<dl><dt><strong>draw_rect</strong></dt>
+<dd><span class="code">Draw&nbsp;rect&nbsp;for&nbsp;object&nbsp;canvas&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<dl><dt><strong>drawable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;drawable&nbsp;components&nbsp;list&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>frame_dim</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;2D&nbsp;dimensions.</span></dd>
+</dl>
+<dl><dt><strong>frame_height</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;height.</span></dd>
+</dl>
+<dl><dt><strong>frame_width</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;width.</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Object&nbsp;height&nbsp;(from&nbsp;its&nbsp;draw_rect)</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Object&nbsp;width&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>canvas</strong></dt>
+<dd><span class="code">This&nbsp;object's&nbsp;drawable&nbsp;surface&nbsp;(Pygame&nbsp;Surface).</span></dd>
+</dl>
+<dl><dt><strong>frame</strong></dt>
+<dd><span class="code">Object&nbsp;frame&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.positional.html#Positional">skytree.positional.Positional</a>:<br>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+<dl><dt><strong>vel</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;velocity.</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>:<br>
+<dl><dt><a name="Animated-update"><strong>update</strong></a>(self, dt)</dt><dd><span class="code">Template&nbsp;to&nbsp;be&nbsp;extended&nbsp;by&nbsp;subclasses&nbsp;that&nbsp;need&nbsp;to&nbsp;do&nbsp;some&nbsp;work&nbsp;on&nbsp;every&nbsp;frame.<br>
+&nbsp;<br>
+Propagate&nbsp;through&nbsp;components.<br>
+dt&nbsp;is&nbsp;delta&nbsp;time&nbsp;(time&nbsp;elapsed&nbsp;since&nbsp;previous&nbsp;frame),<br>
+passed&nbsp;by&nbsp;Game&nbsp;at&nbsp;the&nbsp;root&nbsp;level.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>:<br>
+<dl><dt><strong>updateable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;updateable&nbsp;components&nbsp;list&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><a name="Animated-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><span class="code">Iterate&nbsp;over&nbsp;self.<strong>_components</strong>.</span></dd></dl>
+
+<dl><dt><a name="Animated-add_persistent_component"><strong>add_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Add&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;to&nbsp;the&nbsp;object&nbsp;and&nbsp;add&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;tag&nbsp;will&nbsp;prevent&nbsp;the&nbsp;component&nbsp;from&nbsp;being&nbsp;destroyed&nbsp;on&nbsp;reset<br>
+and&nbsp;also&nbsp;have&nbsp;it&nbsp;restored&nbsp;if&nbsp;it&nbsp;was&nbsp;previously&nbsp;destroyed.</span></dd></dl>
+
+<dl><dt><a name="Animated-add_tag"><strong>add_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Add&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;keep&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="Animated-destroy"><strong>destroy</strong></a>(self)</dt><dd><span class="code">Remove&nbsp;this&nbsp;component&nbsp;from&nbsp;its&nbsp;current&nbsp;owner&nbsp;and&nbsp;propagate&nbsp;the&nbsp;command&nbsp;through&nbsp;its&nbsp;own&nbsp;components.<br>
+&nbsp;<br>
+Avoid&nbsp;calling&nbsp;this&nbsp;method&nbsp;directly,&nbsp;as&nbsp;destroying&nbsp;objects&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;the&nbsp;game&nbsp;loop<br>
+will&nbsp;often&nbsp;yield&nbsp;unexpected&nbsp;(not&nbsp;the&nbsp;fun&nbsp;kind)&nbsp;behaviours.&nbsp;<br>
+Use&nbsp;Game.mark_for_destruction&nbsp;instead&nbsp;and&nbsp;let&nbsp;the&nbsp;game&nbsp;manager&nbsp;do&nbsp;the&nbsp;dirty&nbsp;work&nbsp;for&nbsp;you.</span></dd></dl>
+
+<dl><dt><a name="Animated-remove_persistent_component"><strong>remove_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Remove&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;from&nbsp;the&nbsp;object&nbsp;and&nbsp;remove&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;will&nbsp;remove&nbsp;a&nbsp;persistent&nbsp;object&nbsp;permanently.</span></dd></dl>
+
+<dl><dt><a name="Animated-remove_tag"><strong>remove_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Remove&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;not&nbsp;restore&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="Animated-reset"><strong>reset</strong></a>(self)</dt><dd><span class="code">Restore&nbsp;initial&nbsp;data&nbsp;and&nbsp;propagate&nbsp;command&nbsp;through&nbsp;components.<br>
+&nbsp;<br>
+Restore&nbsp;value&nbsp;of&nbsp;attributes&nbsp;on&nbsp;reset_data["attributes"].<br>
+Restore&nbsp;deleted&nbsp;tags&nbsp;from&nbsp;reset_data["tags"]&nbsp;and&nbsp;delete&nbsp;added&nbsp;tags&nbsp;not&nbsp;registered&nbsp;there.<br>
+Restore&nbsp;removed&nbsp;components&nbsp;from&nbsp;reset_data["components"]&nbsp;and&nbsp;remove&nbsp;added&nbsp;components<br>
+not&nbsp;registered&nbsp;there.<br>
+Extend&nbsp;on&nbsp;subclasses&nbsp;to&nbsp;recover&nbsp;initial&nbsp;state&nbsp;as&nbsp;needed.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>named</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tagged</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;tag&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Object&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>game</strong></dt>
+<dd><span class="code">The&nbsp;Game&nbsp;instance&nbsp;(the&nbsp;root&nbsp;of&nbsp;the&nbsp;tree).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;name.</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;owner.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Particle">class <strong>Particle</strong></a>(<a href="skytree.animated.html#Animated">Animated</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Particle">Particle</a>(tileset,&nbsp;frame_duration=150,&nbsp;**kwargs)<br>
+&nbsp;<br>
+An&nbsp;object&nbsp;with&nbsp;an&nbsp;animation&nbsp;that&nbsp;plays&nbsp;once,&nbsp;then&nbsp;it&nbsp;self-destroys.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.animated.html#Particle">Particle</a></dd>
+<dd><a href="skytree.animated.html#Animated">Animated</a></dd>
+<dd><a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a></dd>
+<dd><a href="skytree.positional.html#Positional">skytree.positional.Positional</a></dd>
+<dd><a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a></dd>
+<dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Particle-__init__"><strong>__init__</strong></a>(self, tileset, frame_duration=150, **kwargs)</dt><dd><span class="code">Extend&nbsp;superclass&nbsp;to&nbsp;add&nbsp;a&nbsp;countdown&nbsp;that&nbsp;destroys&nbsp;itself&nbsp;when&nbsp;the&nbsp;animation&nbsp;finishes.</span></dd></dl>
+
+<hr>
+Methods inherited from <a href="skytree.animated.html#Animated">Animated</a>:<br>
+<dl><dt><a name="Particle-draw"><strong>draw</strong></a>(self, canvas)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>&nbsp;to&nbsp;set&nbsp;the&nbsp;appropriate&nbsp;frame&nbsp;in&nbsp;the&nbsp;tileset&nbsp;before&nbsp;drawing.</span></dd></dl>
+
+<dl><dt><a name="Particle-lock_anim"><strong>lock_anim</strong></a>(self)</dt><dd><span class="code">Prevent&nbsp;animation&nbsp;from&nbsp;being&nbsp;changed.</span></dd></dl>
+
+<dl><dt><a name="Particle-tick_anim"><strong>tick_anim</strong></a>(self)</dt><dd><span class="code">Advance&nbsp;animation&nbsp;(called&nbsp;by&nbsp;the&nbsp;animation&nbsp;timer).</span></dd></dl>
+
+<dl><dt><a name="Particle-unlock_anim"><strong>unlock_anim</strong></a>(self)</dt><dd><span class="code">Stop&nbsp;preventing&nbsp;animation&nbsp;from&nbsp;being&nbsp;changed.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.animated.html#Animated">Animated</a>:<br>
+<dl><dt><strong>tile_dim</strong></dt>
+<dd><span class="code">Tile&nbsp;dimensions&nbsp;(from&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>tile_height</strong></dt>
+<dd><span class="code">Tile&nbsp;height&nbsp;(from&nbsp;tileset).</span></dd>
+</dl>
+<dl><dt><strong>tile_width</strong></dt>
+<dd><span class="code">Tile&nbsp;width&nbsp;(from&nbsp;tileset).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.animated.html#Animated">Animated</a>:<br>
+<dl><dt><strong>anim</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;current&nbsp;animation.</span></dd>
+</dl>
+<dl><dt><strong>tileset</strong></dt>
+<dd><span class="code">Object's&nbsp;tileset.</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><a name="Particle-add_component"><strong>add_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;add&nbsp;component&nbsp;to&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="Particle-align_bottom"><strong>align_bottom</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Particle-align_center"><strong>align_center</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Particle-align_center_x"><strong>align_center_x</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Particle-align_center_y"><strong>align_center_y</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Particle-align_left"><strong>align_left</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Particle-align_proportion"><strong>align_proportion</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value.</span></dd></dl>
+
+<dl><dt><a name="Particle-align_proportion_x"><strong>align_proportion_x</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Particle-align_proportion_y"><strong>align_proportion_y</strong></a>(self, proportion, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Particle-align_right"><strong>align_right</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Particle-align_top"><strong>align_top</strong></a>(self, canvas=None)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;use&nbsp;as&nbsp;a&nbsp;reference;&nbsp;<br>
+don't&nbsp;pass&nbsp;a&nbsp;canvas&nbsp;to&nbsp;try&nbsp;to&nbsp;use&nbsp;owner's.</span></dd></dl>
+
+<dl><dt><a name="Particle-clear_alignment"><strong>clear_alignment</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Particle-clear_alignment_x"><strong>clear_alignment_x</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;horizontal&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Particle-clear_alignment_y"><strong>clear_alignment_y</strong></a>(self)</dt><dd><span class="code">Cancel&nbsp;vertical&nbsp;alignment&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Particle-get_draw_layer"><strong>get_draw_layer</strong></a>(self, component=None)</dt><dd><span class="code">Return&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Particle-move_backward"><strong>move_backward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;backwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Particle-move_forward"><strong>move_forward</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;forwards&nbsp;one&nbsp;position.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Particle-move_to_back"><strong>move_to_back</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;back.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Particle-move_to_front"><strong>move_to_front</strong></a>(self, component=None)</dt><dd><span class="code">Move&nbsp;component/self&nbsp;to&nbsp;front.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<dl><dt><a name="Particle-remove_component"><strong>remove_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;Component&nbsp;to&nbsp;remove&nbsp;component&nbsp;from&nbsp;_drawable&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="Particle-set_align_bottom"><strong>set_align_bottom</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;bottom&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Particle-set_align_center"><strong>set_align_center</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Particle-set_align_center_x"><strong>set_align_center_x</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;horizontally&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Particle-set_align_center_y"><strong>set_align_center_y</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;center&nbsp;vertically&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Particle-set_align_left"><strong>set_align_left</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;left&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Particle-set_align_proportion"><strong>set_align_proportion</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;and&nbsp;can&nbsp;be&nbsp;passed&nbsp;as&nbsp;single&nbsp;value</span></dd></dl>
+
+<dl><dt><a name="Particle-set_align_proportion_x"><strong>set_align_proportion_x</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;horizontally&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Particle-set_align_proportion_y"><strong>set_align_proportion_y</strong></a>(self, proportion)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;vertically&nbsp;following&nbsp;a&nbsp;proportion&nbsp;on&nbsp;draw&nbsp;time.<br>
+&nbsp;<br>
+proportion&nbsp;clamps&nbsp;between&nbsp;0&nbsp;and&nbsp;1.</span></dd></dl>
+
+<dl><dt><a name="Particle-set_align_right"><strong>set_align_right</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;right&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Particle-set_align_top"><strong>set_align_top</strong></a>(self)</dt><dd><span class="code">Align&nbsp;self&nbsp;to&nbsp;canvas&nbsp;top&nbsp;on&nbsp;draw&nbsp;time.</span></dd></dl>
+
+<dl><dt><a name="Particle-set_draw_layer"><strong>set_draw_layer</strong></a>(self, idx, component=None)</dt><dd><span class="code">Set&nbsp;component/self&nbsp;draw&nbsp;layer&nbsp;index.<br>
+&nbsp;<br>
+Pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;it&nbsp;(over&nbsp;drawable);<br>
+don't&nbsp;pass&nbsp;a&nbsp;component&nbsp;to&nbsp;use&nbsp;the&nbsp;method&nbsp;on&nbsp;self&nbsp;(over&nbsp;owner.drawable).</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>dim</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;dimensions&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<dl><dt><strong>draw_rect</strong></dt>
+<dd><span class="code">Draw&nbsp;rect&nbsp;for&nbsp;object&nbsp;canvas&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<dl><dt><strong>drawable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;drawable&nbsp;components&nbsp;list&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>frame_dim</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;2D&nbsp;dimensions.</span></dd>
+</dl>
+<dl><dt><strong>frame_height</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;height.</span></dd>
+</dl>
+<dl><dt><strong>frame_width</strong></dt>
+<dd><span class="code">Object's&nbsp;frame's&nbsp;width.</span></dd>
+</dl>
+<dl><dt><strong>height</strong></dt>
+<dd><span class="code">Object&nbsp;height&nbsp;(from&nbsp;its&nbsp;draw_rect)</span></dd>
+</dl>
+<dl><dt><strong>width</strong></dt>
+<dd><span class="code">Object&nbsp;width&nbsp;(from&nbsp;its&nbsp;draw_rect).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.drawable.html#Drawable">skytree.drawable.Drawable</a>:<br>
+<dl><dt><strong>canvas</strong></dt>
+<dd><span class="code">This&nbsp;object's&nbsp;drawable&nbsp;surface&nbsp;(Pygame&nbsp;Surface).</span></dd>
+</dl>
+<dl><dt><strong>frame</strong></dt>
+<dd><span class="code">Object&nbsp;frame&nbsp;(Pygame&nbsp;Rect).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.positional.html#Positional">skytree.positional.Positional</a>:<br>
+<dl><dt><strong>pos</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;position.</span></dd>
+</dl>
+<dl><dt><strong>vel</strong></dt>
+<dd><span class="code">Object&nbsp;2D&nbsp;velocity.</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>:<br>
+<dl><dt><a name="Particle-update"><strong>update</strong></a>(self, dt)</dt><dd><span class="code">Template&nbsp;to&nbsp;be&nbsp;extended&nbsp;by&nbsp;subclasses&nbsp;that&nbsp;need&nbsp;to&nbsp;do&nbsp;some&nbsp;work&nbsp;on&nbsp;every&nbsp;frame.<br>
+&nbsp;<br>
+Propagate&nbsp;through&nbsp;components.<br>
+dt&nbsp;is&nbsp;delta&nbsp;time&nbsp;(time&nbsp;elapsed&nbsp;since&nbsp;previous&nbsp;frame),<br>
+passed&nbsp;by&nbsp;Game&nbsp;at&nbsp;the&nbsp;root&nbsp;level.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a>:<br>
+<dl><dt><strong>updateable</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;updateable&nbsp;components&nbsp;list&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><a name="Particle-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><span class="code">Iterate&nbsp;over&nbsp;self.<strong>_components</strong>.</span></dd></dl>
+
+<dl><dt><a name="Particle-add_persistent_component"><strong>add_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Add&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;to&nbsp;the&nbsp;object&nbsp;and&nbsp;add&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;tag&nbsp;will&nbsp;prevent&nbsp;the&nbsp;component&nbsp;from&nbsp;being&nbsp;destroyed&nbsp;on&nbsp;reset<br>
+and&nbsp;also&nbsp;have&nbsp;it&nbsp;restored&nbsp;if&nbsp;it&nbsp;was&nbsp;previously&nbsp;destroyed.</span></dd></dl>
+
+<dl><dt><a name="Particle-add_tag"><strong>add_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Add&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;keep&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="Particle-destroy"><strong>destroy</strong></a>(self)</dt><dd><span class="code">Remove&nbsp;this&nbsp;component&nbsp;from&nbsp;its&nbsp;current&nbsp;owner&nbsp;and&nbsp;propagate&nbsp;the&nbsp;command&nbsp;through&nbsp;its&nbsp;own&nbsp;components.<br>
+&nbsp;<br>
+Avoid&nbsp;calling&nbsp;this&nbsp;method&nbsp;directly,&nbsp;as&nbsp;destroying&nbsp;objects&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;the&nbsp;game&nbsp;loop<br>
+will&nbsp;often&nbsp;yield&nbsp;unexpected&nbsp;(not&nbsp;the&nbsp;fun&nbsp;kind)&nbsp;behaviours.&nbsp;<br>
+Use&nbsp;Game.mark_for_destruction&nbsp;instead&nbsp;and&nbsp;let&nbsp;the&nbsp;game&nbsp;manager&nbsp;do&nbsp;the&nbsp;dirty&nbsp;work&nbsp;for&nbsp;you.</span></dd></dl>
+
+<dl><dt><a name="Particle-remove_persistent_component"><strong>remove_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Remove&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;from&nbsp;the&nbsp;object&nbsp;and&nbsp;remove&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;will&nbsp;remove&nbsp;a&nbsp;persistent&nbsp;object&nbsp;permanently.</span></dd></dl>
+
+<dl><dt><a name="Particle-remove_tag"><strong>remove_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Remove&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;not&nbsp;restore&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="Particle-reset"><strong>reset</strong></a>(self)</dt><dd><span class="code">Restore&nbsp;initial&nbsp;data&nbsp;and&nbsp;propagate&nbsp;command&nbsp;through&nbsp;components.<br>
+&nbsp;<br>
+Restore&nbsp;value&nbsp;of&nbsp;attributes&nbsp;on&nbsp;reset_data["attributes"].<br>
+Restore&nbsp;deleted&nbsp;tags&nbsp;from&nbsp;reset_data["tags"]&nbsp;and&nbsp;delete&nbsp;added&nbsp;tags&nbsp;not&nbsp;registered&nbsp;there.<br>
+Restore&nbsp;removed&nbsp;components&nbsp;from&nbsp;reset_data["components"]&nbsp;and&nbsp;remove&nbsp;added&nbsp;components<br>
+not&nbsp;registered&nbsp;there.<br>
+Extend&nbsp;on&nbsp;subclasses&nbsp;to&nbsp;recover&nbsp;initial&nbsp;state&nbsp;as&nbsp;needed.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>named</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tagged</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;tag&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Object&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>game</strong></dt>
+<dd><span class="code">The&nbsp;Game&nbsp;instance&nbsp;(the&nbsp;root&nbsp;of&nbsp;the&nbsp;tree).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;name.</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;owner.</span></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

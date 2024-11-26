@@ -1,3 +1,9 @@
-build.bat
+build/
 dist/
-skytree/__pycache__/
+dist_demo/
+src/skytree/__pycache__/
+src/skytree.egg-info/
+test/
+venv/
+Instucciones_consultor.md
+TO-DO.txt

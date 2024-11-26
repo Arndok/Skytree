@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module skytree.key_commands</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="skytree.html" class="white">skytree</a>.key_commands</strong></td>
+</tr></table>
+    <p><span class="code">Definition&nbsp;of&nbsp;classes&nbsp;that&nbsp;deal&nbsp;with&nbsp;routing&nbsp;and&nbsp;processing&nbsp;events.<br>
+&nbsp;<br>
+<a href="#EventController">EventController</a>(<span style="color: #000099; font-style: italic;">ABC</span>):&nbsp;interface&nbsp;for&nbsp;an&nbsp;object&nbsp;that&nbsp;can&nbsp;process&nbsp;events.<br>
+&nbsp;&nbsp;An&nbsp;object&nbsp;doesn't&nbsp;have&nbsp;to&nbsp;actually&nbsp;be&nbsp;an&nbsp;<a href="#EventController">EventController</a>&nbsp;to&nbsp;be&nbsp;set&nbsp;as&nbsp;such;&nbsp;it&nbsp;just&nbsp;has&nbsp;to&nbsp;implement&nbsp;its&nbsp;methods.<br>
+<a href="#KeyboardReader">KeyboardReader</a>(<a href="#EventController">EventController</a>):&nbsp;an&nbsp;<a href="#EventController">EventController</a>&nbsp;that&nbsp;can&nbsp;process&nbsp;key&nbsp;presses&nbsp;and&nbsp;releases.<br>
+<a href="#KeyCommandReader">KeyCommandReader</a>(<a href="skytree.component.html#Component">Component</a>):&nbsp;a&nbsp;<a href="skytree.component.html#Component">Component</a>&nbsp;that&nbsp;can&nbsp;process&nbsp;commands&nbsp;comming&nbsp;from&nbsp;a&nbsp;<a href="#KeyboardReader">KeyboardReader</a>&nbsp;or&nbsp;hold&nbsp;other&nbsp;components&nbsp;that&nbsp;do&nbsp;so.<br>
+&nbsp;<br>
+EventControllers&nbsp;can&nbsp;send&nbsp;commands&nbsp;for&nbsp;CommandReaders&nbsp;to&nbsp;process.<br>
+In&nbsp;order&nbsp;to&nbsp;do&nbsp;that:<br>
+-&nbsp;Decide&nbsp;a&nbsp;shared&nbsp;list&nbsp;of&nbsp;argument&nbsp;names&nbsp;and&nbsp;types&nbsp;for&nbsp;commands&nbsp;to&nbsp;recognize.<br>
+-&nbsp;Code&nbsp;an&nbsp;<a href="#EventController">EventController</a>&nbsp;that&nbsp;interprets&nbsp;an&nbsp;event&nbsp;and&nbsp;sends&nbsp;a&nbsp;command&nbsp;to&nbsp;its&nbsp;owner&nbsp;(typically,&nbsp;the&nbsp;game&nbsp;manager).<br>
+-&nbsp;Code&nbsp;CommandReaders&nbsp;that&nbsp;have&nbsp;methods&nbsp;with&nbsp;name&nbsp;'_command_[command_name]'&nbsp;that&nbsp;define&nbsp;that&nbsp;object's&nbsp;behaviour&nbsp;when&nbsp;receiving&nbsp;such&nbsp;command.<br>
+CommandReaders&nbsp;will&nbsp;propagate&nbsp;received&nbsp;commands&nbsp;through&nbsp;their&nbsp;components&nbsp;ONLY&nbsp;WHEN&nbsp;they&nbsp;don't&nbsp;have&nbsp;a&nbsp;corresponding&nbsp;method&nbsp;to&nbsp;process&nbsp;the&nbsp;command.</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><span style="color: #000099; font-style: italic;">warnings</span><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><span style="color: #000099; font-style: italic;">abc.ABC</span>(<span style="color: #000099; font-style: italic;">builtins.object</span>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.key_commands.html#EventController">EventController</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.key_commands.html#KeyboardReader">KeyboardReader</a>
+</dt></dl>
+</dd>
+</dl>
+</dd>
+<dt class="heading-text"><a href="skytree.component.html#Component">skytree.component.Component</a>(<span style="color: #000099; font-style: italic;">builtins.object</span>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.key_commands.html#CommandReader">CommandReader</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="skytree.key_commands.html#KeyCommandReader">KeyCommandReader</a>
+</dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="CommandReader">class <strong>CommandReader</strong></a>(<a href="skytree.component.html#Component">skytree.component.Component</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#CommandReader">CommandReader</a>(**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="skytree.component.html#Component">Component</a>&nbsp;to&nbsp;be&nbsp;able&nbsp;to&nbsp;receive&nbsp;and&nbsp;process&nbsp;commands.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;<a href="skytree.component.html#Component">Component</a>&nbsp;behaviour.<br>
+Extends&nbsp;<a href="skytree.component.html#Component">Component</a>.<a href="#CommandReader-add_component">add_component</a>(component)&nbsp;and&nbsp;<a href="skytree.component.html#Component">Component</a>.<a href="#CommandReader-remove_component">remove_component</a>(component).<br>
+&nbsp;<br>
+Commands&nbsp;that&nbsp;can't&nbsp;be&nbsp;processed&nbsp;by&nbsp;this&nbsp;object&nbsp;are&nbsp;propagated&nbsp;through&nbsp;its&nbsp;own&nbsp;<a href="#CommandReader">CommandReader</a>&nbsp;components.<br>
+&nbsp;<br>
+To&nbsp;code&nbsp;commands&nbsp;to&nbsp;a&nbsp;<a href="#CommandReader">CommandReader</a>&nbsp;object,&nbsp;use&nbsp;methods&nbsp;with&nbsp;name&nbsp;'_command_[command_name]'.<br>
+&nbsp;&nbsp;Command&nbsp;names&nbsp;can't&nbsp;have&nbsp;underscores&nbsp;in&nbsp;them.<br>
+Command&nbsp;method&nbsp;arguments&nbsp;should&nbsp;specify&nbsp;used&nbsp;arguments&nbsp;and&nbsp;include&nbsp;**kwargs&nbsp;after&nbsp;that.<br>
+To&nbsp;activate&nbsp;commands&nbsp;in&nbsp;a&nbsp;<a href="#CommandReader">CommandReader</a>&nbsp;object,&nbsp;call&nbsp;object.<a href="#CommandReader-process">process</a>(command).<br>
+&nbsp;&nbsp;Command&nbsp;can&nbsp;be&nbsp;either&nbsp;a&nbsp;command_name&nbsp;or&nbsp;a&nbsp;tuple&nbsp;(command_name,&nbsp;{command_args})<br>
+Valid&nbsp;arguments&nbsp;for&nbsp;a&nbsp;type&nbsp;of&nbsp;command&nbsp;should&nbsp;be&nbsp;documented&nbsp;on&nbsp;subclasses,&nbsp;as&nbsp;well&nbsp;as&nbsp;objects&nbsp;that&nbsp;generate&nbsp;them<br>
+&nbsp;&nbsp;(such&nbsp;as&nbsp;event&nbsp;controllers).<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#CommandReader-process">process</a>(command):&nbsp;call&nbsp;appropriate&nbsp;method&nbsp;if&nbsp;implemented,&nbsp;otherwise&nbsp;propagate&nbsp;to&nbsp;components.<br>
+<a href="#CommandReader-allow_command">allow_command</a>(command):&nbsp;enable&nbsp;processing&nbsp;for&nbsp;given&nbsp;command.<br>
+<a href="#CommandReader-block_command">block_command</a>(command):&nbsp;disable&nbsp;processing&nbsp;for&nbsp;given&nbsp;command.<br>
+<a href="#CommandReader-allow_commands">allow_commands</a>(*commands):&nbsp;call&nbsp;<a href="#CommandReader-allow_command">allow_command</a>(command)&nbsp;for&nbsp;given&nbsp;commands.<br>
+<a href="#CommandReader-block_commands">block_commands</a>(*commands):&nbsp;call&nbsp;<a href="#CommandReader-block_command">block_command</a>(command)&nbsp;for&nbsp;given&nbsp;commands.<br>
+<a href="#CommandReader-lock_controller">lock_controller</a>():&nbsp;disable&nbsp;command&nbsp;processing.<br>
+<a href="#CommandReader-unlock_controller">unlock_controller</a>():&nbsp;enable&nbsp;command&nbsp;processing.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.key_commands.html#CommandReader">CommandReader</a></dd>
+<dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="CommandReader-__init__"><strong>__init__</strong></a>(self, **kwargs)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.component.html#Component">Component</a>&nbsp;to&nbsp;include&nbsp;a&nbsp;_cmd_readers&nbsp;set&nbsp;and&nbsp;build&nbsp;the&nbsp;necessary&nbsp;data&nbsp;structures&nbsp;for&nbsp;handling&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="CommandReader-add_component"><strong>add_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.component.html#Component">Component</a>&nbsp;to&nbsp;add&nbsp;component&nbsp;to&nbsp;_cmd_readers&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="CommandReader-allow_command"><strong>allow_command</strong></a>(self, command)</dt><dd><span class="code">Allow&nbsp;execution&nbsp;of&nbsp;given&nbsp;command.</span></dd></dl>
+
+<dl><dt><a name="CommandReader-allow_commands"><strong>allow_commands</strong></a>(self, *commands)</dt><dd><span class="code">Allow&nbsp;execution&nbsp;of&nbsp;given&nbsp;commands.&nbsp;Default&nbsp;to&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="CommandReader-block_command"><strong>block_command</strong></a>(self, command)</dt><dd><span class="code">Block&nbsp;execution&nbsp;of&nbsp;given&nbsp;command.</span></dd></dl>
+
+<dl><dt><a name="CommandReader-block_commands"><strong>block_commands</strong></a>(self, *commands)</dt><dd><span class="code">Block&nbsp;execution&nbsp;of&nbsp;given&nbsp;commands.&nbsp;Default&nbsp;to&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="CommandReader-lock_controller"><strong>lock_controller</strong></a>(self)</dt><dd><span class="code">Lock&nbsp;command&nbsp;processing.</span></dd></dl>
+
+<dl><dt><a name="CommandReader-process"><strong>process</strong></a>(self, command, **kwargs)</dt><dd><span class="code">Perform&nbsp;appropriate&nbsp;method&nbsp;if&nbsp;implemented,&nbsp;otherwise&nbsp;propagate&nbsp;command&nbsp;to&nbsp;components.</span></dd></dl>
+
+<dl><dt><a name="CommandReader-remove_component"><strong>remove_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.component.html#Component">Component</a>&nbsp;to&nbsp;remove&nbsp;component&nbsp;from&nbsp;_cmd_readers&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="CommandReader-unlock_controller"><strong>unlock_controller</strong></a>(self)</dt><dd><span class="code">Unlock&nbsp;command&nbsp;processing.</span></dd></dl>
+
+<hr>
+Readonly properties defined here:<br>
+<dl><dt><strong>command_readers</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;command&nbsp;reading&nbsp;components&nbsp;set&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><a name="CommandReader-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><span class="code">Iterate&nbsp;over&nbsp;self.<strong>_components</strong>.</span></dd></dl>
+
+<dl><dt><a name="CommandReader-add_persistent_component"><strong>add_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Add&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;to&nbsp;the&nbsp;object&nbsp;and&nbsp;add&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;tag&nbsp;will&nbsp;prevent&nbsp;the&nbsp;component&nbsp;from&nbsp;being&nbsp;destroyed&nbsp;on&nbsp;reset<br>
+and&nbsp;also&nbsp;have&nbsp;it&nbsp;restored&nbsp;if&nbsp;it&nbsp;was&nbsp;previously&nbsp;destroyed.</span></dd></dl>
+
+<dl><dt><a name="CommandReader-add_tag"><strong>add_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Add&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;keep&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="CommandReader-destroy"><strong>destroy</strong></a>(self)</dt><dd><span class="code">Remove&nbsp;this&nbsp;component&nbsp;from&nbsp;its&nbsp;current&nbsp;owner&nbsp;and&nbsp;propagate&nbsp;the&nbsp;command&nbsp;through&nbsp;its&nbsp;own&nbsp;components.<br>
+&nbsp;<br>
+Avoid&nbsp;calling&nbsp;this&nbsp;method&nbsp;directly,&nbsp;as&nbsp;destroying&nbsp;objects&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;the&nbsp;game&nbsp;loop<br>
+will&nbsp;often&nbsp;yield&nbsp;unexpected&nbsp;(not&nbsp;the&nbsp;fun&nbsp;kind)&nbsp;behaviours.&nbsp;<br>
+Use&nbsp;Game.mark_for_destruction&nbsp;instead&nbsp;and&nbsp;let&nbsp;the&nbsp;game&nbsp;manager&nbsp;do&nbsp;the&nbsp;dirty&nbsp;work&nbsp;for&nbsp;you.</span></dd></dl>
+
+<dl><dt><a name="CommandReader-remove_persistent_component"><strong>remove_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Remove&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;from&nbsp;the&nbsp;object&nbsp;and&nbsp;remove&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;will&nbsp;remove&nbsp;a&nbsp;persistent&nbsp;object&nbsp;permanently.</span></dd></dl>
+
+<dl><dt><a name="CommandReader-remove_tag"><strong>remove_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Remove&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;not&nbsp;restore&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="CommandReader-reset"><strong>reset</strong></a>(self)</dt><dd><span class="code">Restore&nbsp;initial&nbsp;data&nbsp;and&nbsp;propagate&nbsp;command&nbsp;through&nbsp;components.<br>
+&nbsp;<br>
+Restore&nbsp;value&nbsp;of&nbsp;attributes&nbsp;on&nbsp;reset_data["attributes"].<br>
+Restore&nbsp;deleted&nbsp;tags&nbsp;from&nbsp;reset_data["tags"]&nbsp;and&nbsp;delete&nbsp;added&nbsp;tags&nbsp;not&nbsp;registered&nbsp;there.<br>
+Restore&nbsp;removed&nbsp;components&nbsp;from&nbsp;reset_data["components"]&nbsp;and&nbsp;remove&nbsp;added&nbsp;components<br>
+not&nbsp;registered&nbsp;there.<br>
+Extend&nbsp;on&nbsp;subclasses&nbsp;to&nbsp;recover&nbsp;initial&nbsp;state&nbsp;as&nbsp;needed.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>named</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tagged</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;tag&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Object&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>game</strong></dt>
+<dd><span class="code">The&nbsp;Game&nbsp;instance&nbsp;(the&nbsp;root&nbsp;of&nbsp;the&nbsp;tree).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;name.</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;owner.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="EventController">class <strong>EventController</strong></a>(<span style="color: #000099; font-style: italic;">abc.ABC</span>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Interface&nbsp;for&nbsp;an&nbsp;object&nbsp;that&nbsp;can&nbsp;be&nbsp;set&nbsp;as&nbsp;an&nbsp;event&nbsp;controller&nbsp;by&nbsp;the&nbsp;Game.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;process&nbsp;method&nbsp;is&nbsp;going&nbsp;to&nbsp;send&nbsp;a&nbsp;command&nbsp;to&nbsp;command&nbsp;readers,<br>
+&nbsp;&nbsp;be&nbsp;sure&nbsp;commands&nbsp;follow&nbsp;the&nbsp;format&nbsp;(command,&nbsp;{command_arguments})&nbsp;and&nbsp;command<br>
+&nbsp;&nbsp;arguments&nbsp;are&nbsp;documented&nbsp;on&nbsp;subclasses,&nbsp;as&nbsp;well&nbsp;as&nbsp;objects&nbsp;that&nbsp;receive&nbsp;them.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#EventController-process">process</a>(event):&nbsp;read&nbsp;the&nbsp;key&nbsp;event&nbsp;and&nbsp;act&nbsp;appropriately.<br>
+<a href="#EventController-connect">connect</a>(owner):&nbsp;set&nbsp;owner&nbsp;and&nbsp;perform&nbsp;controller&nbsp;activation&nbsp;actions.<br>
+<a href="#EventController-disconnect">disconnect</a>():&nbsp;set&nbsp;owner&nbsp;as&nbsp;None&nbsp;and&nbsp;perform&nbsp;controller&nbsp;deactivation&nbsp;actions.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.key_commands.html#EventController">EventController</a></dd>
+<dd><span style="color: #000099; font-style: italic;">abc.ABC</span></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="EventController-connect"><strong>connect</strong></a>(self, owner)</dt><dd><span class="code">Actions&nbsp;to&nbsp;be&nbsp;done&nbsp;when&nbsp;controller&nbsp;is&nbsp;set.</span></dd></dl>
+
+<dl><dt><a name="EventController-disconnect"><strong>disconnect</strong></a>(self)</dt><dd><span class="code">Actions&nbsp;to&nbsp;be&nbsp;done&nbsp;when&nbsp;controller&nbsp;is&nbsp;disconnected.</span></dd></dl>
+
+<dl><dt><a name="EventController-process"><strong>process</strong></a>(self, event)</dt><dd><span class="code">Actions&nbsp;to&nbsp;be&nbsp;done&nbsp;when&nbsp;receiving&nbsp;the&nbsp;event.<br>
+&nbsp;<br>
+If&nbsp;this&nbsp;method&nbsp;is&nbsp;going&nbsp;to&nbsp;send&nbsp;a&nbsp;command&nbsp;to&nbsp;command&nbsp;readers,<br>
+be&nbsp;sure&nbsp;commands&nbsp;follow&nbsp;the&nbsp;format&nbsp;(command,&nbsp;{command_args})</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset({'process'})</dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="KeyCommandReader">class <strong>KeyCommandReader</strong></a>(<a href="skytree.key_commands.html#CommandReader">CommandReader</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#KeyCommandReader">KeyCommandReader</a>(**kwargs)<br>
+&nbsp;<br>
+Extend&nbsp;<a href="#CommandReader">CommandReader</a>&nbsp;to&nbsp;add&nbsp;some&nbsp;functionality&nbsp;related&nbsp;to&nbsp;key&nbsp;presses&nbsp;and&nbsp;releases.<br>
+&nbsp;<br>
+Inherits&nbsp;all&nbsp;<a href="#CommandReader">CommandReader</a>&nbsp;behaviour.<br>
+Extends&nbsp;<a href="#KeyCommandReader-allow_command">allow_command</a>(command)&nbsp;to&nbsp;activate&nbsp;specified&nbsp;command&nbsp;if&nbsp;their&nbsp;associated&nbsp;keys&nbsp;are&nbsp;being&nbsp;pressed.<br>
+Extends&nbsp;<a href="#KeyCommandReader-block_command">block_command</a>(command)&nbsp;to&nbsp;deactivate&nbsp;specified&nbsp;command.<br>
+&nbsp;<br>
+This&nbsp;command&nbsp;reader&nbsp;assumes&nbsp;key&nbsp;pressed&nbsp;mean&nbsp;activation&nbsp;and&nbsp;releases&nbsp;mean&nbsp;deactivation.<br>
+Key&nbsp;command&nbsp;arguments&nbsp;can&nbsp;be:<br>
+press:&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;the&nbsp;command&nbsp;comes&nbsp;from&nbsp;a&nbsp;keydown&nbsp;or&nbsp;keyup&nbsp;event<br>
+mods:&nbsp;bitmask&nbsp;of&nbsp;all&nbsp;the&nbsp;modifier&nbsp;keys&nbsp;being&nbsp;pressed&nbsp;when&nbsp;the&nbsp;event&nbsp;occurred&nbsp;(see&nbsp;key&nbsp;modifier&nbsp;constants&nbsp;in&nbsp;pygame.locals).<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#KeyCommandReader-check_commands">check_commands</a>():&nbsp;for&nbsp;every&nbsp;registered&nbsp;command,&nbsp;activate&nbsp;if&nbsp;pressing&nbsp;and&nbsp;deactivate&nbsp;otherwise.<br>
+<a href="#KeyCommandReader-activate_if_pressing">activate_if_pressing</a>(*commands):&nbsp;activate&nbsp;commands&nbsp;if&nbsp;their&nbsp;keys&nbsp;are&nbsp;being&nbsp;pressed.<br>
+<a href="#KeyCommandReader-deactivate_unless_pressing">deactivate_unless_pressing</a>(*commands):&nbsp;deactivate&nbsp;commands&nbsp;if&nbsp;their&nbsp;keys&nbsp;aren't&nbsp;being&nbsp;pressed.<br>
+<a href="#KeyCommandReader-deactivate_all">deactivate_all</a>():&nbsp;deactivate&nbsp;all&nbsp;commands.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.key_commands.html#KeyCommandReader">KeyCommandReader</a></dd>
+<dd><a href="skytree.key_commands.html#CommandReader">CommandReader</a></dd>
+<dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="KeyCommandReader-activate_if_pressing"><strong>activate_if_pressing</strong></a>(self, *commands)</dt><dd><span class="code">Activate&nbsp;commands&nbsp;if&nbsp;their&nbsp;associated&nbsp;keys&nbsp;are&nbsp;being&nbsp;pressed.&nbsp;Default&nbsp;to&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-allow_command"><strong>allow_command</strong></a>(self, command)</dt><dd><span class="code">Set&nbsp;command&nbsp;as&nbsp;allowed,&nbsp;then&nbsp;activate&nbsp;if&nbsp;associated&nbsp;key&nbsp;is&nbsp;being&nbsp;pressed.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-block_command"><strong>block_command</strong></a>(self, command)</dt><dd><span class="code">Set&nbsp;command&nbsp;as&nbsp;blocked,&nbsp;then&nbsp;deactivate&nbsp;it.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-check_commands"><strong>check_commands</strong></a>(self)</dt><dd><span class="code">For&nbsp;every&nbsp;command,&nbsp;activate&nbsp;it&nbsp;if&nbsp;its&nbsp;associated&nbsp;keys&nbsp;are&nbsp;being&nbsp;pressed;&nbsp;deactivate&nbsp;it&nbsp;otherwise.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-deactivate_all"><strong>deactivate_all</strong></a>(self)</dt><dd><span class="code">Deactivate&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-deactivate_unless_pressing"><strong>deactivate_unless_pressing</strong></a>(self, *commands)</dt><dd><span class="code">Deactivate&nbsp;commands&nbsp;if&nbsp;their&nbsp;associated&nbsp;keys&nbsp;are&nbsp;not&nbsp;being&nbsp;pressed.&nbsp;Default&nbsp;to&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<hr>
+Methods inherited from <a href="skytree.key_commands.html#CommandReader">CommandReader</a>:<br>
+<dl><dt><a name="KeyCommandReader-__init__"><strong>__init__</strong></a>(self, **kwargs)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.component.html#Component">Component</a>&nbsp;to&nbsp;include&nbsp;a&nbsp;_cmd_readers&nbsp;set&nbsp;and&nbsp;build&nbsp;the&nbsp;necessary&nbsp;data&nbsp;structures&nbsp;for&nbsp;handling&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-add_component"><strong>add_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.component.html#Component">Component</a>&nbsp;to&nbsp;add&nbsp;component&nbsp;to&nbsp;_cmd_readers&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-allow_commands"><strong>allow_commands</strong></a>(self, *commands)</dt><dd><span class="code">Allow&nbsp;execution&nbsp;of&nbsp;given&nbsp;commands.&nbsp;Default&nbsp;to&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-block_commands"><strong>block_commands</strong></a>(self, *commands)</dt><dd><span class="code">Block&nbsp;execution&nbsp;of&nbsp;given&nbsp;commands.&nbsp;Default&nbsp;to&nbsp;all&nbsp;commands.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-lock_controller"><strong>lock_controller</strong></a>(self)</dt><dd><span class="code">Lock&nbsp;command&nbsp;processing.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-process"><strong>process</strong></a>(self, command, **kwargs)</dt><dd><span class="code">Perform&nbsp;appropriate&nbsp;method&nbsp;if&nbsp;implemented,&nbsp;otherwise&nbsp;propagate&nbsp;command&nbsp;to&nbsp;components.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-remove_component"><strong>remove_component</strong></a>(self, component)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.component.html#Component">Component</a>&nbsp;to&nbsp;remove&nbsp;component&nbsp;from&nbsp;_cmd_readers&nbsp;if&nbsp;successful.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-unlock_controller"><strong>unlock_controller</strong></a>(self)</dt><dd><span class="code">Unlock&nbsp;command&nbsp;processing.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.key_commands.html#CommandReader">CommandReader</a>:<br>
+<dl><dt><strong>command_readers</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;command&nbsp;reading&nbsp;components&nbsp;set&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Methods inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><a name="KeyCommandReader-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><span class="code">Iterate&nbsp;over&nbsp;self.<strong>_components</strong>.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-add_persistent_component"><strong>add_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Add&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;to&nbsp;the&nbsp;object&nbsp;and&nbsp;add&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;tag&nbsp;will&nbsp;prevent&nbsp;the&nbsp;component&nbsp;from&nbsp;being&nbsp;destroyed&nbsp;on&nbsp;reset<br>
+and&nbsp;also&nbsp;have&nbsp;it&nbsp;restored&nbsp;if&nbsp;it&nbsp;was&nbsp;previously&nbsp;destroyed.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-add_tag"><strong>add_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Add&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;keep&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-destroy"><strong>destroy</strong></a>(self)</dt><dd><span class="code">Remove&nbsp;this&nbsp;component&nbsp;from&nbsp;its&nbsp;current&nbsp;owner&nbsp;and&nbsp;propagate&nbsp;the&nbsp;command&nbsp;through&nbsp;its&nbsp;own&nbsp;components.<br>
+&nbsp;<br>
+Avoid&nbsp;calling&nbsp;this&nbsp;method&nbsp;directly,&nbsp;as&nbsp;destroying&nbsp;objects&nbsp;in&nbsp;the&nbsp;middle&nbsp;of&nbsp;the&nbsp;game&nbsp;loop<br>
+will&nbsp;often&nbsp;yield&nbsp;unexpected&nbsp;(not&nbsp;the&nbsp;fun&nbsp;kind)&nbsp;behaviours.&nbsp;<br>
+Use&nbsp;Game.mark_for_destruction&nbsp;instead&nbsp;and&nbsp;let&nbsp;the&nbsp;game&nbsp;manager&nbsp;do&nbsp;the&nbsp;dirty&nbsp;work&nbsp;for&nbsp;you.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-remove_persistent_component"><strong>remove_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Remove&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;from&nbsp;the&nbsp;object&nbsp;and&nbsp;remove&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+&nbsp;<br>
+This&nbsp;will&nbsp;remove&nbsp;a&nbsp;persistent&nbsp;object&nbsp;permanently.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-remove_tag"><strong>remove_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Remove&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
+&nbsp;<br>
+Setting&nbsp;persistent&nbsp;to&nbsp;True&nbsp;will&nbsp;have&nbsp;the&nbsp;component&nbsp;not&nbsp;restore&nbsp;this&nbsp;tag&nbsp;on&nbsp;reset.</span></dd></dl>
+
+<dl><dt><a name="KeyCommandReader-reset"><strong>reset</strong></a>(self)</dt><dd><span class="code">Restore&nbsp;initial&nbsp;data&nbsp;and&nbsp;propagate&nbsp;command&nbsp;through&nbsp;components.<br>
+&nbsp;<br>
+Restore&nbsp;value&nbsp;of&nbsp;attributes&nbsp;on&nbsp;reset_data["attributes"].<br>
+Restore&nbsp;deleted&nbsp;tags&nbsp;from&nbsp;reset_data["tags"]&nbsp;and&nbsp;delete&nbsp;added&nbsp;tags&nbsp;not&nbsp;registered&nbsp;there.<br>
+Restore&nbsp;removed&nbsp;components&nbsp;from&nbsp;reset_data["components"]&nbsp;and&nbsp;remove&nbsp;added&nbsp;components<br>
+not&nbsp;registered&nbsp;there.<br>
+Extend&nbsp;on&nbsp;subclasses&nbsp;to&nbsp;recover&nbsp;initial&nbsp;state&nbsp;as&nbsp;needed.</span></dd></dl>
+
+<hr>
+Readonly properties inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>named</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;name&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tagged</strong></dt>
+<dd><span class="code">Object&nbsp;components&nbsp;referenced&nbsp;by&nbsp;tag&nbsp;(read-only).</span></dd>
+</dl>
+<dl><dt><strong>tags</strong></dt>
+<dd><span class="code">Object&nbsp;tags&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Data descriptors inherited from <a href="skytree.component.html#Component">skytree.component.Component</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<dl><dt><strong>game</strong></dt>
+<dd><span class="code">The&nbsp;Game&nbsp;instance&nbsp;(the&nbsp;root&nbsp;of&nbsp;the&nbsp;tree).</span></dd>
+</dl>
+<dl><dt><strong>name</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;name.</span></dd>
+</dl>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;owner.</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="KeyboardReader">class <strong>KeyboardReader</strong></a>(<a href="skytree.key_commands.html#EventController">EventController</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#KeyboardReader">KeyboardReader</a>(keys={})<br>
+&nbsp;<br>
+A&nbsp;simple&nbsp;keyboard&nbsp;input&nbsp;controller.<br>
+&nbsp;<br>
+Implements&nbsp;game.<a href="#EventController">EventController</a>&nbsp;interface.<br>
+&nbsp;<br>
+Allows&nbsp;KEYUP&nbsp;and&nbsp;KEYDOWN&nbsp;events.<br>
+Translates&nbsp;keys&nbsp;to&nbsp;commands&nbsp;and&nbsp;sends&nbsp;them&nbsp;to&nbsp;its&nbsp;owner.&nbsp;Passes&nbsp;key&nbsp;modifiers&nbsp;along,&nbsp;but&nbsp;doesn't&nbsp;process&nbsp;them.<br>
+Key&nbsp;command&nbsp;arguments&nbsp;can&nbsp;be:<br>
+press:&nbsp;boolean&nbsp;indicating&nbsp;whether&nbsp;the&nbsp;command&nbsp;comes&nbsp;from&nbsp;a&nbsp;keydown&nbsp;or&nbsp;keyup&nbsp;event<br>
+mods:&nbsp;bitmask&nbsp;of&nbsp;all&nbsp;the&nbsp;modifier&nbsp;keys&nbsp;being&nbsp;pressed&nbsp;when&nbsp;the&nbsp;event&nbsp;occurred&nbsp;(see&nbsp;key&nbsp;modifier&nbsp;constants&nbsp;in&nbsp;pygame.locals).<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#KeyboardReader-process">process</a>(event):&nbsp;read&nbsp;the&nbsp;key&nbsp;event&nbsp;and&nbsp;send&nbsp;a&nbsp;command&nbsp;to&nbsp;owner&nbsp;if&nbsp;the&nbsp;key&nbsp;is&nbsp;bound.<br>
+<a href="#KeyboardReader-bind">bind</a>(key,&nbsp;command):&nbsp;add&nbsp;an&nbsp;entry&nbsp;to&nbsp;the&nbsp;key&nbsp;dictionary.<br>
+<a href="#KeyboardReader-unbind">unbind</a>(key):&nbsp;remove&nbsp;an&nbsp;entry&nbsp;from&nbsp;the&nbsp;key&nbsp;dictionary.<br>
+<a href="#KeyboardReader-connect">connect</a>(owner):&nbsp;set&nbsp;owner&nbsp;and&nbsp;declare&nbsp;a&nbsp;set&nbsp;in&nbsp;it&nbsp;to&nbsp;store&nbsp;commands&nbsp;whose&nbsp;associated&nbsp;keys&nbsp;are&nbsp;being&nbsp;pressed.<br>
+<a href="#KeyboardReader-disconnect">disconnect</a>():&nbsp;set&nbsp;owner&nbsp;as&nbsp;None&nbsp;and&nbsp;remove&nbsp;"pressing"&nbsp;set&nbsp;from&nbsp;previous&nbsp;owner.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="skytree.key_commands.html#KeyboardReader">KeyboardReader</a></dd>
+<dd><a href="skytree.key_commands.html#EventController">EventController</a></dd>
+<dd><span style="color: #000099; font-style: italic;">abc.ABC</span></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="KeyboardReader-__init__"><strong>__init__</strong></a>(self, keys={})</dt><dd><span class="code">Define&nbsp;a&nbsp;dictionary&nbsp;for&nbsp;key&nbsp;events.<br>
+&nbsp;<br>
+keys&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;with&nbsp;entries&nbsp;in&nbsp;the&nbsp;form&nbsp;{key:command,&nbsp;...}.&nbsp;Example:&nbsp;{K_SPACE:&nbsp;"shoot"}.<br>
+&nbsp;&nbsp;Constants&nbsp;labeling&nbsp;keycodes&nbsp;are&nbsp;taken&nbsp;from&nbsp;pygame.locals.</span></dd></dl>
+
+<dl><dt><a name="KeyboardReader-bind"><strong>bind</strong></a>(self, key, command)</dt><dd><span class="code">Add&nbsp;an&nbsp;entry&nbsp;to&nbsp;the&nbsp;dictionary&nbsp;or&nbsp;update&nbsp;an&nbsp;existing&nbsp;one.</span></dd></dl>
+
+<dl><dt><a name="KeyboardReader-connect"><strong>connect</strong></a>(self, owner)</dt><dd><span class="code">Set&nbsp;owner&nbsp;and&nbsp;declare&nbsp;a&nbsp;set&nbsp;in&nbsp;it&nbsp;to&nbsp;store&nbsp;commands&nbsp;whose&nbsp;associated&nbsp;keys&nbsp;are&nbsp;being&nbsp;pressed.<br>
+&nbsp;<br>
+owner&nbsp;must&nbsp;be&nbsp;a&nbsp;<a href="#KeyCommandReader">KeyCommandReader</a>;&nbsp;a&nbsp;TypeError&nbsp;will&nbsp;be&nbsp;raised&nbsp;if&nbsp;it&nbsp;is&nbsp;not.</span></dd></dl>
+
+<dl><dt><a name="KeyboardReader-disconnect"><strong>disconnect</strong></a>(self)</dt><dd><span class="code">Set&nbsp;owner&nbsp;as&nbsp;None&nbsp;and&nbsp;remove&nbsp;"pressing"&nbsp;set&nbsp;from&nbsp;previous&nbsp;owner.</span></dd></dl>
+
+<dl><dt><a name="KeyboardReader-process"><strong>process</strong></a>(self, event)</dt><dd><span class="code">Read&nbsp;the&nbsp;key&nbsp;event&nbsp;and&nbsp;send&nbsp;a&nbsp;command&nbsp;to&nbsp;the&nbsp;appropriate&nbsp;object.<br>
+&nbsp;<br>
+Should&nbsp;only&nbsp;receive&nbsp;KEYDOWN&nbsp;or&nbsp;KEYUP&nbsp;events.<br>
+Append&nbsp;True&nbsp;to&nbsp;the&nbsp;command&nbsp;if&nbsp;the&nbsp;key&nbsp;is&nbsp;pressed&nbsp;or&nbsp;False&nbsp;if&nbsp;it&nbsp;is&nbsp;released.</span></dd></dl>
+
+<dl><dt><a name="KeyboardReader-unbind"><strong>unbind</strong></a>(self, key)</dt><dd><span class="code">Remove&nbsp;an&nbsp;entry&nbsp;from&nbsp;the&nbsp;dictionary.</span></dd></dl>
+
+<hr>
+Readonly properties defined here:<br>
+<dl><dt><strong>owner</strong></dt>
+<dd><span class="code">Public&nbsp;reference&nbsp;to&nbsp;this&nbsp;object's&nbsp;owner&nbsp;(read-only).</span></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+<hr>
+Data descriptors inherited from <a href="skytree.key_commands.html#EventController">EventController</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>KEYDOWN</strong> = 768<br>
+<strong>KEYUP</strong> = 769</td></tr></table>
+</body></html>
