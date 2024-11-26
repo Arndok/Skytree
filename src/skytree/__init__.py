@@ -31,6 +31,7 @@ General usage goes like this:
 Modules:
 config: a repository of variables to be used as definitions for other classes.
 helpers: a repository of helper functions.
+tools: a repository of file manipulation functions.
 singleton: a singleton metaclass, used by game.Game and resource_manager.ResourceManager.
 component: the base class for the nodes of the game tree --the core of the framework.
 updateable: a Component direct subclass that can keep track of time and do some work on each frame.
@@ -56,8 +57,6 @@ __author__ = "Pablo Reyes de Rojas"
 __version__ = "0.1.1"
 __all__ = [
     "config",
-    "helpers",
-    "singleton",
     "component",
     "updateable",
     "positional",

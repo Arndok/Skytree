@@ -66,6 +66,7 @@ modules = (
     "skytree.tile_objects",
     "skytree.tileset",
     "skytree.timers",
+    "skytree.tools",
     "skytree.updateable",
     "skytree.user_interface"
 )
