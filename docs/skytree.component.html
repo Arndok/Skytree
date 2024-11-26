@@ -8,7 +8,7 @@
 <table class="heading">
 <tr class="heading-text decor">
 <td class="title">&nbsp;<br><strong class="title"><a href="skytree.html" class="white">skytree</a>.component</strong></td>
-<td class="extra"><a href=".">index</a><br><a href="file:d%3A%5Cskytree_repo%5Csrc%5Cskytree%5Ccomponent.py">d:\skytree_repo\src\skytree\component.py</a></td></tr></table>
+</tr></table>
     <p><span class="code">Definition&nbsp;of&nbsp;the&nbsp;base&nbsp;class&nbsp;for&nbsp;tree&nbsp;nodes&nbsp;--the&nbsp;core&nbsp;of&nbsp;the&nbsp;framework.<br>
 &nbsp;<br>
 <a href="#Component">Component</a>&nbsp;subclasses&nbsp;generally&nbsp;propagate&nbsp;their&nbsp;basic&nbsp;functionalities&nbsp;to&nbsp;their&nbsp;components&nbsp;with&nbsp;shared&nbsp;subclasses.<br>
@@ -32,7 +32,7 @@ CommandReader&nbsp;components&nbsp;propagate&nbsp;commands&nbsp;(but&nbsp;only&n
     
 <tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
 <td class="singlecolumn"><dl>
-<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+<dt class="heading-text"><span style="color: #000099; font-style: italic;">builtins.object</span>
 </dt><dd>
 <dl>
 <dt class="heading-text"><a href="skytree.component.html#Component">Component</a>
@@ -42,17 +42,17 @@ CommandReader&nbsp;components&nbsp;propagate&nbsp;commands&nbsp;(but&nbsp;only&n
  <p>
 <table class="section">
 <tr class="decor title-decor heading-text">
-<td class="section-title" colspan=3>&nbsp;<br><a name="Component">class <strong>Component</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+<td class="section-title" colspan=3>&nbsp;<br><a name="Component">class <strong>Component</strong></a>(<span style="color: #000099; font-style: italic;">builtins.object</span>)</td></tr>
     
 <tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
 <td class="decor title-decor" colspan=2><span class="code"><a href="#Component">Component</a>(tags=(),&nbsp;name=None,&nbsp;components=(),&nbsp;game=None,&nbsp;**kwargs)<br>
 &nbsp;<br>
-An&nbsp;<a href="builtins.html#object">object</a>&nbsp;that&nbsp;can&nbsp;be&nbsp;owned&nbsp;by&nbsp;another&nbsp;<a href="builtins.html#object">object</a>&nbsp;and&nbsp;own&nbsp;others&nbsp;itself.<br>
+An&nbsp;<span style="color: #000099; font-style: italic;">object</span>&nbsp;that&nbsp;can&nbsp;be&nbsp;owned&nbsp;by&nbsp;another&nbsp;<span style="color: #000099; font-style: italic;">object</span>&nbsp;and&nbsp;own&nbsp;others&nbsp;itself.<br>
 &nbsp;<br>
-This&nbsp;is&nbsp;the&nbsp;core&nbsp;of&nbsp;the&nbsp;framework.&nbsp;Most&nbsp;of&nbsp;a&nbsp;game's&nbsp;<a href="builtins.html#object">object</a>&nbsp;structure&nbsp;is&nbsp;a&nbsp;tree&nbsp;graph<br>
+This&nbsp;is&nbsp;the&nbsp;core&nbsp;of&nbsp;the&nbsp;framework.&nbsp;Most&nbsp;of&nbsp;a&nbsp;game's&nbsp;<span style="color: #000099; font-style: italic;">object</span>&nbsp;structure&nbsp;is&nbsp;a&nbsp;tree&nbsp;graph<br>
 and&nbsp;this&nbsp;class&nbsp;handles&nbsp;how&nbsp;the&nbsp;nodes&nbsp;are&nbsp;related.&nbsp;It&nbsp;includes&nbsp;functionality&nbsp;for<br>
-adding&nbsp;name&nbsp;and&nbsp;tags&nbsp;to&nbsp;each&nbsp;<a href="builtins.html#object">object</a>&nbsp;and&nbsp;keeping&nbsp;tracks&nbsp;of&nbsp;its&nbsp;components'&nbsp;name&nbsp;and&nbsp;tags.<br>
-It&nbsp;also&nbsp;includes&nbsp;a&nbsp;data&nbsp;structure&nbsp;for&nbsp;handling&nbsp;<a href="builtins.html#object">object</a>&nbsp;restoration&nbsp;on&nbsp;reset.<br>
+adding&nbsp;name&nbsp;and&nbsp;tags&nbsp;to&nbsp;each&nbsp;<span style="color: #000099; font-style: italic;">object</span>&nbsp;and&nbsp;keeping&nbsp;tracks&nbsp;of&nbsp;its&nbsp;components'&nbsp;name&nbsp;and&nbsp;tags.<br>
+It&nbsp;also&nbsp;includes&nbsp;a&nbsp;data&nbsp;structure&nbsp;for&nbsp;handling&nbsp;<span style="color: #000099; font-style: italic;">object</span>&nbsp;restoration&nbsp;on&nbsp;reset.<br>
 &nbsp;<br>
 Public&nbsp;methods:<br>
 <a href="#Component-add_component">add_component</a>(component):&nbsp;add&nbsp;a&nbsp;component&nbsp;to&nbsp;_component;&nbsp;set&nbsp;self&nbsp;as&nbsp;component's&nbsp;owner.<br>
@@ -61,7 +61,7 @@ Public&nbsp;methods:<br>
 <a href="#Component-remove_persistent_component">remove_persistent_component</a>(component):&nbsp;remove&nbsp;a&nbsp;component&nbsp;and&nbsp;stop&nbsp;it&nbsp;from&nbsp;persisting&nbsp;on&nbsp;reset.<br>
 <a href="#Component-add_tag">add_tag</a>(tag):&nbsp;add&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner.<br>
 <a href="#Component-remove_tag">remove_tag</a>(tag):&nbsp;remove&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner.<br>
-<a href="#Component-destroy">destroy</a>():&nbsp;remove&nbsp;this&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;its&nbsp;previous&nbsp;owner&nbsp;and&nbsp;destroy&nbsp;its&nbsp;components.&nbsp;Use&nbsp;with&nbsp;caution.<br>
+<a href="#Component-destroy">destroy</a>():&nbsp;remove&nbsp;this&nbsp;<span style="color: #000099; font-style: italic;">object</span>&nbsp;from&nbsp;its&nbsp;previous&nbsp;owner&nbsp;and&nbsp;destroy&nbsp;its&nbsp;components.&nbsp;Use&nbsp;with&nbsp;caution.<br>
 <a href="#Component-reset">reset</a>():&nbsp;restore&nbsp;the&nbsp;component's&nbsp;established&nbsp;initial&nbsp;state&nbsp;(see&nbsp;init&nbsp;and&nbsp;reset&nbsp;for&nbsp;details).<br>
 &nbsp;<br>
 Notes&nbsp;on&nbsp;setters:<br>
@@ -77,19 +77,19 @@ name&nbsp;is&nbsp;a&nbsp;unique&nbsp;identifier&nbsp;(in&nbsp;the&nbsp;namespace
 components&nbsp;is&nbsp;a&nbsp;collection&nbsp;of&nbsp;<a href="#Component">Component</a>&nbsp;objects&nbsp;to&nbsp;be&nbsp;added&nbsp;as&nbsp;persistent&nbsp;on&nbsp;init.<br>
 &nbsp;&nbsp;These&nbsp;objects&nbsp;can&nbsp;be&nbsp;passed&nbsp;pre-built&nbsp;or&nbsp;as&nbsp;(Type,&nbsp;{kwargs})&nbsp;tuples.<br>
 &nbsp;&nbsp;If&nbsp;passing&nbsp;pre-built&nbsp;objects&nbsp;that&nbsp;might&nbsp;be&nbsp;reused,&nbsp;be&nbsp;aware&nbsp;that&nbsp;adding&nbsp;them&nbsp;as<br>
-&nbsp;&nbsp;components&nbsp;to&nbsp;another&nbsp;<a href="builtins.html#object">object</a>&nbsp;will&nbsp;remove&nbsp;them&nbsp;from&nbsp;this&nbsp;one.</span></dd></dl>
+&nbsp;&nbsp;components&nbsp;to&nbsp;another&nbsp;<span style="color: #000099; font-style: italic;">object</span>&nbsp;will&nbsp;remove&nbsp;them&nbsp;from&nbsp;this&nbsp;one.</span></dd></dl>
 
 <dl><dt><a name="Component-__iter__"><strong>__iter__</strong></a>(self)</dt><dd><span class="code">Iterate&nbsp;over&nbsp;self.<strong>_components</strong>.</span></dd></dl>
 
 <dl><dt><a name="Component-add_component"><strong>add_component</strong></a>(self, component)</dt><dd><span class="code">Add&nbsp;component&nbsp;to&nbsp;_components&nbsp;and&nbsp;set&nbsp;self&nbsp;as&nbsp;component's&nbsp;owner.<br>
 &nbsp;<br>
-Raise&nbsp;TypeError&nbsp;if&nbsp;the&nbsp;given&nbsp;<a href="builtins.html#object">object</a>&nbsp;is&nbsp;not&nbsp;a&nbsp;<a href="#Component">Component</a>.<br>
+Raise&nbsp;TypeError&nbsp;if&nbsp;the&nbsp;given&nbsp;<span style="color: #000099; font-style: italic;">object</span>&nbsp;is&nbsp;not&nbsp;a&nbsp;<a href="#Component">Component</a>.<br>
 Add&nbsp;component&nbsp;to&nbsp;the&nbsp;named&nbsp;and&nbsp;tagged&nbsp;dictionaries&nbsp;as&nbsp;needed.<br>
-Raise&nbsp;AttributeError&nbsp;if&nbsp;the&nbsp;<a href="builtins.html#object">object</a>'s&nbsp;name&nbsp;is&nbsp;already&nbsp;in&nbsp;use.<br>
+Raise&nbsp;AttributeError&nbsp;if&nbsp;the&nbsp;<span style="color: #000099; font-style: italic;">object</span>'s&nbsp;name&nbsp;is&nbsp;already&nbsp;in&nbsp;use.<br>
 Propagate&nbsp;reference&nbsp;to&nbsp;the&nbsp;Game&nbsp;instance.<br>
 Return&nbsp;True&nbsp;if&nbsp;the&nbsp;component&nbsp;has&nbsp;been&nbsp;added;&nbsp;False&nbsp;otherwise.</span></dd></dl>
 
-<dl><dt><a name="Component-add_persistent_component"><strong>add_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Add&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;to&nbsp;the&nbsp;<a href="builtins.html#object">object</a>&nbsp;and&nbsp;add&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+<dl><dt><a name="Component-add_persistent_component"><strong>add_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Add&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;to&nbsp;the&nbsp;<span style="color: #000099; font-style: italic;">object</span>&nbsp;and&nbsp;add&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
 &nbsp;<br>
 This&nbsp;tag&nbsp;will&nbsp;prevent&nbsp;the&nbsp;component&nbsp;from&nbsp;being&nbsp;destroyed&nbsp;on&nbsp;reset<br>
 and&nbsp;also&nbsp;have&nbsp;it&nbsp;restored&nbsp;if&nbsp;it&nbsp;was&nbsp;previously&nbsp;destroyed.</span></dd></dl>
@@ -106,13 +106,13 @@ Use&nbsp;Game.mark_for_destruction&nbsp;instead&nbsp;and&nbsp;let&nbsp;the&nbsp;
 
 <dl><dt><a name="Component-remove_component"><strong>remove_component</strong></a>(self, component)</dt><dd><span class="code">Remove&nbsp;component&nbsp;from&nbsp;_components&nbsp;and&nbsp;set&nbsp;None&nbsp;as&nbsp;component's&nbsp;owner.<br>
 &nbsp;<br>
-Raise&nbsp;TypeError&nbsp;if&nbsp;the&nbsp;given&nbsp;<a href="builtins.html#object">object</a>&nbsp;is&nbsp;not&nbsp;a&nbsp;<a href="#Component">Component</a>.<br>
+Raise&nbsp;TypeError&nbsp;if&nbsp;the&nbsp;given&nbsp;<span style="color: #000099; font-style: italic;">object</span>&nbsp;is&nbsp;not&nbsp;a&nbsp;<a href="#Component">Component</a>.<br>
 Add&nbsp;component&nbsp;to&nbsp;the&nbsp;named&nbsp;and&nbsp;tagged&nbsp;dictionaries&nbsp;as&nbsp;needed.<br>
 Return&nbsp;True&nbsp;if&nbsp;the&nbsp;component&nbsp;has&nbsp;been&nbsp;removed;&nbsp;False&nbsp;otherwise.</span></dd></dl>
 
-<dl><dt><a name="Component-remove_persistent_component"><strong>remove_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Remove&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;from&nbsp;the&nbsp;<a href="builtins.html#object">object</a>&nbsp;and&nbsp;remove&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
+<dl><dt><a name="Component-remove_persistent_component"><strong>remove_persistent_component</strong></a>(self, component)</dt><dd><span class="code">Remove&nbsp;the&nbsp;tag&nbsp;'persistent'&nbsp;from&nbsp;the&nbsp;<span style="color: #000099; font-style: italic;">object</span>&nbsp;and&nbsp;remove&nbsp;it&nbsp;as&nbsp;a&nbsp;component.<br>
 &nbsp;<br>
-This&nbsp;will&nbsp;remove&nbsp;a&nbsp;persistent&nbsp;<a href="builtins.html#object">object</a>&nbsp;permanently.</span></dd></dl>
+This&nbsp;will&nbsp;remove&nbsp;a&nbsp;persistent&nbsp;<span style="color: #000099; font-style: italic;">object</span>&nbsp;permanently.</span></dd></dl>
 
 <dl><dt><a name="Component-remove_tag"><strong>remove_tag</strong></a>(self, tag, persistent=False)</dt><dd><span class="code">Remove&nbsp;a&nbsp;tag&nbsp;and&nbsp;update&nbsp;owner&nbsp;about&nbsp;it.<br>
 &nbsp;<br>

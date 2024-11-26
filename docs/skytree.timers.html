@@ -8,7 +8,7 @@
 <table class="heading">
 <tr class="heading-text decor">
 <td class="title">&nbsp;<br><strong class="title"><a href="skytree.html" class="white">skytree</a>.timers</strong></td>
-<td class="extra"><a href=".">index</a><br><a href="file:d%3A%5Cskytree_repo%5Csrc%5Cskytree%5Ctimers.py">d:\skytree_repo\src\skytree\timers.py</a></td></tr></table>
+</tr></table>
     <p><span class="code">Definition&nbsp;of&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>&nbsp;Components&nbsp;that&nbsp;keep&nbsp;track&nbsp;of&nbsp;time.<br>
 &nbsp;<br>
 Classes:<br>
@@ -47,7 +47,7 @@ Classes:<br>
 <td class="section-title" colspan=3>&nbsp;<br><a name="Countdown">class <strong>Countdown</strong></a>(<a href="skytree.timers.html#Timer">Timer</a>)</td></tr>
     
 <tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
-<td class="decor title-decor" colspan=2><span class="code"><a href="#Countdown">Countdown</a>(init_time,&nbsp;trigger=&amp;lt;function&nbsp;nop&nbsp;at&nbsp;0x00000266FEE29260&amp;gt;,&nbsp;**kwargs)<br>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Countdown">Countdown</a>(init_time,&nbsp;trigger=&amp;lt;function&nbsp;nop&nbsp;at&nbsp;0x000002ACFFB193A0&amp;gt;,&nbsp;**kwargs)<br>
 &nbsp;<br>
 Extend&nbsp;<a href="#Timer">Timer</a>&nbsp;to&nbsp;go&nbsp;backwards&nbsp;and&nbsp;have&nbsp;the&nbsp;ability&nbsp;to&nbsp;do&nbsp;something&nbsp;when&nbsp;time&nbsp;reaches&nbsp;0.<br>
 &nbsp;<br>
@@ -62,11 +62,11 @@ Public&nbsp;methods:<br>
 <dd><a href="skytree.timers.html#Timer">Timer</a></dd>
 <dd><a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a></dd>
 <dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
-<dd><a href="builtins.html#object">builtins.object</a></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="Countdown-__init__"><strong>__init__</strong></a>(self, init_time, trigger=&lt;function nop at 0x00000266FEE29260&gt;, **kwargs)</dt><dd><span class="code">Initialize&nbsp;timer&nbsp;and&nbsp;store&nbsp;a&nbsp;trigger&nbsp;action.<br>
+<dl><dt><a name="Countdown-__init__"><strong>__init__</strong></a>(self, init_time, trigger=&lt;function nop at 0x000002ACFFB193A0&gt;, **kwargs)</dt><dd><span class="code">Initialize&nbsp;timer&nbsp;and&nbsp;store&nbsp;a&nbsp;trigger&nbsp;action.<br>
 &nbsp;<br>
 init_time&nbsp;is&nbsp;the&nbsp;time&nbsp;to&nbsp;count&nbsp;down&nbsp;from.<br>
 trigger&nbsp;may&nbsp;be&nbsp;either&nbsp;a&nbsp;function&nbsp;or&nbsp;a&nbsp;tuple&nbsp;(function,&nbsp;{kwargs}).&nbsp;Defaults&nbsp;to&nbsp;doing&nbsp;nothing.</span></dd></dl>
@@ -168,7 +168,7 @@ Data descriptors inherited from <a href="skytree.component.html#Component">skytr
 <td class="section-title" colspan=3>&nbsp;<br><a name="Cycle">class <strong>Cycle</strong></a>(<a href="skytree.timers.html#Countdown">Countdown</a>)</td></tr>
     
 <tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
-<td class="decor title-decor" colspan=2><span class="code"><a href="#Cycle">Cycle</a>(init_time,&nbsp;trigger=&amp;lt;function&nbsp;nop&nbsp;at&nbsp;0x00000266FEE29260&amp;gt;,&nbsp;**kwargs)<br>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Cycle">Cycle</a>(init_time,&nbsp;trigger=&amp;lt;function&nbsp;nop&nbsp;at&nbsp;0x000002ACFFB193A0&amp;gt;,&nbsp;**kwargs)<br>
 &nbsp;<br>
 A&nbsp;countdown&nbsp;that&nbsp;resets&nbsp;when&nbsp;time&nbsp;reaches&nbsp;0.<br>
 &nbsp;<br>
@@ -180,7 +180,7 @@ Extends&nbsp;<a href="#Countdown">Countdown</a>.<a href="#Cycle-on_time">on_time
 <dd><a href="skytree.timers.html#Timer">Timer</a></dd>
 <dd><a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a></dd>
 <dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
-<dd><a href="builtins.html#object">builtins.object</a></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
 </dl>
 <hr>
 Methods defined here:<br>
@@ -188,7 +188,7 @@ Methods defined here:<br>
 
 <hr>
 Methods inherited from <a href="skytree.timers.html#Countdown">Countdown</a>:<br>
-<dl><dt><a name="Cycle-__init__"><strong>__init__</strong></a>(self, init_time, trigger=&lt;function nop at 0x00000266FEE29260&gt;, **kwargs)</dt><dd><span class="code">Initialize&nbsp;timer&nbsp;and&nbsp;store&nbsp;a&nbsp;trigger&nbsp;action.<br>
+<dl><dt><a name="Cycle-__init__"><strong>__init__</strong></a>(self, init_time, trigger=&lt;function nop at 0x000002ACFFB193A0&gt;, **kwargs)</dt><dd><span class="code">Initialize&nbsp;timer&nbsp;and&nbsp;store&nbsp;a&nbsp;trigger&nbsp;action.<br>
 &nbsp;<br>
 init_time&nbsp;is&nbsp;the&nbsp;time&nbsp;to&nbsp;count&nbsp;down&nbsp;from.<br>
 trigger&nbsp;may&nbsp;be&nbsp;either&nbsp;a&nbsp;function&nbsp;or&nbsp;a&nbsp;tuple&nbsp;(function,&nbsp;{kwargs}).&nbsp;Defaults&nbsp;to&nbsp;doing&nbsp;nothing.</span></dd></dl>
@@ -288,7 +288,7 @@ Data descriptors inherited from <a href="skytree.component.html#Component">skytr
 <td class="section-title" colspan=3>&nbsp;<br><a name="Delay">class <strong>Delay</strong></a>(<a href="skytree.timers.html#Countdown">Countdown</a>)</td></tr>
     
 <tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
-<td class="decor title-decor" colspan=2><span class="code"><a href="#Delay">Delay</a>(init_time,&nbsp;trigger=&amp;lt;function&nbsp;nop&nbsp;at&nbsp;0x00000266FEE29260&amp;gt;,&nbsp;**kwargs)<br>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Delay">Delay</a>(init_time,&nbsp;trigger=&amp;lt;function&nbsp;nop&nbsp;at&nbsp;0x000002ACFFB193A0&amp;gt;,&nbsp;**kwargs)<br>
 &nbsp;<br>
 A&nbsp;countdown&nbsp;that&nbsp;destroys&nbsp;itself&nbsp;when&nbsp;time&nbsp;reaches&nbsp;0.<br>
 &nbsp;<br>
@@ -300,7 +300,7 @@ Extends&nbsp;<a href="#Countdown">Countdown</a>.<a href="#Delay-on_time">on_time
 <dd><a href="skytree.timers.html#Timer">Timer</a></dd>
 <dd><a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a></dd>
 <dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
-<dd><a href="builtins.html#object">builtins.object</a></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
 </dl>
 <hr>
 Methods defined here:<br>
@@ -308,7 +308,7 @@ Methods defined here:<br>
 
 <hr>
 Methods inherited from <a href="skytree.timers.html#Countdown">Countdown</a>:<br>
-<dl><dt><a name="Delay-__init__"><strong>__init__</strong></a>(self, init_time, trigger=&lt;function nop at 0x00000266FEE29260&gt;, **kwargs)</dt><dd><span class="code">Initialize&nbsp;timer&nbsp;and&nbsp;store&nbsp;a&nbsp;trigger&nbsp;action.<br>
+<dl><dt><a name="Delay-__init__"><strong>__init__</strong></a>(self, init_time, trigger=&lt;function nop at 0x000002ACFFB193A0&gt;, **kwargs)</dt><dd><span class="code">Initialize&nbsp;timer&nbsp;and&nbsp;store&nbsp;a&nbsp;trigger&nbsp;action.<br>
 &nbsp;<br>
 init_time&nbsp;is&nbsp;the&nbsp;time&nbsp;to&nbsp;count&nbsp;down&nbsp;from.<br>
 trigger&nbsp;may&nbsp;be&nbsp;either&nbsp;a&nbsp;function&nbsp;or&nbsp;a&nbsp;tuple&nbsp;(function,&nbsp;{kwargs}).&nbsp;Defaults&nbsp;to&nbsp;doing&nbsp;nothing.</span></dd></dl>
@@ -424,7 +424,7 @@ Public&nbsp;methods:<br>
 <dd><a href="skytree.timers.html#Timer">Timer</a></dd>
 <dd><a href="skytree.updateable.html#Updateable">skytree.updateable.Updateable</a></dd>
 <dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
-<dd><a href="builtins.html#object">builtins.object</a></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
 </dl>
 <hr>
 Methods defined here:<br>

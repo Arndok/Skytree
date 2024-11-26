@@ -8,10 +8,10 @@
 <table class="heading">
 <tr class="heading-text decor">
 <td class="title">&nbsp;<br><strong class="title"><a href="skytree.html" class="white">skytree</a>.key_commands</strong></td>
-<td class="extra"><a href=".">index</a><br><a href="file:d%3A%5Cskytree_repo%5Csrc%5Cskytree%5Ckey_commands.py">d:\skytree_repo\src\skytree\key_commands.py</a></td></tr></table>
+</tr></table>
     <p><span class="code">Definition&nbsp;of&nbsp;classes&nbsp;that&nbsp;deal&nbsp;with&nbsp;routing&nbsp;and&nbsp;processing&nbsp;events.<br>
 &nbsp;<br>
-<a href="#EventController">EventController</a>(<a href="abc.html#ABC">ABC</a>):&nbsp;interface&nbsp;for&nbsp;an&nbsp;object&nbsp;that&nbsp;can&nbsp;process&nbsp;events.<br>
+<a href="#EventController">EventController</a>(<span style="color: #000099; font-style: italic;">ABC</span>):&nbsp;interface&nbsp;for&nbsp;an&nbsp;object&nbsp;that&nbsp;can&nbsp;process&nbsp;events.<br>
 &nbsp;&nbsp;An&nbsp;object&nbsp;doesn't&nbsp;have&nbsp;to&nbsp;actually&nbsp;be&nbsp;an&nbsp;<a href="#EventController">EventController</a>&nbsp;to&nbsp;be&nbsp;set&nbsp;as&nbsp;such;&nbsp;it&nbsp;just&nbsp;has&nbsp;to&nbsp;implement&nbsp;its&nbsp;methods.<br>
 <a href="#KeyboardReader">KeyboardReader</a>(<a href="#EventController">EventController</a>):&nbsp;an&nbsp;<a href="#EventController">EventController</a>&nbsp;that&nbsp;can&nbsp;process&nbsp;key&nbsp;presses&nbsp;and&nbsp;releases.<br>
 <a href="#KeyCommandReader">KeyCommandReader</a>(<a href="skytree.component.html#Component">Component</a>):&nbsp;a&nbsp;<a href="skytree.component.html#Component">Component</a>&nbsp;that&nbsp;can&nbsp;process&nbsp;commands&nbsp;comming&nbsp;from&nbsp;a&nbsp;<a href="#KeyboardReader">KeyboardReader</a>&nbsp;or&nbsp;hold&nbsp;other&nbsp;components&nbsp;that&nbsp;do&nbsp;so.<br>
@@ -28,7 +28,7 @@ CommandReaders&nbsp;will&nbsp;propagate&nbsp;received&nbsp;commands&nbsp;through
 <td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
     
 <tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
-<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="warnings.html">warnings</a><br>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><span style="color: #000099; font-style: italic;">warnings</span><br>
 </td><td class="multicolumn"></td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
 <table class="section">
 <tr class="decor index-decor heading-text">
@@ -36,7 +36,7 @@ CommandReaders&nbsp;will&nbsp;propagate&nbsp;received&nbsp;commands&nbsp;through
     
 <tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
 <td class="singlecolumn"><dl>
-<dt class="heading-text"><a href="abc.html#ABC">abc.ABC</a>(<a href="builtins.html#object">builtins.object</a>)
+<dt class="heading-text"><span style="color: #000099; font-style: italic;">abc.ABC</span>(<span style="color: #000099; font-style: italic;">builtins.object</span>)
 </dt><dd>
 <dl>
 <dt class="heading-text"><a href="skytree.key_commands.html#EventController">EventController</a>
@@ -47,7 +47,7 @@ CommandReaders&nbsp;will&nbsp;propagate&nbsp;received&nbsp;commands&nbsp;through
 </dd>
 </dl>
 </dd>
-<dt class="heading-text"><a href="skytree.component.html#Component">skytree.component.Component</a>(<a href="builtins.html#object">builtins.object</a>)
+<dt class="heading-text"><a href="skytree.component.html#Component">skytree.component.Component</a>(<span style="color: #000099; font-style: italic;">builtins.object</span>)
 </dt><dd>
 <dl>
 <dt class="heading-text"><a href="skytree.key_commands.html#CommandReader">CommandReader</a>
@@ -94,7 +94,7 @@ Public&nbsp;methods:<br>
 <td class="singlecolumn"><dl><dt>Method resolution order:</dt>
 <dd><a href="skytree.key_commands.html#CommandReader">CommandReader</a></dd>
 <dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
-<dd><a href="builtins.html#object">builtins.object</a></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
 </dl>
 <hr>
 Methods defined here:<br>
@@ -189,7 +189,7 @@ Data descriptors inherited from <a href="skytree.component.html#Component">skytr
 </td></tr></table> <p>
 <table class="section">
 <tr class="decor title-decor heading-text">
-<td class="section-title" colspan=3>&nbsp;<br><a name="EventController">class <strong>EventController</strong></a>(<a href="abc.html#ABC">abc.ABC</a>)</td></tr>
+<td class="section-title" colspan=3>&nbsp;<br><a name="EventController">class <strong>EventController</strong></a>(<span style="color: #000099; font-style: italic;">abc.ABC</span>)</td></tr>
     
 <tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
 <td class="decor title-decor" colspan=2><span class="code">Interface&nbsp;for&nbsp;an&nbsp;object&nbsp;that&nbsp;can&nbsp;be&nbsp;set&nbsp;as&nbsp;an&nbsp;event&nbsp;controller&nbsp;by&nbsp;the&nbsp;Game.<br>
@@ -205,8 +205,8 @@ Public&nbsp;methods:<br>
 <tr><td>&nbsp;</td>
 <td class="singlecolumn"><dl><dt>Method resolution order:</dt>
 <dd><a href="skytree.key_commands.html#EventController">EventController</a></dd>
-<dd><a href="abc.html#ABC">abc.ABC</a></dd>
-<dd><a href="builtins.html#object">builtins.object</a></dd>
+<dd><span style="color: #000099; font-style: italic;">abc.ABC</span></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
 </dl>
 <hr>
 Methods defined here:<br>
@@ -260,7 +260,7 @@ Public&nbsp;methods:<br>
 <dd><a href="skytree.key_commands.html#KeyCommandReader">KeyCommandReader</a></dd>
 <dd><a href="skytree.key_commands.html#CommandReader">CommandReader</a></dd>
 <dd><a href="skytree.component.html#Component">skytree.component.Component</a></dd>
-<dd><a href="builtins.html#object">builtins.object</a></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
 </dl>
 <hr>
 Methods defined here:<br>
@@ -390,8 +390,8 @@ Public&nbsp;methods:<br>
 <td class="singlecolumn"><dl><dt>Method resolution order:</dt>
 <dd><a href="skytree.key_commands.html#KeyboardReader">KeyboardReader</a></dd>
 <dd><a href="skytree.key_commands.html#EventController">EventController</a></dd>
-<dd><a href="abc.html#ABC">abc.ABC</a></dd>
-<dd><a href="builtins.html#object">builtins.object</a></dd>
+<dd><span style="color: #000099; font-style: italic;">abc.ABC</span></dd>
+<dd><span style="color: #000099; font-style: italic;">builtins.object</span></dd>
 </dl>
 <hr>
 Methods defined here:<br>
