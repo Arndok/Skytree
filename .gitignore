@@ -1,9 +1,9 @@
 build/
 demo/
 dist/
+resources_project_files/
 src/skytree/__pycache__/
 src/skytree.egg-info/
-test/
 venv/
 Instucciones_consultor.md
 TO-DO.txt
