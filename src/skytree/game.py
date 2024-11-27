@@ -277,7 +277,7 @@ class Game(Updateable, Drawable, KeyCommandReader, metaclass=Singleton):
         """
         if not "pause" in self.states:
             from .user_interface import PauseState
-            warnings.warn("Pause State not found at game run time; using default", RuntimeWarning)
+            print("Pause State not found at game run time; using default.")
             PauseState()
         
         clock = pygame.time.Clock()
