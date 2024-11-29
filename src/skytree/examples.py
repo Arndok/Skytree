@@ -558,7 +558,7 @@ def run_demo():
                                     "C1": (VisibleCheckpointTile, {"board": "sidescroller10", "idx":(51,52), "offset":(0,-16)})
                                     }),
                         backgrounds=(Layer("demo_bg_smol.png"), TiledLayer(level_tset, "demo_scr9_bg.txt", {**STG_TILES,"C1":(DrawableTile, {"idx":(51)})})),
-                        name="sidescroller10", entities=(Text("SORRY", pos=(84,18)), sidescroller_player, ExitArea("sidescroller11", pos=(0,176), hb_dim=(208,1))), music=LEVEL_MUSIC)
+                        name="sidescroller10", entities=(Text("SORRY", pos=(84,18)), sidescroller_player, ExitArea("sidescroller11", pos=(-100,500), hb_dim=(408,1))), music=LEVEL_MUSIC, kill_margins=500)
     # Spawners and enemies
     # - Tiles that make entities appear.
     # - Entities other than the player sprite can interact with layers too.
