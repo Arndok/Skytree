@@ -314,6 +314,7 @@ def run_demo():
 
         def shoot(self):
             """Create a hook sprite, add it as a component and set it to draw below the player sprite."""
+            print("shoot")
             hook = Hook((self.x + 4, self.y - 1))
             self.add_component(hook)
             self.move_to_back(hook)
@@ -350,7 +351,7 @@ def run_demo():
             Shooting the hook is a commited action, so it blocks player commands.
             It's also on a slight delay so it feels heavier.
             """
-            if press and not self.vel_y:
+            if press and not self.shooting and not self.vel_y:
                 if self.crouching:
                     self._com_down_release()
                     if self.crouching: return
@@ -362,6 +363,7 @@ def run_demo():
         def reset(self):
             """Reset HP HUD."""
             super().reset()
+            self.allow_commands()
             self.hud.canvas = self._font.render("HP: "+str(self.hp), 0, (255,255,255))
             
         def destroy(self):

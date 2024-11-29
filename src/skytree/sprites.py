@@ -1218,6 +1218,11 @@ class SidescrollerPlayer(SidescrollerJump, SidescrollerCrouch, AccelerationSpeed
         self._alive = True
         """Whether the player is alive or not."""
             
+    @property
+    def alive(self):
+        """Whether the player is alive or not."""
+        return self._alive
+            
     def _determine_anim(self, dt):
         """Determine and set animation."""
         if self.crouching:
@@ -1331,10 +1336,11 @@ class SidescrollerPlayer(SidescrollerJump, SidescrollerCrouch, AccelerationSpeed
         self.game.reset_stage()
         self._alive = True
         self.unlock_anim()
+        self.allow_commands() # In case some commands are blocked by subclass methods
         self.unlock_controller()
-        self.check_commands()
         self.unlock_hitbox()
         self.unlock_movement()
+        self.check_commands()
 
     def kill(self, note="natural causes"):
         """Extend Sprite to lock the sprite, play the stored death sound, set the death animation and trigger quick retry on a delay."""
