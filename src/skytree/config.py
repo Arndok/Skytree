@@ -69,7 +69,7 @@ MIXER_BUFFER = 512
 """Default mixer buffer size."""
 DEF_FADEOUT = 1000
 """Default music fadeout (when keyword 'fade' is used)."""
-MUSIC_VOLUME = 0.8
+MUSIC_VOLUME = 1
 """Music volume."""
 
 # Boards

@@ -314,7 +314,6 @@ def run_demo():
 
         def shoot(self):
             """Create a hook sprite, add it as a component and set it to draw below the player sprite."""
-            print("shoot")
             hook = Hook((self.x + 4, self.y - 1))
             self.add_component(hook)
             self.move_to_back(hook)
