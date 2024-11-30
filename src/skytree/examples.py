@@ -398,11 +398,11 @@ def run_demo():
                 }
 
     BCK_SOLID = {
-                    "0": (AniColTile, {"idx": (9,3,6,12), "tags":("solid",)}),
+                    "0": (AniColTile, {"idx": (56,57,58,59), "tags":("solid",)}),
                 }
 
     BCK_NOTSOLID = {
-                       "0": (AnimatedTile, {"idx": (9,3,6,12)}),
+                       "0": (AnimatedTile, {"idx": (60,61,62,63)}),
                    }
 
     #####
@@ -530,12 +530,11 @@ def run_demo():
                                     "E2": (ExitTile, {"hb_dim":(1,8), "hb_offset":(8,0), "dest_board":"sidescroller9", "start_label":"start1"}),
                                     "C1": (VisibleCheckpointTile, {"board": "sidescroller8", "idx":(51,52), "offset":(0,-16)})
                                     }),
-                        backgrounds=(Layer("demo_bg.png"), MovingTiledLayer(level_tset, "demo_scr7_bg.txt", BCK_SOLID,
-                                                                                    parallax_adjust=(0,-64,0,0),
-                                                                                    destinations=(((0,-64),1000),((0,0),1000)))),
+                        backgrounds=(Layer("demo_bg.png", components=(Text("LOOK OUT!!", pos=(224,98), color=(255,0,0)),)),
+                                     MovingTiledLayer(level_tset, "demo_scr7_bg.txt", BCK_SOLID, parallax_adjust=(0,-64,0,0), destinations=(((0,-64),1000),((0,0),1000)))),
                         name="sidescroller8", music=LEVEL_MUSIC,
                         entities=(Text("LAYERS CAN BE", pos=(90,18)), Text("TILED", pos=(90,34)), Text("MOVING", pos=(90,50)), Text("INTERACTIBLE", pos=(90,64)),
-                                  Text("ANIMATED", pos=(90,80)), Text("LOOK OUT!!", pos=(224,96), color=(255,0,0)), sidescroller_player))
+                                  Text("ANIMATED", pos=(90,80)), sidescroller_player))
     # Moving layers and parallax
     # - Parallax layer with automatic movement.
     OnePlayerTiledBoard(TiledLayer(level_tset, "demo_scr8.txt",
