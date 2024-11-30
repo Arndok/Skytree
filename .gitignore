@@ -7,4 +7,5 @@ src/skytree.egg-info/
 test/__pycache__/
 venv/
 Instucciones_consultor.md
+level_manip.py
 TO-DO.txt

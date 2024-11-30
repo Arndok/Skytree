@@ -391,6 +391,7 @@ def run_demo():
                 }
 
     STG_TILES = {
+                    **{str(i): (DraColTile, {"idx": i, "tags":("solid",)}) for i in range(47)},
                     "0": (DraColTile, {"idx": 0, "tags":("solid",)}),
                     "Hz": (DraColTile, {"idx": 48, "tags":("lethal",)}),
                     "S1": (StartTile, {"name":"start1"}),
@@ -555,8 +556,9 @@ def run_demo():
                                     "E1": (ExitTile, {"hb_dim":(1,8), "hb_offset":(-1,0), "dest_board":"sidescroller9", "start_label":"start2"}),
                                     "C1": (VisibleCheckpointTile, {"board": "sidescroller10", "idx":(51,52), "offset":(0,-16)})
                                     }),
-                        backgrounds=(Layer("demo_bg_smol.png"), TiledLayer(level_tset, "demo_scr9_bg.txt", {**STG_TILES,"C1":(DrawableTile, {"idx":(51)})})),
-                        name="sidescroller10", entities=(Text("SORRY", pos=(84,18)), sidescroller_player, ExitArea("sidescroller11", pos=(-100,500), hb_dim=(408,1))), music=LEVEL_MUSIC, kill_margins=500)
+                        backgrounds=(Layer("demo_bg_smol.png"), TiledLayer(level_tset, "demo_scr9_bg.txt", {**STG_TILES,"C1":(DrawableTile, {"idx":(51)})},
+                                                                           components=(Text("SORRY", pos=(84,18)),))),
+                        name="sidescroller10", entities=(sidescroller_player, ExitArea("sidescroller11", pos=(-100,500), hb_dim=(408,1))), music=LEVEL_MUSIC, kill_margins=500)
     # Spawners and enemies
     # - Tiles that make entities appear.
     # - Entities other than the player sprite can interact with layers too.
@@ -632,13 +634,13 @@ def run_demo():
                                     "s1": (SpawnerTile, {"obj":(HoveringEnemy, {"tileset":(TileSet,{"canvas":"spooky_serious.png", "tile_dim":GOON_DIM}),
                                                                                 "speed":GHOST_SPEED, "direction":"left", "patrol_time": GHOST_PATROL,
                                                                                 "osc_period": GHOST_OSC, "tags":("lethal",), "solids":(), "hb_adjust":hov_enemy_hb_adjust})}),
-                                    "s2": (DraSpaTile, {"idx":0, "obj":(HoveringEnemy, {"tileset":(TileSet,{"canvas":"spooky_grinny.png", "tile_dim":GOON_DIM}),
-                                                                                        "speed":GHOST_SPEED, "direction":"left", "tags":("lethal",),
-                                                                                        "solids":(), "hb_adjust":hov_enemy_hb_adjust}),
+                                    "s2": (DraSpaTile, {"idx":46, "obj":(HoveringEnemy, {"tileset":(TileSet,{"canvas":"spooky_grinny.png", "tile_dim":GOON_DIM}),
+                                                                                         "speed":GHOST_SPEED, "direction":"left", "tags":("lethal",),
+                                                                                         "solids":(), "hb_adjust":hov_enemy_hb_adjust}),
                                                         "cooldown":0}),
-                                    "s3": (DraSpaTile, {"idx":0, "obj":(HoveringEnemy, {"tileset":(TileSet,{"canvas":"spooky_grinny.png", "tile_dim":GOON_DIM}),
-                                                                                        "speed":GHOST_SPEED_FAST, "direction":"left", "tags":("lethal",),
-                                                                                        "solids":(), "hb_adjust":hov_enemy_hb_adjust}),
+                                    "s3": (DraSpaTile, {"idx":46, "obj":(HoveringEnemy, {"tileset":(TileSet,{"canvas":"spooky_grinny.png", "tile_dim":GOON_DIM}),
+                                                                                         "speed":GHOST_SPEED_FAST, "direction":"left", "tags":("lethal",),
+                                                                                         "solids":(), "hb_adjust":hov_enemy_hb_adjust}),
                                                         "obj_limit":2, "cooldown":2000}),
                                     "s4": (SpawnerTile, {"obj":(GravityOrb, {"start_label":"stage2", "exit_label":"down"})}),
                                     }),
