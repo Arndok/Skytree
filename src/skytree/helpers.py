@@ -4,6 +4,7 @@ A repository of helper functions.
 Functions:
 nop(): do nothing (to be used as a default argument function).
 is_collection(obj): check if obj is "intuitively" a collection.
+tupleize(obj): put obj inside a tuple unless it's one itself.
 repack2(obj): turn obj into (obj, obj) if it's a single value.
 repack4(obj): turn obj into (obj, obj, obj, obj)|(*obj, *obj) if it's a single value or a collection with size 2.
 bake_obj(obj): build the object if it's a type or a tuple (type, {kwargs}).
@@ -19,6 +20,10 @@ def nop():
 def is_collection(obj):
     """Return True if obj is a Sequence but not a string, bytes or bytearray; False otherwise."""
     return isinstance(obj, Sequence) and not isinstance(obj, (str, bytes, bytearray))
+
+def tupleize(obj):
+    """Put obj inside a tuple unless it's one itself."""
+    return obj if isinstance(obj, tuple) else (obj,)
 
 def repack2(obj):
     """Return obj if it's a collection of 2 elements or a tuple (obj, obj) otherwise."""

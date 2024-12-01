@@ -34,6 +34,9 @@ def bake_bordered_mass(in_path, out_path=None, tile_symbol=0, edge_borders=False
     if edge_borders is set to False, out-of-bounds positions will be treated as neighbour matches.
     
     Check terrain.png on the example_resources folder to see how the tiles should be ordered in the tileset.
+    Orthogonal neighbours are a bitmask, but diagonals are not because they only matter in some circumstances.
+    It's a whole thing. Contrast the png with the code of this function if you're really curious;
+    otherwise, just copy the tile order in the png.
     """
     if not out_path:
         name, extension = os.path.splitext(in_path)

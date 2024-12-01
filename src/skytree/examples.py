@@ -439,6 +439,7 @@ def run_demo():
     # - Setting solid border policies.
     Board(name="simple", border_policies="solid", music=LEVEL_MUSIC,
           entities=(Text("KEYS OR WASD TO MOVE", pos=(10,10)), Text("ESC TO PAUSE", pos=(10,26)),
+                    Text("^", pos=(186, 28)), Text("|", pos=(188, 28)), Text("Touch", pos=(170, 36)),
                     Orb(start_label="stage1", exit_label="right", pos=(184, 16)), topdown_player),)
 
     ###########
@@ -495,7 +496,7 @@ def run_demo():
                                     "E1": (ExitTile, {"hb_dim":(1,8), "hb_offset":(8,0), "dest_board":"sidescroller6", "start_label":"start1"}),
                                     "C1": (VisibleCheckpointTile, {"board": "sidescroller5", "idx":(51,52), "offset":(0,-16)})
                                     }),
-                        name="sidescroller5", entities=(Text("REMEMBER", pos=(94,18)), Text("PACMAN", pos=(94, 34)), sidescroller_player),
+                        name="sidescroller5", entities=(Text("REMEMBER", pos=(90,18)), Text("PACMAN?", pos=(90, 34)), sidescroller_player),
                         music=LEVEL_MUSIC, border_policies="wrap")
     # Big screen
     # - Boards bigger than the frame.
@@ -506,7 +507,7 @@ def run_demo():
                                     "E2": (ExitTile, {"hb_dim":(1,8), "hb_offset":(8,0), "dest_board":"sidescroller7", "start_label":"start1"}),
                                     "C1": (VisibleCheckpointTile, {"board": "sidescroller6", "idx":(51,52), "offset":(0,-16)})
                                     }),
-                        name="sidescroller6", entities=(Text("SOME ROOMS ARE BIGGER", pos=(18,102)), sidescroller_player,), music=LEVEL_MUSIC)
+                        name="sidescroller6", entities=(Text("SOME ROOMS ARE BIGGER", pos=(18,98)), sidescroller_player,), music=LEVEL_MUSIC)
     # Layers and parallax
     # - Parallax layers.
     # - Backgrounds and foregrounds.
@@ -547,7 +548,7 @@ def run_demo():
                         backgrounds=(Layer("demo_bg_smol.png"), MovingTiledLayer(level_tset, "demo_scr8_bg.txt", BCK_NOTSOLID,
                                                                                     parallax_adjust=(-32,-32,16,16), speed=100,
                                                                                     destinations=(((16,16),200),((16,-16),200),((-16,-16),200),((-16,16),200)))),
-                        name="sidescroller9", entities=(Text("PARALLAX WITH MOVING LAYERS", pos=(24,90)), sidescroller_player,), music=LEVEL_MUSIC)
+                        name="sidescroller9", entities=(Text("PARALLAX WITH MOVING LAYERS", pos=(36,90)), sidescroller_player,), music=LEVEL_MUSIC)
     # Getting weird with layers
     # - This is a light-hearted troll I've seen in a couple Super Mario World Kaizo levels.
     # - Uses parallax to have the ground move with the frame.
@@ -569,7 +570,8 @@ def run_demo():
                                                                                  "speed":GOON_SPEED, "direction":"right", "tags":("lethal",), "solids":("solid","lethal"),
                                                                                  "anims":ss_enemy_anims, "hb_adjust":ss_enemy_hb_adjust})})
                                     }),
-                        backgrounds=(MovingTiledLayer(level_tset, "demo_scr10_bg.txt", BCK_SOLID, destinations=(((0,40),0),((0,0),0))),),
+                        backgrounds=(MovingTiledLayer(level_tset, "demo_scr10_bg.txt", BCK_SOLID, destinations=(((0,40),0),((0,0),0))),
+                                     Layer(config.CANVAS_DIM, components=(Drawable("demo_bg_scr10.png", pos=(72,0)),))),
                         name="sidescroller11", entities=(Text("SPAWNERS", pos=(136,18)), sidescroller_player,), music=LEVEL_MUSIC)
     # Different enemy behaviours
     # - One example enemy turns around when encountering a platform border; the other drops.
