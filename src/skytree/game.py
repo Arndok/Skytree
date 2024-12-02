@@ -89,7 +89,7 @@ class Game(Updateable, Drawable, KeyCommandReader, metaclass=Singleton):
         
         # Caption.
         pygame.display.set_caption(config.CAPTION)
-        ### Might want to include icon here
+        pygame.display.set_icon(pygame.image.load(config.ICON_PATH).convert_alpha())
 
         # Event Controllers
         pygame.mouse.set_visible(False) # Might rethink how we deal with this when we implement mouse controllers.

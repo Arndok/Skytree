@@ -28,6 +28,7 @@ MUSIC_PATH = EXAMPLE_RESOURCES_PATH
 """Default path for music files."""
 SOUND_PATH = EXAMPLE_RESOURCES_PATH
 """Default path for sound files."""
+ICON_PATH = EXAMPLE_RESOURCES_PATH + "/icon.png"
 
 def set_all_paths(path):
     """Set every resource path to the given string."""
