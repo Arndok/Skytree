@@ -101,8 +101,9 @@ def run_demo():
 
     DBOOST = 1000
 
-    LEVEL_MUSIC = "skytree_groove.ogg"
+    MAIN_MUSIC = "skytree_groove.ogg"
     PUNG_MUSIC = "skytree_bounce.ogg"
+    INTRO_MUSIC = "skytree_bask.ogg"
 
     #####
     # Tilesets that can be defined outside their owners:
@@ -438,7 +439,7 @@ def run_demo():
     # A simple stage.
     # - Using top-down player.
     # - Setting solid border policies.
-    Board(name="simple", border_policies="solid", music=LEVEL_MUSIC,
+    Board(name="simple", border_policies="solid", music=INTRO_MUSIC,
           entities=(Text("KEYS OR WASD TO MOVE", pos=(10,10)), Text("ESC TO PAUSE", pos=(10,26)),
                     Text("^", pos=(186, 28)), Text("|", pos=(188, 28)), Text("Touch", pos=(170, 36)),
                     Orb(start_label="stage1", exit_label="right", pos=(184, 16)), topdown_player),)
@@ -458,7 +459,7 @@ def run_demo():
                                    {**STG_TILES,
                                     "E1": (ExitTile, {"hb_dim":(1,8), "hb_offset":(8,0), "dest_board":"sidescroller2", "start_label":"start1"})
                                     }),
-                        name="sidescroller1", entities=(Text("TILES", pos=(18,18)), Text("STARTS AND EXITS", pos=(18,34)), sidescroller_player,), music=LEVEL_MUSIC)
+                        name="sidescroller1", entities=(Text("TILES", pos=(18,18)), Text("STARTS AND EXITS", pos=(18,34)), sidescroller_player,), music=MAIN_MUSIC)
     # Checkpoints and falls
     # - A tile that sets the active checkpoint with visual / audio feedback.
     # - Killing the sprite when it leaves the frame.
@@ -469,7 +470,7 @@ def run_demo():
                                     "C1": (VisibleCheckpointTile, {"board": "sidescroller2", "idx":(51,52), "offset":(0,-16)})
                                     }),
                         name="sidescroller2", entities=(Text("A CHECKPOINT AND A FALL", pos=(18,18)), sidescroller_player),
-                        music=LEVEL_MUSIC)
+                        music=MAIN_MUSIC)
     # Sprite kill margins
     # - Setting the margin for killing the sprite outside the frame.
     OnePlayerTiledBoard(TiledLayer(level_tset, "demo_scr2.txt",
@@ -479,7 +480,7 @@ def run_demo():
                                     "C1": (VisibleCheckpointTile, {"board": "sidescroller3", "idx":(51,52), "offset":(0,-16)})
                                     }),
                         name="sidescroller3", entities=(Text("SOME FALLS ARE LONGER", pos=(18,18)), sidescroller_player),
-                        music=LEVEL_MUSIC, kill_margins=500)
+                        music=MAIN_MUSIC, kill_margins=500)
     # Tile hazards
     # - Tiles that hurt the player.
     OnePlayerTiledBoard(TiledLayer(level_tset, "demo_scr3.txt",
@@ -489,7 +490,7 @@ def run_demo():
                                     "C1": (VisibleCheckpointTile, {"board": "sidescroller4", "idx":(51,52), "offset":(0,-16)})
                                     }),
                         name="sidescroller4", entities=(Text("SOME TILES WANT TO", pos=(18,18)), Text("HURT YOU", pos=(18,34)), sidescroller_player),
-                        music=LEVEL_MUSIC)
+                        music=MAIN_MUSIC)
     # Screen wrap
     # - Screen wrap border policies.
     OnePlayerTiledBoard(TiledLayer(level_tset, "demo_scr4.txt",
@@ -498,7 +499,7 @@ def run_demo():
                                     "C1": (VisibleCheckpointTile, {"board": "sidescroller5", "idx":(51,52), "offset":(0,-16)})
                                     }),
                         name="sidescroller5", entities=(Text("REMEMBER", pos=(90,18)), Text("PACMAN?", pos=(90, 34)), sidescroller_player),
-                        music=LEVEL_MUSIC, border_policies="wrap")
+                        music=MAIN_MUSIC, border_policies="wrap")
     # Big screen
     # - Boards bigger than the frame.
     # - Board subclass that has the frame follow the player.
@@ -508,7 +509,7 @@ def run_demo():
                                     "E2": (ExitTile, {"hb_dim":(1,8), "hb_offset":(8,0), "dest_board":"sidescroller7", "start_label":"start1"}),
                                     "C1": (VisibleCheckpointTile, {"board": "sidescroller6", "idx":(51,52), "offset":(0,-16)})
                                     }),
-                        name="sidescroller6", entities=(Text("SOME ROOMS ARE BIGGER", pos=(18,98)), sidescroller_player,), music=LEVEL_MUSIC)
+                        name="sidescroller6", entities=(Text("SOME ROOMS ARE BIGGER", pos=(18,98)), sidescroller_player,), music=MAIN_MUSIC)
     # Layers and parallax
     # - Parallax layers.
     # - Backgrounds and foregrounds.
@@ -521,7 +522,7 @@ def run_demo():
                                     }),
                         backgrounds=(Layer("demo_bg.png"), Layer("demo_bg2.png")),
                         foregrounds=(Layer(config.CANVAS_DIM, subsurface=True, components=(Text("PARALLAX LAYERS", pos=(96,18)),)),),
-                        name="sidescroller7", entities=(sidescroller_player,), music=LEVEL_MUSIC)
+                        name="sidescroller7", entities=(sidescroller_player,), music=MAIN_MUSIC)
     # Moving, solid and animated layers
     # - Layer with automatic movement.
     # - Layer with solid ground.
@@ -535,7 +536,7 @@ def run_demo():
                                     }),
                         backgrounds=(Layer("demo_bg.png", components=(Text("LOOK OUT!!", pos=(224,98), color=(255,0,0)),)),
                                      MovingTiledLayer(level_tset, "demo_scr7_bg.txt", BCK_SOLID, parallax_adjust=(0,-64,0,0), destinations=(((0,-64),1000),((0,0),1000)))),
-                        name="sidescroller8", music=LEVEL_MUSIC,
+                        name="sidescroller8", music=MAIN_MUSIC,
                         entities=(Text("LAYERS CAN BE", pos=(90,18)), Text("TILED", pos=(90,34)), Text("MOVING", pos=(90,50)), Text("INTERACTIBLE", pos=(90,64)),
                                   Text("ANIMATED", pos=(90,80)), sidescroller_player))
     # Moving layers and parallax
@@ -549,7 +550,7 @@ def run_demo():
                         backgrounds=(Layer("demo_bg_smol.png"), MovingTiledLayer(level_tset, "demo_scr8_bg.txt", BCK_NOTSOLID,
                                                                                     parallax_adjust=(-32,-32,16,16), speed=100,
                                                                                     destinations=(((16,16),200),((16,-16),200),((-16,-16),200),((-16,16),200)))),
-                        name="sidescroller9", entities=(Text("PARALLAX WITH MOVING LAYERS", pos=(36,90)), sidescroller_player,), music=LEVEL_MUSIC)
+                        name="sidescroller9", entities=(Text("PARALLAX WITH MOVING LAYERS", pos=(36,90)), sidescroller_player,), music=MAIN_MUSIC)
     # Getting weird with layers
     # - This is a light-hearted troll I've seen in a couple Super Mario World Kaizo levels.
     # - Uses parallax to have the ground move with the frame.
@@ -560,7 +561,7 @@ def run_demo():
                                     }),
                         backgrounds=(Layer("demo_bg_smol.png"), TiledLayer(level_tset, "demo_scr9_bg.txt", {**STG_TILES,"C1":(DrawableTile, {"idx":(51)})},
                                                                            components=(Text("SORRY", pos=(84,18)),))),
-                        name="sidescroller10", entities=(sidescroller_player, ExitArea("sidescroller11", pos=(-100,500), hb_dim=(408,1))), music=LEVEL_MUSIC, kill_margins=500)
+                        name="sidescroller10", entities=(sidescroller_player, ExitArea("sidescroller11", pos=(-100,500), hb_dim=(408,1))), music=MAIN_MUSIC, kill_margins=500)
     # Spawners and enemies
     # - Tiles that make entities appear.
     # - Entities other than the player sprite can interact with layers too.
@@ -573,7 +574,7 @@ def run_demo():
                                     }),
                         backgrounds=(MovingTiledLayer(level_tset, "demo_scr10_bg.txt", BCK_SOLID, destinations=(((0,40),0),((0,0),0))),
                                      Layer(config.CANVAS_DIM, components=(Drawable("demo_bg_scr10.png", pos=(72,0)),))),
-                        name="sidescroller11", entities=(Text("SPAWNERS", pos=(136,18)), sidescroller_player,), music=LEVEL_MUSIC)
+                        name="sidescroller11", entities=(Text("SPAWNERS", pos=(136,18)), sidescroller_player,), music=MAIN_MUSIC)
     # Different enemy behaviours
     # - One example enemy turns around when encountering a platform border; the other drops.
     # - Most basic enemy behaviour distinction in Super Mario Bros.
@@ -589,7 +590,7 @@ def run_demo():
                                                                                  "speed":GOON_SPEED, "direction":"left", "tags":("lethal",),
                                                                                  "anims":ss_enemy_anims, "hb_adjust":ss_enemy_hb_adjust})})
                                     }),
-                        name="sidescroller12", entities=(Text("ENEMY BEHAVIOURS", pos=(18,18)), sidescroller_player,), music=LEVEL_MUSIC)
+                        name="sidescroller12", entities=(Text("ENEMY BEHAVIOURS", pos=(18,18)), sidescroller_player,), music=MAIN_MUSIC)
     # Stompable enemies
     # - Same kind of behaviours as enemies in the previous board.
     # - These ones can be killed by jumping on them.
@@ -607,7 +608,7 @@ def run_demo():
                                                                                  "anims":ss_enemy_anims, "hb_adjust":ss_enemy_hb_adjust,
                                                                                  "sounds":{"stomp":"stomp.ogg"}})})
                                     }),
-                        name="sidescroller13", entities=(Text("YOU CAN STOMP THESE", pos=(18,18)), sidescroller_player,), music=LEVEL_MUSIC)
+                        name="sidescroller13", entities=(Text("YOU CAN STOMP THESE", pos=(18,18)), sidescroller_player,), music=MAIN_MUSIC)
     # Jumping enemies
     # - More enemy behaviours.
     # - One enemy does smaller jumps continuously, the other one does bigger jumps on a timer.
@@ -626,7 +627,7 @@ def run_demo():
                                                                                "anims":ss_enemy_anims, "hb_adjust":ss_enemy_hb_adjust,
                                                                                "sounds":{"stomp":"stomp.ogg"}})})
                                     }),
-                        name="sidescroller14", entities=(Text("THEY CAN JUMP NOW", pos=(50,18)), sidescroller_player,), music=LEVEL_MUSIC)
+                        name="sidescroller14", entities=(Text("THEY CAN JUMP NOW", pos=(50,18)), sidescroller_player,), music=MAIN_MUSIC)
     # Hovering enemies and spawner options
     # - These enemies hover in a direction, can oscillate perpendicularly, and can have a patrolling behaviour or not (velocity controlled).
     # - Spawners can be set for different maximum numbers of spawned enemies allowed at the same time, and can have different cooldowns between spawns.
@@ -647,7 +648,7 @@ def run_demo():
                                                         "obj_limit":2, "cooldown":2000}),
                                     "s4": (SpawnerTile, {"obj":(GravityOrb, {"start_label":"stage2", "exit_label":"down"})}),
                                     }),
-                        name="sidescroller15", entities=(Text("SPAWNER", pos=(50,18)), Text("SETTINGS", pos=(50,34)), sidescroller_player,), music=LEVEL_MUSIC)
+                        name="sidescroller15", entities=(Text("SPAWNER", pos=(50,18)), Text("SETTINGS", pos=(50,34)), sidescroller_player,), music=MAIN_MUSIC)
 
 
     ###########
