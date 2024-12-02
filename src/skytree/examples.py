@@ -101,7 +101,8 @@ def run_demo():
 
     DBOOST = 1000
 
-    LEVEL_MUSIC = "skytree_stage.ogg"
+    LEVEL_MUSIC = "skytree_groove.ogg"
+    PUNG_MUSIC = "skytree_bounce.ogg"
 
     #####
     # Tilesets that can be defined outside their owners:
@@ -658,7 +659,7 @@ def run_demo():
     # - Interaction between differently shaped hitboxes.
     TiledBoard(TiledLayer(TileSet("terrain.png", TILE_DIM), "demo_pung.txt", STG_TILES), name="pung",
                pos=(0,10), entities=(Text("SPACE TO SHOOT", pos=(10,2)), PungPlayer(), PungBall),
-               border_policies=("solid", None), kill_margins=100, music=LEVEL_MUSIC)
+               border_policies=("solid", None), kill_margins=100, music=PUNG_MUSIC)
 
     game.run()
 
