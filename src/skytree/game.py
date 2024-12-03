@@ -82,10 +82,10 @@ class Game(Updateable, Drawable, KeyCommandReader, metaclass=Singleton):
         """The maximum frames per second. FPS must always be capped."""
 
         # Set display.
-        self.fullscreen = config.START_FULLSCREEN
-        """Whether the game's running fullscreen or not."""
         self._fullscreen_scale = 1
         """Window fullscreen scaling factor."""
+        self.fullscreen = config.START_FULLSCREEN
+        """Whether the game's running fullscreen or not."""
         
         # Caption.
         pygame.display.set_caption(config.CAPTION)
@@ -142,8 +142,8 @@ class Game(Updateable, Drawable, KeyCommandReader, metaclass=Singleton):
             self._screen = pygame.display.set_mode((self.width * config.WINDOW_MAGNIFY, self.height * config.WINDOW_MAGNIFY), (FULLSCREEN))
             display_info = pygame.display.Info()
             # Calculate and apply scaling factor
-            self._fullscreen_scale = min(display_info.current_w / self.canvas.get_width(), display_info.current_h / self.canvas.get_height())
-            self._window = pygame.Surface((int(self.canvas.get_width() * self._fullscreen_scale), int(self.canvas.get_height() * self._fullscreen_scale)))
+            self._fullscreen_scale = min(display_info.current_w / self.width, display_info.current_h / self.height)
+            self._window = pygame.Surface((int(self.width * self._fullscreen_scale), int(self.height * self._fullscreen_scale)))
             # Center the window
             self._window_rect = self._window.get_rect()
             self._window_rect.center = (display_info.current_w // 2, display_info.current_h // 2)
@@ -282,7 +282,7 @@ class Game(Updateable, Drawable, KeyCommandReader, metaclass=Singleton):
         
         clock = pygame.time.Clock()
         dt = 0 # Delta time in milliseconds
-
+        
         done = False
         while not done:
             
@@ -310,10 +310,10 @@ class Game(Updateable, Drawable, KeyCommandReader, metaclass=Singleton):
             
             # SCALE canvas into window; BLIT window into screen; FLIP display
             if self._fullscreen:
-                pygame.transform.scale(self.canvas, (int(self.canvas.get_width() * self._fullscreen_scale), 
-                                                     int(self.canvas.get_height() * self._fullscreen_scale)), self._window)
+                pygame.transform.scale(self.canvas, (int(self.width * self._fullscreen_scale), 
+                                                     int(self.height * self._fullscreen_scale)), self._window)
             elif config.WINDOW_MAGNIFY != 1:
-                pygame.transform.scale(self.canvas, (self._window.get_width(), self._window.get_height()), self._window)
+                pygame.transform.scale(self.canvas, (self._window_rect.width, self._window_rect.height), self._window)
             self._screen.blit(self._window, self._window_rect)
             pygame.display.flip()
             

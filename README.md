@@ -1,8 +1,8 @@
 # Skytree
 2D game framework for Python
-_Version 0.1.1_
+_Version 0.2.0_
 
-Skytree is a flexible, easy-to-use 2D game framework that leverages Pygame for creating side-scrolling platformers and other games with Python.
+Skytree is a 2D game framework that helps you organize and run common game structures and operations.
 
 ![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey)
 
