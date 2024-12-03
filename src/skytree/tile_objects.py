@@ -380,7 +380,7 @@ class CheckpointTile(StartTile, CollidableTile):
         """
         self.board = board
         """The Board this checkpoint points to."""
-        self._sound = ResourceManager().get_sound(config.SOUND_ACTIVATE_CHECKPOINT)
+        self._sound = ResourceManager().get_sound(config.SOUND_ACTIVATE_CHECKPOINT) if config.SOUND_ACTIVATE_CHECKPOINT else None
         """A sound to play on activation."""
         super().__init__(owner=owner, name=name, tags=tags+("checkpoint",), **kwargs)
         
@@ -404,7 +404,8 @@ class CheckpointTile(StartTile, CollidableTile):
         if value:
             if not self.active:
                 self.game.active_stage.checkpoint = self
-                self._sound.play()
+                if self._sound:
+                    self._sound.play()
         elif self.active:
             self.game.active_stage.checkpoint = None
 

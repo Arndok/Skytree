@@ -46,7 +46,7 @@ class Stage:
         """The object holding the current point of entry (entry_state and start_label)."""
         self.game = game.Game()
         """The active Game instance."""
-        self._beat_sound = ResourceManager().get_sound(config.SOUND_ENTER_STAGE)
+        self._beat_sound = ResourceManager().get_sound(config.SOUND_ENTER_STAGE) if config.SOUND_ENTER_STAGE else None
         """A sound to be played on beating a stage."""
 
     @property
@@ -90,7 +90,8 @@ class Stage:
         if not start_label:
             start_label = self.exit_label
         # Exit stage, pass exit label if present
-        self._beat_sound.play()
+        if self._beat_sound:
+            self._beat_sound.play()
         self.game.set_state(exit_state, start_label=start_label, exit_label=exit_label)
         self.game.active_stage = Stage(self.game.state)
         # Reset stage checkpoint

@@ -25,7 +25,6 @@ def run_demo():
 
     # Set configurations
 
-    import os
     #config.set_all_paths("[desired_path]/") # Use this to set up your resources folders. You can also set them separately (check out config functions).
     config.CANVAS_DIM = (208, 160)
     config.WINDOW_MAGNIFY = 4
