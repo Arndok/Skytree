@@ -129,7 +129,7 @@ player_starting_pos = (120, 108)
 topdown_player = TopDownPlayer(tileset=player_tileset, pos=player_starting_pos, anims=player_anims)
 
 # Setting up the board.
-#     name: by giving a board a name, it will automatically become available as a game state.
+#     name: by giving a board a name, it will automatically become available as a game state on instantiation.
 #     border_policies: what happens by default when a sprite collides with the frame borders.
 #         We'll set this one for screen wrap because that's fun.
 #     music: self-explanatory. Try also skytree_groove.org or skytree_bounce.org if you want!
