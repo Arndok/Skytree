@@ -12,14 +12,35 @@
     <p><span class="code">A&nbsp;repository&nbsp;of&nbsp;file&nbsp;manipulation&nbsp;functions.<br>
 &nbsp;<br>
 Functions:<br>
-<a href="#-reverse_tilemap">reverse_tilemap</a>(in_path,&nbsp;out_path):&nbsp;generate&nbsp;a&nbsp;second&nbsp;tilemap&nbsp;with&nbsp;horizontally&nbsp;reversed&nbsp;symbols.</span></p>
+<a href="#-reverse_tilemap">reverse_tilemap</a>(in_path,&nbsp;out_path):&nbsp;generate&nbsp;a&nbsp;second&nbsp;tilemap&nbsp;with&nbsp;horizontally&nbsp;reversed&nbsp;symbols.<br>
+<a href="#-bake_bordered_mass">bake_bordered_mass</a>(in_path,&nbsp;out_path,&nbsp;tile_symbol,&nbsp;edge_borders):&nbsp;calculate&nbsp;tileset&nbsp;index&nbsp;of&nbsp;each&nbsp;tile&nbsp;in&nbsp;a&nbsp;bordered&nbsp;mass.</span></p>
 <p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><span style="color: #000099; font-style: italic;">csv</span><br>
+</td><td class="multicolumn"><span style="color: #000099; font-style: italic;">os</span><br>
+</td><td class="multicolumn"></td><td class="multicolumn"></td></tr></table></td></tr></table><p>
 <table class="section">
 <tr class="decor functions-decor heading-text">
 <td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
     
 <tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
-<td class="singlecolumn"><dl><dt><a name="-reverse_tilemap"><strong>reverse_tilemap</strong></a>(in_path, out_path=None)</dt><dd><span class="code">Generate&nbsp;a&nbsp;second&nbsp;tilemap&nbsp;with&nbsp;horizontally&nbsp;reversed&nbsp;symbols.<br>
+<td class="singlecolumn"><dl><dt><a name="-bake_bordered_mass"><strong>bake_bordered_mass</strong></a>(in_path, out_path=None, tile_symbol=0, edge_borders=False)</dt><dd><span class="code">Calculate&nbsp;index&nbsp;of&nbsp;each&nbsp;tile&nbsp;in&nbsp;a&nbsp;tileset&nbsp;mass.<br>
+&nbsp;<br>
+Take&nbsp;an&nbsp;input&nbsp;file&nbsp;with&nbsp;a&nbsp;tile&nbsp;symbol&nbsp;that&nbsp;represents&nbsp;a&nbsp;tile&nbsp;that&nbsp;belongs<br>
+to&nbsp;a&nbsp;bordered&nbsp;mass&nbsp;(default&nbsp;0)&nbsp;and&nbsp;calculate&nbsp;the&nbsp;symbol&nbsp;of&nbsp;each&nbsp;of&nbsp;those&nbsp;tiles<br>
+in&nbsp;function&nbsp;of&nbsp;the&nbsp;presence&nbsp;or&nbsp;absence&nbsp;of&nbsp;each&nbsp;of&nbsp;their&nbsp;8&nbsp;neighbours.<br>
+If&nbsp;output&nbsp;path&nbsp;is&nbsp;not&nbsp;provided,&nbsp;default&nbsp;to&nbsp;[in_name]_bordered_mass_[tile_symbol].txt.<br>
+if&nbsp;edge_borders&nbsp;is&nbsp;set&nbsp;to&nbsp;False,&nbsp;out-of-bounds&nbsp;positions&nbsp;will&nbsp;be&nbsp;treated&nbsp;as&nbsp;neighbour&nbsp;matches.<br>
+&nbsp;<br>
+Check&nbsp;terrain.png&nbsp;on&nbsp;the&nbsp;example_resources&nbsp;folder&nbsp;to&nbsp;see&nbsp;how&nbsp;the&nbsp;tiles&nbsp;should&nbsp;be&nbsp;ordered&nbsp;in&nbsp;the&nbsp;tileset.<br>
+Orthogonal&nbsp;neighbours&nbsp;are&nbsp;a&nbsp;bitmask,&nbsp;but&nbsp;diagonals&nbsp;are&nbsp;not&nbsp;because&nbsp;they&nbsp;only&nbsp;matter&nbsp;in&nbsp;some&nbsp;circumstances.<br>
+It's&nbsp;a&nbsp;whole&nbsp;thing.&nbsp;Contrast&nbsp;the&nbsp;png&nbsp;with&nbsp;the&nbsp;code&nbsp;of&nbsp;this&nbsp;function&nbsp;if&nbsp;you're&nbsp;really&nbsp;curious;<br>
+otherwise,&nbsp;just&nbsp;copy&nbsp;the&nbsp;tile&nbsp;order&nbsp;in&nbsp;the&nbsp;png.</span></dd></dl>
+ <dl><dt><a name="-reverse_tilemap"><strong>reverse_tilemap</strong></a>(in_path, out_path=None)</dt><dd><span class="code">Generate&nbsp;a&nbsp;second&nbsp;tilemap&nbsp;with&nbsp;horizontally&nbsp;reversed&nbsp;symbols&nbsp;using&nbsp;CSV.<br>
 &nbsp;<br>
 If&nbsp;output&nbsp;path&nbsp;is&nbsp;not&nbsp;provided,&nbsp;default&nbsp;to&nbsp;[in_name]_reversed.txt.</span></dd></dl>
 </td></tr></table>

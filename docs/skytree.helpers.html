@@ -14,6 +14,7 @@
 Functions:<br>
 <a href="#-nop">nop</a>():&nbsp;do&nbsp;nothing&nbsp;(to&nbsp;be&nbsp;used&nbsp;as&nbsp;a&nbsp;default&nbsp;argument&nbsp;function).<br>
 <a href="#-is_collection">is_collection</a>(obj):&nbsp;check&nbsp;if&nbsp;obj&nbsp;is&nbsp;"intuitively"&nbsp;a&nbsp;collection.<br>
+<a href="#-tupleize">tupleize</a>(obj):&nbsp;put&nbsp;obj&nbsp;inside&nbsp;a&nbsp;tuple&nbsp;unless&nbsp;it's&nbsp;one&nbsp;itself.<br>
 <a href="#-repack2">repack2</a>(obj):&nbsp;turn&nbsp;obj&nbsp;into&nbsp;(obj,&nbsp;obj)&nbsp;if&nbsp;it's&nbsp;a&nbsp;single&nbsp;value.<br>
 <a href="#-repack4">repack4</a>(obj):&nbsp;turn&nbsp;obj&nbsp;into&nbsp;(obj,&nbsp;obj,&nbsp;obj,&nbsp;obj)|(*obj,&nbsp;*obj)&nbsp;if&nbsp;it's&nbsp;a&nbsp;single&nbsp;value&nbsp;or&nbsp;a&nbsp;collection&nbsp;with&nbsp;size&nbsp;2.<br>
 <a href="#-bake_obj">bake_obj</a>(obj):&nbsp;build&nbsp;the&nbsp;object&nbsp;if&nbsp;it's&nbsp;a&nbsp;type&nbsp;or&nbsp;a&nbsp;tuple&nbsp;(type,&nbsp;{kwargs}).<br>
@@ -33,5 +34,6 @@ If&nbsp;it's&nbsp;a&nbsp;tuple,&nbsp;try&nbsp;to&nbsp;build&nbsp;it&nbsp;assumin
  <dl><dt><a name="-nop"><strong>nop</strong></a>()</dt><dd><span class="code">Do&nbsp;nothing.</span></dd></dl>
  <dl><dt><a name="-repack2"><strong>repack2</strong></a>(obj)</dt><dd><span class="code">Return&nbsp;obj&nbsp;if&nbsp;it's&nbsp;a&nbsp;collection&nbsp;of&nbsp;2&nbsp;elements&nbsp;or&nbsp;a&nbsp;tuple&nbsp;(obj,&nbsp;obj)&nbsp;otherwise.</span></dd></dl>
  <dl><dt><a name="-repack4"><strong>repack4</strong></a>(obj)</dt><dd><span class="code">Return&nbsp;obj&nbsp;if&nbsp;it's&nbsp;a&nbsp;collection&nbsp;of&nbsp;4&nbsp;elements,&nbsp;a&nbsp;tuple&nbsp;(*obj,&nbsp;*obj)&nbsp;if&nbsp;it's&nbsp;a&nbsp;collection&nbsp;of&nbsp;2&nbsp;elements&nbsp;or&nbsp;a&nbsp;tuple&nbsp;(obj,&nbsp;obj,&nbsp;obj,&nbsp;obj)&nbsp;otherwise.</span></dd></dl>
+ <dl><dt><a name="-tupleize"><strong>tupleize</strong></a>(obj)</dt><dd><span class="code">Put&nbsp;obj&nbsp;inside&nbsp;a&nbsp;tuple&nbsp;unless&nbsp;it's&nbsp;one&nbsp;itself.</span></dd></dl>
 </td></tr></table>
 </body></html>
