@@ -33,7 +33,7 @@ pip install skytree
 
 Skytree requires `pygame` version 2.6. When you install via pip, this will be handled automatically.
 
-### Basic example
+## Basic example
 
 Setting up a controllable character in a blank space:
 
