@@ -170,7 +170,7 @@ def run_demo():
     hov_enemy_hb_adjust = (-4, -2, 2, 1)
 
     #####
-    # You can use the Skytree classes to define your own!
+    # You can leverage Skytree classes to define your own!
 
     class Text(Drawable):
         """A quick and dirty text object."""
