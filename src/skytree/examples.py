@@ -114,7 +114,7 @@ def run_demo():
     # whereas tiled layers' tilesets are not (so they can be shared).
 
     level_tset = TileSet("terrain.png", TILE_DIM)
-    map_tset = TileSet("paths.png", MAP_TILE_DIM)
+    map_tset = TileSet("demo_map_tiles.png", MAP_TILE_DIM)
     hook_ts = TileSet("hook.png", TILE_DIM)
 
     #####
@@ -390,6 +390,7 @@ def run_demo():
                     "A": (StageTile, {"idx": (0, 1), "name": "stage1", "entry_state": "simple", "traversable": True, "tags": ("right",)}),
                     "B": (StageTile, {"idx": (0, 1), "name": "stage2", "entry_state": "sidescroller1", "tags": ("left", "down")}),
                     "C": (StageTile, {"idx": (0, 1), "name": "stage3", "entry_state": "pung", "tags": ("left", "up")}),
+                    "w": (AnimatedTile, {"idx": (16,17,18,19)}),
                 }
 
     STG_TILES = {
@@ -430,7 +431,8 @@ def run_demo():
     # Instantiating a board with a name makes it automatically available as a game state.
 
     OnePlayerTiledBoard(TiledLayer(map_tset, "demo_map.txt", MAP_TILES, tags=("persistent_tiles",)), music="fade", name="map", first_state=True,
-                        backgrounds=(Drawable("demo_map.png"),), entities=(map_player,))
+                        backgrounds=(TiledLayer(map_tset, "demo_map_bg.txt", MAP_TILES, frame_duration=600), Drawable("demo_map.png"),),
+                        entities=(map_player,))
 
     ###########
     # STAGE 1 #
