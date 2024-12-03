@@ -2,44 +2,12 @@
 2D game framework for Python
 _Version 0.2.0_
 
-Skytree is a 2D game framework that helps you organize and run common game structures and operations.
+Skytree is a flexible, easy-to-use game framework that leverages Pygame for creating side-scrolling platformers and other kinds of 2D games.
 
 ![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey)
 
 This project is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License, which allows you to share and adapt the material for non-commercial purposes as long as you provide appropriate attribution and share any adaptations under the same license.  
 For more information, see [CC BY-NC-SA 4.0 License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-
-## Instrucciones para el consultor (entrega PEC2)
-Vídeo explicativo sobre el motor en https://www.youtube.com/watch?v=P-MAbDhIuok
-
-INSTRUCCIONES DE INSTALACIÓN Y USO PARA LA DEMO JUGABLE:
-- Opción A (ejecutable para Windows; probado en Windows 10): 
-  - Descargar el archivo Skytree Demo.zip
-  - Descomprimir y ejecutar skytree_demo.exe
-- Opción B (paquete de Python; probado con Python 3.11 y Pygame 2.6)
-  - Descargar e instalar Python 3.11 (https://www.python.org/downloads/)
-  - Instalar Skytree mediante pip:
-```
-pip install skytree
-```
-  - Ejecutar la demo desde el paquete:
-```python
-import skytree.examples
-skytree.examples.run_demo()
-```
-
-Características en la demo:
-- Renderizado de gráficos 2D; reproducción de música y sonidos.
-- Estado de pausa que permite salir de una fase al mapa, o bien cerrar el juego desde el mapa.
-- Mapa: estado modificable y persistente; jugador con movimiento por casillas.
-- Fase 1: pantalla simple con un personaje jugador con movimiento omnidireccional.
-- Fase 2: características para juegos de plataformas con vista lateral; opciones para configurar y conectar los espacios; sistema de capas con posibilidad de configurar objetos por casillas; personaje jugador que puede saltar y agacharse, diferentes entidades enemigas y objetos generadores de entidades; sistema de puntos de control (se puede salir de la fase mediante el estado de pausa y volver a entrar manteniendo el último punto de control activado).
-- Fase 3: clon de Pang; colisiones entre círculos y rectángulos; uso de clases nuevas en el script: personaje jugador con puntos de vida y disparo comprometido, entidades que generan otras entidades y que construyen sus atributos de manera dinámica a partir de un factor de tamaño.
-- Controles:
-  - Los personajes se mueven con WASD o las flechas. El personaje jugador de vista lateral puede saltar con A / arriba y agacharse con S / abajo. 
-  - Enter para entrar en las fases.
-  - ESC para activar el estado de pausa.
-  - Espacio para disparar en la fase 3.
 
 ## Features
 Skytree uses Pygame to render 2D graphics, play audio and read user inputs. At the moment, only keyboard inputs are supported.
@@ -67,7 +35,7 @@ Skytree requires `pygame` version 2.6. When you install via pip, this will be ha
 
 ### Basic example
 
-Here's how you would set up a character in a space:
+Setting up a controllable character in a blank space:
 
 ```Python
 #######################################
@@ -167,6 +135,8 @@ topdown_player = TopDownPlayer(tileset=player_tileset, pos=player_starting_pos, 
 #     music: self-explanatory. Try also skytree_groove.org or skytree_bounce.org if you want!
 #     entities: a collection of entities to be added to the level on instantiation (just one for this example).
 #     first_state: setting this as True will connect the board to the game mannager on instantiation.
+# You'll notice a blue background. This is a default; you can change it by assigning
+#     config.BOARD_BGCOLOR = ([0-255], [0-255], [0-255]) before instantiating the board.
 Board(name="simple", border_policies="wrap", music="skytree_bask.ogg", entities=(topdown_player,), first_state=True)
 
 #############################
