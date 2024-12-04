@@ -258,19 +258,20 @@ class KeyCommandReader(CommandReader):
     deactivate_all(): deactivate all commands.
     """
     
-    def check_commands(self):
+    def check_commands(self, *commands):
         """For every command, activate it if its associated keys are being pressed; deactivate it otherwise."""
         if not self.game:
-            print(self, "here")
+            warnings.warn("A KeyCommandReader is running without being active.", RuntimeWarning)
             return
+        coms = commands if commands else self._commands
         try:
-            for com in self._commands:
+            for com in coms:
                 if com in self.game.pressing:
                     self.process(com, **{"press": True})
                 else:
                     self.process(com, **{"press": False})
             for component in self._cmd_readers:
-                component.check_commands()
+                component.check_commands(commands)
         except AttributeError:
             warnings.warn("A KeyCommandReader is running without a KeyboardReader in Game.", RuntimeWarning)
             return

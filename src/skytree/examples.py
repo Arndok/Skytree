@@ -40,7 +40,7 @@ def run_demo():
         **{key: "right" for key in (K_d, K_RIGHT)},
         **{key: "down" for key in (K_s, K_DOWN)},
         K_SPACE: "action1", #Shoot
-        **{key: "action2" for key in (K_RCTRL, K_LCTRL)}, #Run
+        **{key: "run" for key in (K_RCTRL, K_LCTRL)}, #Run
         K_f: "fullscreen",
         K_ESCAPE: "esc",
         K_RETURN: "enter"
@@ -562,7 +562,7 @@ def run_demo():
                                     }),
                         backgrounds=(Layer("demo_bg_smol.png"), TiledLayer(level_tset, "demo_scr9_bg.txt", {**STG_TILES,"C1":(DrawableTile, {"idx":(51)})},
                                                                            components=(Text("SORRY", pos=(84,18)),))),
-                        name="sidescroller10", entities=(sidescroller_player, ExitArea("sidescroller11", pos=(-100,500), hb_dim=(408,1))), music=MAIN_MUSIC, kill_margins=500)
+                        name="sidescroller10", entities=(sidescroller_player, ExitArea("sidescroller11", pos=(-100,500), hb_dim=(500,1))), music=MAIN_MUSIC, kill_margins=500)
     # Spawners and enemies
     # - Tiles that make entities appear.
     # - Entities other than the player sprite can interact with layers too.

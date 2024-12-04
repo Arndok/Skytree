@@ -23,6 +23,7 @@ from skytree.key_commands import KeyCommandReader
 from skytree.layers import Layer, TiledLayer
 from skytree.stage import Stage
 from skytree.user_interface import PauseState
+from skytree.sprites import SidescrollerPlayer
 
 class LayerContainer(Updateable, Drawable, Collidable):
     """Combine Updateable, Drawable and Collidable."""
@@ -182,6 +183,9 @@ class Board(Updateable, Drawable, Collidable, KeyCommandReader, GameState):
                 if target_pos:
                     player.pos = (target_pos[0] - player.hitbox.offset_x, target_pos[1] - player.hitbox.offset_y)
                     player._reset_data["attributes"]["pos"] = player.pos
+            # Refactor this ASAP
+            if isinstance(player, SidescrollerPlayer):
+                player.check_commands("left", "right", "run")
 
     def leave(self, new_state=None, **kwargs):
         """Reset the board unless entering a pause state."""

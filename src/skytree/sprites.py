@@ -1450,6 +1450,13 @@ class TopDownPlayer(TopDownWalk, AccelerationSpeedUp, KeyCommandReader):
             # Check whether "up" is pressed
             self.activate_if_pressing("up")
     
+    def _command_run(self, press, **kwargs):
+        """Run or stop running."""
+        if press:
+            self.run()
+        else:
+            self.stop_running()
+    
     def _collided_exit(self, obj):
         """Activate the appropriate transition."""
         if "beat" in obj.tags:
