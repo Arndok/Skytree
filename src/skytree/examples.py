@@ -39,8 +39,8 @@ def run_demo():
         **{key: "up" for key in (K_w, K_UP)},
         **{key: "right" for key in (K_d, K_RIGHT)},
         **{key: "down" for key in (K_s, K_DOWN)},
-        K_SPACE: "action1", #Shoot
-        **{key: "run" for key in (K_RCTRL, K_LCTRL)}, #Run
+        K_SPACE: "shoot",
+        **{key: "run" for key in (K_RCTRL, K_LCTRL)},
         K_f: "fullscreen",
         K_ESCAPE: "esc",
         K_RETURN: "enter"
@@ -344,16 +344,16 @@ def run_demo():
             if not "dboost" in self.named or int(self.named["dboost"].time / 100)%2 == 0:
                 super().draw(canvas)
                 
-        def _command_action1(self, press, **kwargs):
+        def _command_shoot(self, press, **kwargs):
             """
-            Bind 'action1' command to shooting the hook.
+            Bind 'shoot' command to the hook.
             
             Shooting the hook is a commited action, so it blocks player commands.
             It's also on a slight delay so it feels heavier.
             """
             if press and not self.shooting and not self.vel_y:
                 if self.crouching:
-                    self._com_down_release()
+                    self._command_down(False)
                     if self.crouching: return
                 self.block_commands()
                 self.vel_x = 0
