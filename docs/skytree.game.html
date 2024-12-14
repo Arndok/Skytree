@@ -77,7 +77,7 @@ Variables&nbsp;used&nbsp;from&nbsp;config:&nbsp;CANVAS_DIM,&nbsp;MIXER_FREQUENCY
 Inherits&nbsp;all&nbsp;behaviour&nbsp;from&nbsp;<a href="skytree.component.html#Component">Component</a>,&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>,&nbsp;Positional,&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>&nbsp;and&nbsp;<a href="skytree.key_commands.html#KeyCommandReader">KeyCommandReader</a>.<br>
 Overrides&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>.<a href="#Game-draw">draw</a>(canvas).<br>
 &nbsp;<br>
-Deals&nbsp;with&nbsp;game&nbsp;loop,&nbsp;states&nbsp;and&nbsp;initial&nbsp;configuration.&nbsp;Holds&nbsp;game&nbsp;constants.<br>
+Deals&nbsp;with&nbsp;game&nbsp;loop,&nbsp;states&nbsp;and&nbsp;initial&nbsp;configuration.<br>
 A&nbsp;reference&nbsp;to&nbsp;this&nbsp;object&nbsp;is&nbsp;passed&nbsp;to&nbsp;<a href="skytree.component.html#Component">Component</a>&nbsp;init,&nbsp;and&nbsp;will&nbsp;be&nbsp;propagated&nbsp;to&nbsp;all&nbsp;present<br>
 &nbsp;&nbsp;and&nbsp;future&nbsp;components&nbsp;through&nbsp;init&nbsp;and&nbsp;add_component&nbsp;respectively.<br>
 Being&nbsp;a&nbsp;singleton,&nbsp;it&nbsp;can&nbsp;also&nbsp;be&nbsp;accessed&nbsp;through&nbsp;further&nbsp;construction&nbsp;calls&nbsp;(i.e&nbsp;using&nbsp;<a href="#Game">Game</a>()).<br>
@@ -354,7 +354,7 @@ Methods inherited from <a href="skytree.key_commands.html#KeyCommandReader">skyt
 
 <dl><dt><a name="Game-block_command"><strong>block_command</strong></a>(self, command)</dt><dd><span class="code">Set&nbsp;command&nbsp;as&nbsp;blocked,&nbsp;then&nbsp;deactivate&nbsp;it.</span></dd></dl>
 
-<dl><dt><a name="Game-check_commands"><strong>check_commands</strong></a>(self)</dt><dd><span class="code">For&nbsp;every&nbsp;command,&nbsp;activate&nbsp;it&nbsp;if&nbsp;its&nbsp;associated&nbsp;keys&nbsp;are&nbsp;being&nbsp;pressed;&nbsp;deactivate&nbsp;it&nbsp;otherwise.</span></dd></dl>
+<dl><dt><a name="Game-check_commands"><strong>check_commands</strong></a>(self, *commands)</dt><dd><span class="code">For&nbsp;every&nbsp;command,&nbsp;activate&nbsp;it&nbsp;if&nbsp;its&nbsp;associated&nbsp;keys&nbsp;are&nbsp;being&nbsp;pressed;&nbsp;deactivate&nbsp;it&nbsp;otherwise.</span></dd></dl>
 
 <dl><dt><a name="Game-deactivate_all"><strong>deactivate_all</strong></a>(self)</dt><dd><span class="code">Deactivate&nbsp;all&nbsp;commands.</span></dd></dl>
 
