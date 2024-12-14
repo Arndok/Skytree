@@ -30,7 +30,7 @@ class Game(Updateable, Drawable, KeyCommandReader, metaclass=Singleton):
     Inherits all behaviour from Component, Updateable, Positional, Drawable and KeyCommandReader.
     Overrides Drawable.draw(canvas).
     
-    Deals with game loop, states and initial configuration. Holds game constants.
+    Deals with game loop, states and initial configuration.
     A reference to this object is passed to Component init, and will be propagated to all present
       and future components through init and add_component respectively.
     Being a singleton, it can also be accessed through further construction calls (i.e using Game()).

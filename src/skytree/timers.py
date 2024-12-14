@@ -58,7 +58,7 @@ class Countdown(Timer):
     Extends Timer.update(dt).
     
     Public methods:
-    on_time(): performs trigger action.
+    _on_time(): performs trigger action.
     """
     
     def __init__(self, init_time, trigger=nop, **kwargs):
@@ -80,39 +80,39 @@ class Countdown(Timer):
         """Initial time from which to count back."""
         return self._reset_data["attributes"]["time"]
         
-    def update(self, dt):
-        """Extend Timer to count time backwards and call self.on_time() when time reaches 0."""
-        super().update(-dt)
-        if self.time <= 0:
-            self.on_time()
-        
-    def on_time(self):
+    def _on_time(self):
         """Perform trigger action."""
         if isinstance(self._trigger, tuple):
             self._trigger[0](**self._trigger[1])
         else:
             self._trigger()
+        
+    def update(self, dt):
+        """Extend Timer to count time backwards and call self._on_time() when time reaches 0."""
+        super().update(-dt)
+        if self.time <= 0:
+            self._on_time()
 
 class Delay(Countdown):
     """
     A countdown that destroys itself when time reaches 0.
     
-    Extends Countdown.on_time()
+    Extends Countdown._on_time()
     """
     
-    def on_time(self):
+    def _on_time(self):
         """Extend Countdown to self-destroy when reaching 0."""
-        super().on_time()
+        super()._on_time()
         self.destroy()
             
 class Cycle(Countdown):
     """
     A countdown that resets when time reaches 0.
     
-    Extends Countdown.on_time()
+    Extends Countdown._on_time()
     """
     
-    def on_time(self):
+    def _on_time(self):
         """Extend Countdown to add init_time to time when reaching 0."""
-        super().on_time()
+        super()._on_time()
         self.time += self.init_time

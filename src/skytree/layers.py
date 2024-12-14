@@ -20,7 +20,7 @@ from skytree.resource_manager import ResourceManager
 from skytree.tile_objects import UpdateableTile, DrawableTile, CollidableTile, AnimatedTile
 from skytree.timers import Timer, Delay, Cycle
 
-class Layer(Drawable, Updateable):
+class Layer(Drawable, Updateable, Collidable):
     """
     Extend Drawable and Updateable to represent layer within a Board.
     
@@ -184,7 +184,7 @@ class MovingLayer(Layer):
         self._offset = self.pos
         self._destination = self._destinations[0][0]
         
-class TiledLayer(Layer, Collidable):
+class TiledLayer(Layer):
     """
     Extend Layer and Collidable to represent a tiled space.
     
