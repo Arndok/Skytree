@@ -9,6 +9,7 @@ repack2(obj): turn obj into (obj, obj) if it's a single value.
 repack4(obj): turn obj into (obj, obj, obj, obj)|(*obj, *obj) if it's a single value or a collection with size 2.
 bake_obj(obj): build the object if it's a type or a tuple (type, {kwargs}).
 distance(p1, p2): return euclidean distance between given 2D points.
+ComboClass(*classes): return a new class combining provided ones as arguments and generating an appropriate name.
 """
 
 from collections.abc import Sequence 
@@ -65,3 +66,11 @@ def bake_obj(obj):
 def distance(p1, p2):
     """Return number representing euclidean distance between two 2D points."""
     return ((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)**.5
+    
+def ComboClass(*classes):
+    """Return a new class combining provided ones as arguments and generating an appropriate name."""
+    if len(classes) < 2:
+        raise TypeError(f"At least two classes must be provided. Classes: {classes}")
+    if not all(isinstance(cls, type) for cls in classes):
+        raise TypeError(f"All arguments in *classes must be valid classes. Current arguments: {classes}")
+    return type("ComboClass_" + "_".join(cls.__name__ for cls in classes), classes, {})

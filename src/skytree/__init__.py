@@ -54,7 +54,7 @@ examples: a runnable demo!
 """
 
 __author__ = "Pablo Reyes de Rojas"
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 __all__ = [
     "config",
     "component",

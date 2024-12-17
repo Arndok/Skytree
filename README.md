@@ -1,6 +1,6 @@
 # Skytree
-2D game framework for Python
-_Version 0.2.1_
+2D game framework for Python  
+_Version 0.2.1_  
 
 Skytree is a flexible, easy-to-use game framework that leverages Pygame for creating side-scrolling platformers and other kinds of 2D games.
 
@@ -20,10 +20,15 @@ INSTRUCCIONES DE INSTALACIÓN Y USO PARA LA DEMO JUGABLE:
 - Opción B (paquete de Python; probado con Python 3.11 y Pygame 2.6)
   - Descargar e instalar Python 3.11 (https://www.python.org/downloads/)
   - Instalar Skytree mediante pip:
-```
+```bash
 pip install skytree
 ```
   - Ejecutar la demo desde el paquete:
+```bash
+# especificando versión de Python si es necesario (e.g, "python3.11")
+python -m skytree.examples
+```
+  - O bien desde el paquete:
 ```python
 import skytree.examples
 skytree.examples.run_demo()
@@ -54,17 +59,86 @@ There is a system of classes dedicated to modeling game entities and spaces, wit
 
 ## Installation
 
+Skytree requires a Python version between 3.6 and 3.11. If you have several different Python versions installed on the same environment and the default Python version (used by `python` command) is not compatible with Skytree, you'll have to specify another Python version within the supported range. E.g:
+```bash
+# instead of:
+python setup.py install
+# use:
+python3.11 setup.py install
+```
+
 ### Install via pip
 
 The easiest way to install Skytree is through pip:
 
-```
+```bash
 pip install skytree
 ```
 
-### Dependencies
+Alternately, you can download the `.whl` file from [PyPI](https://pypi.org/project/skytree/) and install it locally with pip:
 
-Skytree requires `pygame` version 2.6. When you install via pip, this will be handled automatically.
+```bash
+pip install skytree-<version>-py3-none-any.whl
+```
+
+### Manual Installation
+
+If you'd rather install Skytree manually, follow these steps:
+
+1. **Download**  
+   You can get the source code of Skytree from the [GitHub](https://pypi.org/project/skytree/) as a `.zip` file or [PyPI](https://github.com/Arndok/Skytree) as a `.tar.gz`. On Windows, tar files may require additional software (like 7zip) to extract.
+
+2. **Extract**  
+   Once downloaded, extract the contents of the archive:
+
+   ```bash
+   tar -xvf skytree-<version>.tar.gz
+   # or
+   unzip skytree-<version>.zip
+   ```
+
+3. **Install**  
+   Navigate to the extracted folder and run:
+   ```bash
+   cd skytree-<version>
+   # specify python version if needed (e.g, "python3.11")
+   python setup.py install
+   ```
+
+### Testing the installation
+
+To make sure the package has been properly installed, you can run the playable demo like this:
+```bash
+# specify python version if needed (e.g, "python3.11")
+python -m skytree.examples
+```
+
+### Notes
+
+- **Dependencies:**
+  Skytree requires `pygame` version 2.6. This will be handled automatically on installation.
+  
+- **Using a virtual environment:**
+  If you'd like to isolate Skytree and its dependencies from other Python projects, consider using a virtual environment:
+
+  ```bash
+  # Setting up the virtual environment:
+  python -m venv skytree-env
+  
+  # Activating the virtual environment:
+  # On Windows:
+  skytree-env\Scripts\activate
+  # On macOS/Linux:
+  source skytree-env/bin/activate
+  
+  # (Install / use the package)
+  
+  # Deactivating the virtual environment:
+  # On Windows:
+  skytree-env\Scripts\deactivate
+  # On macOS/Linux:
+  source skytree-env/bin/deactivate
+  ```
 
 ## Basic example
 
