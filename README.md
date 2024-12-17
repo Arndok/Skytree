@@ -100,7 +100,6 @@ If you'd rather install Skytree manually, follow these steps:
 3. **Install**  
    Navigate to the extracted folder and run:
    ```bash
-   cd skytree-<version>
    # specify python version if needed (e.g, "python3.11")
    python setup.py install
    ```
@@ -126,18 +125,16 @@ python -m skytree.examples
   python -m venv skytree-env
   
   # Activating the virtual environment:
-  # On Windows:
-  skytree-env\Scripts\activate
-  # On macOS/Linux:
   source skytree-env/bin/activate
+  # Or, on Windows:
+  skytree-env\Scripts\activate
   
   # (Install / use the package)
   
   # Deactivating the virtual environment:
-  # On Windows:
-  skytree-env\Scripts\deactivate
-  # On macOS/Linux:
   source skytree-env/bin/deactivate
+  # Or, on Windows:
+  skytree-env\Scripts\deactivate
   ```
 
 ## Basic example
@@ -252,3 +249,5 @@ Board(name="simple", border_policies="wrap", music="skytree_bask.ogg", entities=
 
 game.run()
 ```
+
+You can check out further demonstrations in the examples module.
