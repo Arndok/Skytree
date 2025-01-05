@@ -9,9 +9,10 @@ Skytree is a flexible, easy-to-use game framework that leverages Pygame for crea
 This project is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License, which allows you to share and adapt the material for non-commercial purposes as long as you provide appropriate attribution and share any adaptations under the same license.  
 For more information, see [CC BY-NC-SA 4.0 License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-## Instrucciones para el consultor (entrega PEC3)
+## Instrucciones para el consultor (entrega PEC4/5)
 (PEC2) Vídeo explicativo sobre el motor en https://youtu.be/P-MAbDhIuok
 (PEC3) Vídeo explicativo sobre la demo jugable en https://youtu.be/XDDUpM0iNyM
+(PEC5) Trailer en https://youtu.be/YPQkTTSJSc0
 
 INSTRUCCIONES DE INSTALACIÓN Y USO PARA LA DEMO JUGABLE:
 - Opción A (ejecutable para Windows; probado en Windows 10): 
