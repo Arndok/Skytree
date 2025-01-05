@@ -1,7 +1,7 @@
 """
 Skytree - A 2D game framework for Python
 
-Version: 0.2.1
+Version: 0.2.2
 
 This project is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. 
 You may share and adapt the material for non-commercial purposes, as long as you provide appropriate attribution and share any adaptations under the same license.
@@ -54,7 +54,7 @@ examples: a runnable demo!
 """
 
 __author__ = "Pablo Reyes de Rojas"
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 __all__ = [
     "config",
     "component",
