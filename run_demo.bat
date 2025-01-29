@@ -1,5 +1,5 @@
 @echo off
-set PYTHON_EXE=C:\Users\harol\AppData\Local\Microsoft\WindowsApps\python3.11.exe
+set PYTHON_EXE=python3.11
 set PYTHONPATH=%cd%\src
 %PYTHON_EXE% -m skytree.examples
 pause

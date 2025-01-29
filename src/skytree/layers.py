@@ -29,8 +29,6 @@ class Layer(Drawable, Updateable, Collidable):
     
     Supports parallax.
     
-    Public methods:
-    get_position_of(label): return the position of the component with name matching given label.
     """
     
     def __init__(self, canvas, parallax_adjust=(0,0,0,0), **kwargs):
@@ -59,10 +57,6 @@ class Layer(Drawable, Updateable, Collidable):
     def board(self):
         """Current game board."""
         return self.game.state.board if self.game else None
-        
-    def get_position_of(self, label):
-        """Return the position of the component with name matching given label; return None if absent."""
-        return self.named[label].pos if label in self.named else None
         
 class MovingLayer(Layer):
     """
