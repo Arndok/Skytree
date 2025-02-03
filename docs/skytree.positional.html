@@ -37,7 +37,10 @@ A&nbsp;<a href="skytree.component.html#Component">Component</a>&nbsp;that&nbsp;h
 Inherits&nbsp;all&nbsp;<a href="skytree.component.html#Component">Component</a>&nbsp;behaviour.<br>
 &nbsp;<br>
 Velocity&nbsp;can&nbsp;be&nbsp;descriptive&nbsp;or&nbsp;prescriptive.&nbsp;Implement&nbsp;on&nbsp;subclasses<br>
-if&nbsp;velocity&nbsp;affects&nbsp;position&nbsp;or&nbsp;viceversa.<br>&nbsp;</span></td></tr>
+whether&nbsp;velocity&nbsp;affects&nbsp;position&nbsp;or&nbsp;viceversa.<br>
+&nbsp;<br>
+Public&nbsp;methods:<br>
+<a href="#Positional-get_position_of">get_position_of</a>(label):&nbsp;return&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;component&nbsp;with&nbsp;name&nbsp;matching&nbsp;given&nbsp;label.<br>&nbsp;</span></td></tr>
 <tr><td>&nbsp;</td>
 <td class="singlecolumn"><dl><dt>Method resolution order:</dt>
 <dd><a href="skytree.positional.html#Positional">Positional</a></dd>
@@ -47,6 +50,8 @@ if&nbsp;velocity&nbsp;affects&nbsp;position&nbsp;or&nbsp;viceversa.<br>&nbsp;</s
 <hr>
 Methods defined here:<br>
 <dl><dt><a name="Positional-__init__"><strong>__init__</strong></a>(self, pos=(0, 0), vel=(0, 0), **kwargs)</dt><dd><span class="code">Store&nbsp;position&nbsp;and&nbsp;velocity;&nbsp;set&nbsp;reset&nbsp;data.</span></dd></dl>
+
+<dl><dt><a name="Positional-get_position_of"><strong>get_position_of</strong></a>(self, label)</dt><dd><span class="code">Return&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;component&nbsp;with&nbsp;name&nbsp;matching&nbsp;given&nbsp;label;&nbsp;return&nbsp;None&nbsp;if&nbsp;absent.</span></dd></dl>
 
 <hr>
 Data descriptors defined here:<br>

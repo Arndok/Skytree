@@ -18,14 +18,16 @@ Functions:<br>
 <a href="#-repack2">repack2</a>(obj):&nbsp;turn&nbsp;obj&nbsp;into&nbsp;(obj,&nbsp;obj)&nbsp;if&nbsp;it's&nbsp;a&nbsp;single&nbsp;value.<br>
 <a href="#-repack4">repack4</a>(obj):&nbsp;turn&nbsp;obj&nbsp;into&nbsp;(obj,&nbsp;obj,&nbsp;obj,&nbsp;obj)|(*obj,&nbsp;*obj)&nbsp;if&nbsp;it's&nbsp;a&nbsp;single&nbsp;value&nbsp;or&nbsp;a&nbsp;collection&nbsp;with&nbsp;size&nbsp;2.<br>
 <a href="#-bake_obj">bake_obj</a>(obj):&nbsp;build&nbsp;the&nbsp;object&nbsp;if&nbsp;it's&nbsp;a&nbsp;type&nbsp;or&nbsp;a&nbsp;tuple&nbsp;(type,&nbsp;{kwargs}).<br>
-<a href="#-distance">distance</a>(p1,&nbsp;p2):&nbsp;return&nbsp;euclidean&nbsp;distance&nbsp;between&nbsp;given&nbsp;2D&nbsp;points.</span></p>
+<a href="#-distance">distance</a>(p1,&nbsp;p2):&nbsp;return&nbsp;euclidean&nbsp;distance&nbsp;between&nbsp;given&nbsp;2D&nbsp;points.<br>
+<a href="#-ComboClass">ComboClass</a>(*classes):&nbsp;return&nbsp;a&nbsp;new&nbsp;class&nbsp;combining&nbsp;provided&nbsp;ones&nbsp;as&nbsp;arguments&nbsp;and&nbsp;generating&nbsp;an&nbsp;appropriate&nbsp;name.</span></p>
 <p>
 <table class="section">
 <tr class="decor functions-decor heading-text">
 <td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
     
 <tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
-<td class="singlecolumn"><dl><dt><a name="-bake_obj"><strong>bake_obj</strong></a>(obj)</dt><dd><span class="code">Return&nbsp;the&nbsp;given&nbsp;object&nbsp;after&nbsp;trying&nbsp;to&nbsp;build&nbsp;it&nbsp;if&nbsp;necessary.<br>
+<td class="singlecolumn"><dl><dt><a name="-ComboClass"><strong>ComboClass</strong></a>(*classes)</dt><dd><span class="code">Return&nbsp;a&nbsp;new&nbsp;class&nbsp;combining&nbsp;provided&nbsp;ones&nbsp;as&nbsp;arguments&nbsp;and&nbsp;generating&nbsp;an&nbsp;appropriate&nbsp;name.</span></dd></dl>
+ <dl><dt><a name="-bake_obj"><strong>bake_obj</strong></a>(obj)</dt><dd><span class="code">Return&nbsp;the&nbsp;given&nbsp;object&nbsp;after&nbsp;trying&nbsp;to&nbsp;build&nbsp;it&nbsp;if&nbsp;necessary.<br>
 &nbsp;<br>
 If&nbsp;obj&nbsp;is&nbsp;a&nbsp;type,&nbsp;try&nbsp;to&nbsp;call&nbsp;constructor&nbsp;without&nbsp;arguments.<br>
 If&nbsp;it's&nbsp;a&nbsp;tuple,&nbsp;try&nbsp;to&nbsp;build&nbsp;it&nbsp;assuming&nbsp;the&nbsp;tuple's&nbsp;in&nbsp;the&nbsp;form&nbsp;(Class,&nbsp;{kwargs})</span></dd></dl>
