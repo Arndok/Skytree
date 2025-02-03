@@ -9,7 +9,10 @@ class Positional(Component):
     Inherits all Component behaviour.
     
     Velocity can be descriptive or prescriptive. Implement on subclasses
-    if velocity affects position or viceversa.
+    whether velocity affects position or viceversa.
+    
+    Public methods:
+    get_position_of(label): return the position of the component with name matching given label.
     """
     
     def __init__(self, pos=(0,0), vel=(0,0), **kwargs):
@@ -38,3 +41,7 @@ class Positional(Component):
     @vel.setter
     def vel(self, value):
         self.vel_x, self.vel_y = value
+    
+    def get_position_of(self, label):
+        """Return the position of the component with name matching given label; return None if absent."""
+        return self.named[label].pos if label in self.named else None

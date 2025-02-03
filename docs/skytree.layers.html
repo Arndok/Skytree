@@ -98,10 +98,7 @@ Extend&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>&nbsp;and&nbsp;
 Inherits&nbsp;all&nbsp;behaviours&nbsp;from&nbsp;Component,&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>,&nbsp;Positional&nbsp;and&nbsp;<a href="skytree.drawable.html#Drawable">Drawable</a>.<br>
 Extends&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>.<a href="#Layer-update">update</a>(dt).<br>
 &nbsp;<br>
-Supports&nbsp;parallax.<br>
-&nbsp;<br>
-Public&nbsp;methods:<br>
-<a href="#Layer-get_position_of">get_position_of</a>(label):&nbsp;return&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;component&nbsp;with&nbsp;name&nbsp;matching&nbsp;given&nbsp;label.<br>&nbsp;</span></td></tr>
+Supports&nbsp;parallax.<br>&nbsp;</span></td></tr>
 <tr><td>&nbsp;</td>
 <td class="singlecolumn"><dl><dt>Method resolution order:</dt>
 <dd><a href="skytree.layers.html#Layer">Layer</a></dd>
@@ -118,8 +115,6 @@ Methods defined here:<br>
 &nbsp;<br>
 Parallax&nbsp;adjustments&nbsp;are&nbsp;(trim_width,&nbsp;trim_height,&nbsp;offset_x,&nbsp;offset_y).<br>
 Keep&nbsp;in&nbsp;mind&nbsp;that&nbsp;trims&nbsp;are&nbsp;ADDED&nbsp;(so&nbsp;for&nbsp;intended&nbsp;functionality,&nbsp;express&nbsp;them&nbsp;as&nbsp;negative).</span></dd></dl>
-
-<dl><dt><a name="Layer-get_position_of"><strong>get_position_of</strong></a>(self, label)</dt><dd><span class="code">Return&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;component&nbsp;with&nbsp;name&nbsp;matching&nbsp;given&nbsp;label;&nbsp;return&nbsp;None&nbsp;if&nbsp;absent.</span></dd></dl>
 
 <dl><dt><a name="Layer-update"><strong>update</strong></a>(self, dt)</dt><dd><span class="code">Extend&nbsp;<a href="skytree.updateable.html#Updateable">Updateable</a>&nbsp;to&nbsp;calculate&nbsp;layer&nbsp;parallax.<br>
 &nbsp;<br>
@@ -329,6 +324,10 @@ Data descriptors inherited from <a href="skytree.collidable.html#Collidable">sky
 <dd><span class="code">Object's&nbsp;hitbox.</span></dd>
 </dl>
 <hr>
+Methods inherited from <a href="skytree.positional.html#Positional">skytree.positional.Positional</a>:<br>
+<dl><dt><a name="Layer-get_position_of"><strong>get_position_of</strong></a>(self, label)</dt><dd><span class="code">Return&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;component&nbsp;with&nbsp;name&nbsp;matching&nbsp;given&nbsp;label;&nbsp;return&nbsp;None&nbsp;if&nbsp;absent.</span></dd></dl>
+
+<hr>
 Data descriptors inherited from <a href="skytree.positional.html#Positional">skytree.positional.Positional</a>:<br>
 <dl><dt><strong>pos</strong></dt>
 <dd><span class="code">Object&nbsp;2D&nbsp;position.</span></dd>
@@ -440,10 +439,6 @@ Set&nbsp;destination&nbsp;to&nbsp;starting&nbsp;position&nbsp;to&nbsp;establish&
 <dl><dt><a name="MovingLayer-update"><strong>update</strong></a>(self, dt)</dt><dd><span class="code">Extend&nbsp;<a href="#Layer">Layer</a>&nbsp;to&nbsp;apply&nbsp;lerp&nbsp;movement.<br>
 &nbsp;<br>
 On&nbsp;arrival,&nbsp;call&nbsp;_next_destination&nbsp;if&nbsp;there's&nbsp;no&nbsp;waiting&nbsp;time&nbsp;or&nbsp;set&nbsp;a&nbsp;delay&nbsp;for&nbsp;calling&nbsp;this&nbsp;method&nbsp;if&nbsp;there&nbsp;is.</span></dd></dl>
-
-<hr>
-Methods inherited from <a href="skytree.layers.html#Layer">Layer</a>:<br>
-<dl><dt><a name="MovingLayer-get_position_of"><strong>get_position_of</strong></a>(self, label)</dt><dd><span class="code">Return&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;component&nbsp;with&nbsp;name&nbsp;matching&nbsp;given&nbsp;label;&nbsp;return&nbsp;None&nbsp;if&nbsp;absent.</span></dd></dl>
 
 <hr>
 Readonly properties inherited from <a href="skytree.layers.html#Layer">Layer</a>:<br>
@@ -647,6 +642,10 @@ Data descriptors inherited from <a href="skytree.collidable.html#Collidable">sky
 <dl><dt><strong>hitbox</strong></dt>
 <dd><span class="code">Object's&nbsp;hitbox.</span></dd>
 </dl>
+<hr>
+Methods inherited from <a href="skytree.positional.html#Positional">skytree.positional.Positional</a>:<br>
+<dl><dt><a name="MovingLayer-get_position_of"><strong>get_position_of</strong></a>(self, label)</dt><dd><span class="code">Return&nbsp;the&nbsp;position&nbsp;of&nbsp;the&nbsp;component&nbsp;with&nbsp;name&nbsp;matching&nbsp;given&nbsp;label;&nbsp;return&nbsp;None&nbsp;if&nbsp;absent.</span></dd></dl>
+
 <hr>
 Data descriptors inherited from <a href="skytree.positional.html#Positional">skytree.positional.Positional</a>:<br>
 <dl><dt><strong>pos</strong></dt>
